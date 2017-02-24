@@ -39,45 +39,45 @@ $.fn.center = function () {
 };
 
 $(function() {
-	<?php if(!isset($_SESSION['promote'])):?>
-	$('#overlay').show();
-	$('#wholesale-box').center().show();
-	<?php $_SESSION['promote'] = 1;?>
-	<?php endif;?>
-	$(window).resize(function() {
-		$('#wholesale-box').center();
-	});
+<!--	--><?php //if(!isset($_SESSION['promote'])):?>
+//	$('#overlay').show();
+//	$('#wholesale-box').center().show();
+//	<?php //$_SESSION['promote'] = 1;?>
+<!--	--><?php //endif;?>
+//	$(window).resize(function() {
+//		$('#wholesale-box').center();
+//	});
 
-	$('#wholesale-link').click(function(event){
-		event.preventDefault();
-		$('#overlay').show();
-		$('#wholesale-box').center().fadeIn();
-	});
+//	$('#wholesale-link').click(function(event){
+//		event.preventDefault();
+//		$('#overlay').show();
+//		$('#wholesale-box').center().fadeIn();
+//	});
 
-	$('#confirm-btn').click(function(event){
-		event.preventDefault();
-		$.ajax({
-			type: "POST",
-	        url: "<?php echo url('user/addwholesaleuser');?>",
-	    	data: $("#wholesale-box form").serialize(), // serializes the form's elements.
-	        success: function(data) {
-				var ret = $.parseJSON(data);
-	       		if (ret.success) {
-	       			$('#wholesale-box form').hide();
-	       			$('#alert_info').hide();
-					$('#wholesale-box #message').show();
-					$('#confirm-btn').hide();
-	       		} else {
-		       		alert(ret.message);
-	       		}
-	       }
-		});
-	});
+//	$('#confirm-btn').click(function(event){
+//		event.preventDefault();
+//		$.ajax({
+//			type: "POST",
+//	        url: "<?php //echo url('user/addwholesaleuser');?>//",
+//	    	data: $("#wholesale-box form").serialize(), // serializes the form's elements.
+//	        success: function(data) {
+//				var ret = $.parseJSON(data);
+//	       		if (ret.success) {
+//	       			$('#wholesale-box form').hide();
+//	       			$('#alert_info').hide();
+//					$('#wholesale-box #message').show();
+//					$('#confirm-btn').hide();
+//	       		} else {
+//		       		alert(ret.message);
+//	       		}
+//	       }
+//		});
+//	});
 
-	$('#cancel-btn').click(function(event){
-		event.preventDefault();
-		$('#overlay').hide();
-		$('#wholesale-box').fadeOut();
-	});
+//	$('#cancel-btn').click(function(event){
+//		event.preventDefault();
+//		$('#overlay').hide();
+//		$('#wholesale-box').fadeOut();
+//	});
 });
 </script>
