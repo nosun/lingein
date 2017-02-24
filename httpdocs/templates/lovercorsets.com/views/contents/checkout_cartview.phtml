@@ -1,0 +1,65 @@
+
+<div class="body-left">
+   <div id="wrapper-left">
+    <h4>Check Out Items</h4>
+    <p><a href="#shipAddr">Account Information</a></p>
+    <p><a href="#shipMethod">Shipping Address</a></p>
+    <p><a href="#choosePymt">Payment Method</a></p>
+    </div>
+    <div class="block-title">
+        <strong><span>My Shopping Cart</span></strong>
+    </div>
+    <div class="summary">
+    <p class="amount">
+    <a href="http://www.sexydresses.com/checkout/cart/"><strong><?php if ($cartInfo->product){ echo count($cartInfo->product);} ?> Products</strong></a> in Your Shopping Cart.
+    </p>
+    
+    <p class="subtotal">
+    <span class="label">Items Subtotal: </span> <br />
+    <span class="price"><strong><?php echo isset($cartInfo->goods_amount) ? c($cartInfo->goods_amount) : '$0.00'?></strong></span>
+    </p>
+    </div>
+
+<div class="widget" id="hotsNow">
+<div class="w-head contrast">
+	<h2>Cart Items</h2>
+</div>
+
+<div>
+
+<?php
+if ($cartInfo->product) :
+foreach ($cartInfo->product as $k => $v) : ?>
+
+	<dl>
+	<dt><a href="<?php echo url($v->url);?>">
+		<img src="<?php echo urlimg('60x90', $v->filepath) ?>" alt="<?php echo isset($v->name) ? $v->name : null ?>" title="<?php echo isset($v->name) ? $v->name : null ?>">
+	</a></dt>
+	
+    <dd class="price" style="margin-left:0; padding-left:0;"><?php echo isset($v->price)? c($v->price) : null;?></dd>
+    
+		 <?php 	if(isset($v->data) && $v->data):
+		 			foreach($v->data as $dk => $dv):?>
+		 			<dd><span class="'.$dk.'_NAME-value"><?php echo $dv;?></span></dd>
+		 			<?php endforeach;
+		 			endif;
+		 			?>
+         <dd class="qty"><span class="ITEM_QUANTITY-value"><?php echo isset($v->qty) ? $v->qty : null ?></span> Items</dd>
+    
+	</dl>
+<?php endforeach;
+endif;
+?>
+	<div class="clear"></div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+</div>

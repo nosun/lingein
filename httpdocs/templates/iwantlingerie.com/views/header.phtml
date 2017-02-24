@@ -1,0 +1,74 @@
+<?php global $user ?><div id="globalAction">
+	<div id="utility">
+		<div id="Welcome_Section"><p class="Welcome"><strong>Welcome! </strong> Enjoy online shopping for sexy lingeries, g strings, sexy panties and stocking!</p>
+			<div><dl id="curSelector" class=""><dt><a title="" href="#" id="yourCurrency"><?php
+                      if (!isset($_SESSION['currency'])) {
+                        $_SESSION['currency'] = 'USD';
+                      }
+                      echo $_SESSION['currency']
+                    ?></a></dt>
+					<dd><ul><?php
+                          if ($currencyList && count($currencyList) >0) :
+                            foreach ($currencyList as $k => $v) :
+                              if ($v->visible) :
+                          ?><li><a title="<?php echo $v->name ?>" class="flag <?php echo $v->name?>" rel="nofollow" href="#" target="_top"><?php echo $v->name; ?></a></li><?php
+                              endif;
+                            endforeach;
+                          endif; ?></ul></dd>
+				</dl></div></div>
+		<div id="userActionPanel"><ul><li id="UAP-signup"><?php 
+		  if ($user->uid): ?><a href="<?php echo url('order/list/');?>" rel="nofollow" class="red">My Orders</a> or <a href="<?php echo url('user/logout') ?>" rel="nofollow" class="red">Logout</a><?php 
+		  else: ?><a href="<?php echo url('user/login');?>" rel="nofollow" class="red">Sign In</a> or <a href="<?php echo url('user/register');?>" rel="nofollow" class="red">Join Free</a><?php endif;
+		  ?> </li><li id="UAP-livechat"><dl><dt><a class="b u_" onclick="window.open((window.pageViewer && pageViewer.link || function(link){return link;})(this.href + (this.href.indexOf('?')>=0 ? '&' : '?') + 'url=' + escape(document.location.href)), 'Chat1743750156405706922', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=640,height=480');return false;" target="_blank" href="https://livechat.boldchat.com/aid/862550217621906162/bc.chat?resize=true&cbdid=9124226868952368718"><span>Live Chat</span></a></dt>
+					<dt><script type="text/javascript" src="http://cdn.dev.skype.com/uri/skype-uri.js"></script>
+					<div id="genSkypeCall_01">
+					    <script type="text/javascript">
+					        Skype.ui({
+					            name: "chat",
+					            element: "genSkypeCall_01",
+					            participants: ["christiya521"],
+					            imageSize: 16,
+					            imageColor: "skype"
+					        });
+					    </script>
+					</div></dt>
+					</dl></li>
+				<li id="UAP-help"><dl><dt><a href="<?php echo url('how-to-place-an-order.html');?>" rel="nofollow"  class="b">Help</a></dt>						
+						<dd><p><a class="u_" href="<?php echo url('how-to-place-an-order.html');?>" rel="nofollow" target="_top">How to Place an Order</a></p>
+							<p><a class="red" href="<?php echo url('article/size-chart.html');?>">Size Chart</a>
+							<p><a href="<?php echo url('articletype/faq.html');?>" rel="nofollow">F.A.Q</a></p>
+							<p><a href="<?php echo url('article/contact-us.html');?>" rel="nofollow" target="_top">Contact Us</a></p></dd>
+					</dl></li></ul>
+		</div></div></div>
+<div class="header"><div class="head_top">
+      <div class="logo"><a href="<?php echo url('');?>"><img src="<?php echo $tpldir ?>/images/logo2.png" width="230" height="60" alt="IWantLingerie.com" title="Sexy Corset, Lingerie and Quality Sex Clothing Online Shopping Mall" /></a></div>
+      <p id="slogan"><a href="<?php echo url('');?>">Perfect Lingerie</a>, <br>Boost Your Energy!</p>
+        <div class="logo_right"><div class="search"><form action="<?php echo url('pitems');?>" method="post">
+                <input name="keyword" id="search_keyword" type="text" class="text" value="<?php echo isset($search_keywords) ? plain($search_keywords) : 'sexy lingerie';?>" onfocus="if(this.value=='What would you like to save on today'){this.value='';}"  onblur="if(this.value==''){this.value='sexy lingerie';}" />
+                <a id="header_search_keyword" href="javascript:void(0)"><button type="submit">Search</button></a></form></div>
+			<p id="shoppingCart"><span>Cart&nbsp;<em class="cart_item_number"><?php echo isset($goodsInCart)? $goodsInCart : 0; ?></em> &nbsp;Item</span>
+			<span><a href="<?php echo url('cart');?>" style="">Check Out</a></span>
+			</p>
+	</div></div></div>
+
+<div class="navigation">
+<div id="litb-nav"><?php
+  if(isset($category) && $category):
+    $_first_category_class = true;
+    foreach ($category as $c):
+?><dl class="<?php echo $_first_category_class ? 'first' : ''; $_first_category_class = false;?> "><dt><a class="navItem " href="<?php echo url('browse/' . $c->path_alias . '.html');?>"><?php echo isset($c->name)? $c->name : null;?></a></dt><?php
+  //if have sub categories
+  if(isset($c->sub) && $c->sub):
+?>
+<dd class="sub-nav-container  alignLeft">
+	<div class="widget sub-nav-content">
+		<div class="linkHeader"><?php   foreach($c->sub as $s):
+?><p><a href="<?php echo url('browse/' . $s->path_alias . '.html');?>"><?php echo isset($s->name) ? $s->name : null; ?></a></p>
+<?php endforeach;
+?></div></div></dd><?php
+      endif;
+?></dl><?php
+    endforeach;
+endif;
+?></div>
+</div>

@@ -1,0 +1,21 @@
+<?php
+  if(isset($hotProductList) && $hotProductList):
+?><div class="Browse w-bp"><div id="hotsNow" class="w-bp w-hotsNow">
+	<h3><a class="red u_" href="<?php echo url('hot-products.html');?>">What's Hot!</a></h3>
+	<div class="grid grid-m-l-narrow"><?php
+     foreach ($hotProductList as $v):
+?><dl><dt><a href="<?php echo url($v->url);?>"><img height="80" src="<?php echo urlimg('118x178', $v->filepath);?>" title="<?php echo $v->name;?>" alt="<?php echo $v->name;?>"></a></dt>
+	<dd><h4><a href="<?php echo url($v->url);?>"><?php 
+	if(strlen($v->name) > 50){
+		  echo substr(str_replace(',', ', ', $v->name), 0, 50) . '...';
+		} else{
+		  echo str_replace(',', ', ', $v->name);
+	}?></a></h4><span class="price"><span><?php echo isset($v->list_price)? c($v->list_price) : null;?></span> &nbsp; <?php echo isset($v->price)? c($v->price) : null;?></span><?php 
+	if(isset($v->star) && $v->star):?><?php echo $v->star;?><br><?php 
+	endif;?></dd></dl><?php 
+  endforeach;
+?></div>
+<p><a href="<?php echo url('hot-products.html');?>" class="more right">See More »</a></p></div>
+</div><?php 
+   endif;
+?>

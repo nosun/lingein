@@ -1,0 +1,21 @@
+<div class="widget">
+<div id="partners" class="widget w-partners">
+	<span class="paypal">paypal</span> 	
+	<span class="paypalVerified">paypal verified</span> 	
+	<span class="imgInSide mcafee">mcafee verified</span>
+	<span class="delivery">dhl ups  ems</span>		
+	<span class="banks">visa, master card, maestro, carte blue</span> 	
+	<span class="westernUnion">western union</span>
+	<span class="verSign">verSign Trusted</span>
+
+</div>
+</div>
+
+<div id="copyright">Copyright &copy; 2011-2012 <a href="<?php echo url('');?>">I Want Lingerie</a> Ltd. All Rights Reserved. 	</div>
+</body>
+<?php echo $this->render('after_body.phtml'); ?>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/common.js' ?>" type="text/javascript"></script>
+</html>
+<?php foreach(getMessages() as $k => $v) : ?>
+    <script type="text/javascript">alert('<?php echo $v['message']?>');</script>
+<?php endforeach;?>

@@ -1,0 +1,40 @@
+<?php if(isset($recommandProductList) && $recommandProductList):?>
+
+<div id="p-recommend" class="p-widget fl">
+<h2>You'll Also Love</h2>
+
+<div class="widget prodslide">
+	<ul class="flex-direction-nav prodslide-nav"><li><a href="javascript:void(0);" class="flex-prev">Previous</a></li><li><a href="javascript:void(0);" class="flex-next">Next</a></li></ul>
+	<div style="position:relative;overflow:hidden;height:260px;">
+		<div class="grid">
+		  <?php shuffle($recommandProductList);
+		    $item_count = 0;
+		    foreach ($recommandProductList as $v):
+		      $item_count++;?>
+		<?php if($item_count % 6 == 1):?>
+			<div class="prodsliderow active <?php echo 'prodsliderow-'. floor($item_count / 6);?>">
+				<dl class="slide-proditem first"> 
+			<?php else:?>
+				<dl class="slide-proditem">
+			<?php endif;?>
+				<dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url) ?>"><img alt="<?php echo $v->name;?>" src="<?php echo urlimg('120x180',$v->filepath)?>"></a></dt>
+			    <dd class="prodName"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo $v->name;?></a></dd>
+			</dl>
+			<?php if($item_count % 6 == 0):echo '</div>';endif;endforeach;?>
+			<?php if($item_count % 6 != 0):echo '</div>';endif;?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php $this->render('comments/product_review.phtml');?>
+
+</div>
+<?php endif;?>
+
+
+
+
+
+
+

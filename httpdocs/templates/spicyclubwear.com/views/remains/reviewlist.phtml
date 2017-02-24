@@ -1,0 +1,17 @@
+<?php echo $this->render('before_body.phtml'); ?>
+<body><?php echo $this->render('header.phtml'); ?>
+<div class="bodyer"><h1 id="breadcrumb"><?php echo themeBreadcrumb() ?></h1>
+	<div class="body_right"><?php echo $this->render('review_left.phtml'); ?></div>
+	<div class="body_left"><div class="general"><?php 
+    if(isset($termInfo) && $termInfo):?><div class="Product_narration">
+                <div class="top" style="text-align:left;padding-left:0;"> Products Reviews of <?php echo $termInfo->name;?> <span class="vcb-holder">
+                <a class="litb-btn ir viewCatButton" href="<?php echo url('browse/' . $termInfo->path_alias . '.html');?>">View Category</a></span></div>
+                <div><?php echo isset($termInfo->description) ? $termInfo->description : null;?></div>
+            </div><?php 
+	endif;?>
+    <?php 
+        if(isset($docvar3)):?><div id="advanced_intro-w"><?php echo $docvar3;?></div><?php 
+        endif;?>
+    <?php echo $this->render('category_comments.phtml');?></div>
+	<div class="general_bottom"></div>
+</div></div><?php echo $this->render('footer.phtml'); ?></body><?php echo $this->render('after_body.phtml'); ?></html>

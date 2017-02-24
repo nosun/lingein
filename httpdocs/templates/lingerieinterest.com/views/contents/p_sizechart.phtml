@@ -1,0 +1,5 @@
+<?php if(isset($product->brand) && isset($product->brand->size_chart)):?>
+	<div style="margin-top:20px">
+	   <?php echo $product->brand->size_chart->content;?>
+	</div>
+<?php endif;?>

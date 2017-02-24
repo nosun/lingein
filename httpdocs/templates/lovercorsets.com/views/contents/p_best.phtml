@@ -1,0 +1,23 @@
+<?php if ($recommandProductList) :?>
+<div id="p-best" class="p-widget">
+  <h2><span>POPULAR IN THIS CATEGORY </span><b></b></h2>
+<div class="grid">
+<?php
+  shuffle($bestProductList);
+  $best_count = 0;
+  foreach ($bestProductList as $v):
+  if($best_count >= 3)
+    break;
+  $best_count++;
+?>
+<dl><dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url) ?>">
+		<img alt="<?php echo $v->name;?>" src="<?php echo urlimg('188x282',$v->filepath)?>"></a></dt>
+      	<dd class="prodName"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo $v->name;?></a></dd>
+      	<dd class="oldPrice"><?php echo isset($v->list_price)? c($v->list_price) : null;?></dd>
+      	<dd class="price"><?php echo isset($v->price)? c($v->price) : null;?></dd>
+
+</dl>
+<?php endforeach;?>
+</div>
+</div>
+<?php endif;?>

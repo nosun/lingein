@@ -1,0 +1,20 @@
+<?php if(isset($hotProductList) && $hotProductList):?>
+<div class="widget" id="hotsNow" >
+<div class="w-head contrast">
+	<h2>HOTTEST</h2>
+</div>
+<div>
+<?php foreach ($hotProductList as $v):?>
+	<dl>
+	<dt><a href="<?php echo url($v->url);?>">
+		<img src="<?php echo urlimg('118x178', $v->filepath);?>" title="<?php echo $v->name;?>" alt="<?php echo $v->name;?>">
+	</a></dt>
+    <dd class="prodName"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo str_replace(',', ', ', $v->name);?></a></dd>
+    <dd class="oldPrice"><?php echo isset($v->list_price)? c($v->list_price) : null;?></dd>
+    <dd class="price"><?php echo isset($v->price)? c($v->price) : null;?></dd>
+	</dl>
+	<?php endforeach;?>
+</div>
+<a href="<?php echo url('hot-products.html');?>" class="more right">More »</a>
+</div>
+<?php endif;?>

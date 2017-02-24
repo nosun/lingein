@@ -1,0 +1,41 @@
+<div class="footer">
+<div id="customerHelp" class="w-bp">
+  <div>
+  <?php if(isset($helpList) && isset($articleTypeList)):
+  $articleTypeCount = 0;
+  foreach($helpList as $index => $articleList):
+  	if($index != 'news' && $index != 'News'):
+  	$articleTypeCount++;
+  	if($articleTypeCount > 5):
+  		break;
+  	endif;
+  	?>
+  <dl><dt><?php echo $articleTypeList[$index]->name;?></dt><?php 
+          	foreach ($articleList as $v):
+          ?><dd><a href="<?php echo url($v->url)?>"><?php echo $v->title;?></a></dd><?php 
+          	endforeach;
+          ?></dl>
+  <?php endif;
+  endforeach;
+  endif?>
+</div>
+</div>
+
+
+<div class="widget w-customeGuide" id="customerGuide">
+<div class="col" id="newsLetter">
+            <!--<h3>Subscribe to our <em>Newsletter</em></h3>-->
+			<input type="text" class="text" value="Enter Your Email" id="mailAddress">
+            <button id="submitMailAddress" class="textbtnGray"></button>
+            <p>Get special offers & More!</p>
+     </div>
+</div>
+
+
+<div class="clears"></div>
+<div id="copyright">
+<span class="floatleft">
+           	<?php $siteInfo = Bl_Config::get('siteInfo');echo $siteInfo['copyright'];?>
+        </span>
+</div>
+</div>

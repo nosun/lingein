@@ -1,0 +1,53 @@
+<div class="shopcart_top">
+	<h1 class="top">User Information</h1>
+</div>
+
+
+<div class="shopcart">
+            <form action="" method="post" name="changePwdForm" onsubmit="javascript:return checkChangePwd()">
+             <?php echo themeMessages() ?>
+
+
+		<div class="user_edit">
+        	<div class="formHeader"><b>Modify Password information</b></div>
+                  <table align="center" width="100%" cellspacing="1" cellpadding="3" bgcolor="#ffffff" class="member">
+                    <tbody>
+                      <tr>
+                        <td align="right" width="157" height="40" class="formItemCaption">Username:</td>
+                        <td width="1" class="formItemCaption">&nbsp;</td>
+                        <td width="" class="formItemControl"><input type="text" readonly="readonly" value="<?php echo isset($user->name) ? $user->name : null ?>" class="elmbBlur input readonly"></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="formItemCaption"><b>Old Password:</b></td>
+                        <td class="formItemCaption">&nbsp;</td>
+                        <td width="" class="formItemControl"> <input type="password" name="oldpwd" value="" class="elmbBlur input" title="old password is not empty!"><span style="color:red;">&nbsp;*</span></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="formItemCaption"><b>New Password:</b></td>
+                        <td class="formItemCaption">&nbsp;</td>
+                        <td class="formItemControl"> <input type="password" name="newpwd" value="" class="elmbBlur input" title="new password is not empty!"><span style="color:red;">&nbsp;*</span></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="formItemCaption"><b>New Password Again:</b></td>
+                        <td class="formItemCaption">&nbsp;</td>
+                        <td class="formItemControl"> <input type="password" name="newpwd2" value="" class="elmbBlur input" title="comfirm password is not empty!"><span style="color:red;">&nbsp;*</span></td>
+                      </tr>
+
+                     <tr>
+                        <td align="right" class="formItemCaption">&nbsp;</td>
+                        <td class="formItemCaption">&nbsp;</td>
+                        <td class="formItemControl"><button class="textbtn" type="submit">Save Changes</button>
+                        <button class="textbtn" type="reset">Reset Form</button>
+                        </td>
+                      </tr>
+                       <tr>
+                        <td colspan="3">&nbsp;</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+
+
+                </form>
+            </div>

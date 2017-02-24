@@ -1,0 +1,66 @@
+<div class="shopcart_top">
+	<h1 class="top">User Information</h1>
+</div>
+            <div class="shopcart">
+             <?php echo themeMessages() ?>
+            <form action="" method="post">
+        		<div class="user_edit">
+        		
+				<div class="formHeader"><b>Contact Information</b></div>
+        		
+                  <table width="100%" cellspacing="1" cellpadding="3" bgcolor="#ffffff" align="center" class="member">
+                    <tbody>
+                      <tr>
+                        <td width="157" height="32" align="right" class="formItemCaption">Username:</td>
+                        <td width="1" class="formItemCaption">&nbsp;</td>
+                        <td width="522" class="formItemControl"><input type="text" readonly="readonly" value="<?php echo isset($user->name) ? $user->name : null ?>" class="elmbBlur input readonly"></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="formItemCaption"><b>Nickname:</b></td>
+                        <td class="formItemCaption">&nbsp;</td>
+                        <td class="formItemControl"><input type="text" name="nickname" value="<?php echo isset($user->nickname) ? $user->nickname : null ?>" class="elmbBlur input" title="Nickname"/></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="formItemCaption">Birthday:</td>
+                        <td class="formItemCaption">&nbsp;</td>
+                        <td class="formItemControl"><input type="text" name="birthday" value="<?php if (isset($user) && $user->birthday != '') echo plain(substr($user->birthday, 0, 4) . '-' . intval(substr($user->birthday, 4, 2)) . '-' . intval(substr($user->birthday, 6, 2))) ?>"  class="elmbBlur input" title="Birthday"/> <span style="color:red;">*</span> <span class="notes">Format : YYYY-MM-DD</span></td>
+                      </tr>
+                     <tr>
+                        <td align="right" class="formItemCaption">E-mail:</td>
+                        <td class="formItemCaption">&nbsp;</td>
+                        <td class="formItemControl"><input type="text" name="email" value="<?php echo isset($user->email) ? $user->email : null ?>"  class="non-empty elmbBlur input" title="Email can't for empty"/> <span style="color:red;">*</span></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="formItemCaption">Telephone:</td>
+                        <td class="formItemCaption">&nbsp;</td>
+                        <td class="formItemControl"><input type="text" name="phone" value="<?php echo isset($user->phone) ? $user->phone : null ?>" class="elmbBlur input"/></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="formItemCaption">mobile:</td>
+                        <td class="formItemCaption">&nbsp;</td>
+                        <td class="formItemControl"><input type="text" name="mobile" value="<?php echo isset($user->mobile) ? $user->mobile : null ?>" class="elmbBlur input"/></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="formItemCaption">Region:</td>
+                        <td class="formItemCaption">&nbsp;</td>
+                        <td class="formItemControl"><input type="text" name="area" value="<?php echo isset($user->area) ? $user->area : null ?>" class="elmbBlur input"/></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="formItemCaption">Postcode:</td>
+                        <td class="formItemCaption">&nbsp;</td>
+                        <td class="formItemControl"><input type="text" name="postcode" value="<?php echo isset($user->postcode) ? $user->postcode : null ?>" class="elmbBlur input"/></td>
+                      </tr>
+                     <tr>
+                        <td align="right" class="formItemCaption">&nbsp;</td>
+                        <td class="formItemCaption">&nbsp;</td>
+                        <td class="formItemControl"><button class="textbtn" type="submit">Save Changes</button>
+                        <button class="textbtn" type="reset">Reset Form</button></td>
+                      </tr>
+                      <tr>
+                        <td colspan="3">&nbsp;</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                </form>
+            </div>

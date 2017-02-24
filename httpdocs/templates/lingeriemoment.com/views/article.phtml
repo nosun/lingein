@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+<?php global $user ?>
+
+<?php $this->render('parts/header.phtml'); ?>
+<div class="main-content">
+<div class="general article">
+<div class="main-block1">
+
+<div class="article-block">
+
+<div class="w-head">
+<h1><?php echo $articleInfo->title;?></h1>
+</div>
+<div class="w-content">
+<!--  here comes the contents -->
+<?php echo isset($articleInfo->content) ? $articleInfo->content : null?>
+</div>
+
+</div>
+</div>
+<?php $this->render('contents/a_category.phtml');?>
+
+</div>
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+</body>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+</html>

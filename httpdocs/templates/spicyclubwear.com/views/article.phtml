@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body><div style="width:100%;height:100%;background:#000000">
+<?php global $user ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<div class="container">
+<?php $this->render('parts/header.phtml'); ?>
+<div class="main-content">
+<?php $this->render('parts/breadcrumb.phtml')?>
+
+<?php $this->render('modules/ads_topslot.phtml')?>
+<div class="general article">
+
+<div class="main-block">
+
+<div class="widget">
+<div class="w-head">
+<h2><?php echo $articleInfo->title;?></h2>
+</div>
+<!--  here comes the contents -->
+<div class="w-content">
+<?php echo isset($articleInfo->content) ? $articleInfo->content : null?>
+</div>
+</div>
+</div>
+
+<?php $this->render('contents/a_category.phtml');?>
+
+</div>
+<div class="general_bottom"></div>
+</div>
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+</div>
+</body>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+</html>

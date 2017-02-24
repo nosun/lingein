@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body style="zoom:1">
+<?php global $user; ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<?php $this->render('parts/navigation.phtml'); ?>
+<div class="container">
+<div class="main-content">
+
+
+
+<?php $this->render('contents/cart_list_view.phtml');?>
+
+<div class="general general1">
+        <h1><span>Check Out</span> </h1>
+
+<?php echo themeMessages(); ?>
+<div id="client_message" style="display:none"></div>
+<form action="" method="post" name="checkoutForm" class="disable_on_submit" onsubmit="javascript: return checkCartShipping()">
+    <input type="hidden" name="pids" id="pids" value="<?php echo $pids;?>"/>
+    <input type="hidden" name="goods_amount" id="goods_amount" value = "<?php echo isset($cartInfo->goods_amount) ? $cartInfo->goods_amount : '0'; ?>"/>
+	<input type="hidden" name="goods_number" id="goods_number" value = "<?php echo isset($cartInfo->goods_number) ? $cartInfo->goods_number : '0'; ?>"/>
+	<input type="hidden" name="goods_weight" id="goods_weight" value = "<?php echo isset($cartInfo->goods_weight) ? $cartInfo->goods_weight : '0'; ?>"/>
+	<input type="hidden" name="fromcart" value="<?php echo isset($fromcart) ? $fromcart : 0?>"/>
+	<input type="hidden" name="ordertoken" value="<?php echo isset($ordertoken) ? $ordertoken : 0?>"/>
+	<input type="hidden" id="delivery_cid" name="delivery_cid" />
+	<input type="hidden" id="delivery_pid" name="delivery_pid" />
+
+
+
+<?php $this->render('contents/checkout_shipaddress.phtml');?>
+<?php $this->render('contents/checkout_shipmethod.phtml');?>
+<?php $this->render('contents/checkout_paymethod.phtml');?>
+<?php $this->render('contents/checkout_cartamount.phtml');?>
+
+
+<div class="panelFooter">
+<input type="submit" class="checkoutBtn button add2Cart" id="orderFormSubmit" value="Place Your Order" name="checkout"/>
+</div>
+
+</form>
+</div>
+
+
+</div>
+</div>
+
+<div class=" clears"></div>
+
+<?php echo $this->render('parts/footer.phtml'); ?>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/common.js'; ?>" type="text/javascript"></script>
+</body>
+</html>

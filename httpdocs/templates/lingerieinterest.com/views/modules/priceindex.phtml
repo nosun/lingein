@@ -1,0 +1,42 @@
+<div class="w-b w-cateNav"> 
+	<div class="h3">Shop By Price</div>
+	<dl><!--  <dt>Shop By Price</dt>--><?php 
+					  $pricesRange = array(array(0, 5),array(5,10), array(10,15),array(15,20),array(20,25),array(25,30));
+					  $pageFilter = isset($pageFilter) ? $pageFilter : '';
+					  $filter_type = isset($filter['type']) ? $filter['type'] : '';
+					  $filter_brand_tid = isset($filter['brand_tid'])?$filter['brand_tid']:'';
+					  $priceMatchKey = -1;
+  					  foreach ($pricesRange as $k => $v){
+  					    if(isset($filter['pricesarr']) 
+  					       && isset($filter['pricesarr'][0])
+  					       &&$filter['pricesarr'][0] == $v[0] 
+  					       && $filter['pricesarr'][1] == $v[1]){
+  					      $priceMatchKey = $k;
+  					      break;
+  					    }
+  					  }
+					?><dd><span <?php if($priceMatchKey == -1) echo 'class="selectedHasSub"'?>><a rel="nofollow" href="<?php 
+					$filterUrlArray = array(0=>'', 1=>'', 2=>'', 3=>'', 4=>'', 5=>'', 6=>'');
+					if(isset($urlArray) && count($urlArray) == 7 ){
+					  $filterUrlArray = $urlArray;
+					}
+				    $filterUrlArray[5] = '';
+				    $filterUrlArray[6] = 1;
+				    $url = implode('+', $filterUrlArray);
+				    echo url(categoryURL($url));
+					?>">Any Price <em>&nbsp;</em></a></span></dd><?php 
+					  foreach ($pricesRange as $k => $v){
+					?><dd><span <?php
+					  if($priceMatchKey == $k) echo 'class="selectedHasSub" ' 
+					?>> <a rel="nofollow" href="<?php 
+					$filterUrlArray = array(0=>'', 1=>'', 2=>'', 3=>'', 4=>'', 5=>'', 6=>'');
+					if(isset($urlArray) && count($urlArray) == 7 ){
+					  $filterUrlArray = $urlArray;
+					}
+					  $filterUrlArray[5] = $v[0].'_'.$v[1];
+					  $filterUrlArray[6] = 1;
+					  $url = implode('+', $filterUrlArray);
+					  echo url(categoryURL($url));
+					?>"><?php echo 'US$ '.$v[0].'.00 - US$ '.$v[1].'.00' ?></a></span></dd><?php }?>
+					<dd class="priceRange"><form method="POST" action="<?php echo url('browsefilter') ?>"><label>US$</label><input type="text" value="" name="lowprice" id="p_start"><span>To</span><label>US$</label><input type="text" value="" name="highprice" id="p_end"><button class="textbtn" type="submit">Go</button></form></dd>
+		</dl></div>

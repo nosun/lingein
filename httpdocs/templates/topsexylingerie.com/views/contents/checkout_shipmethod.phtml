@@ -1,0 +1,41 @@
+<div class="cart-list">
+<fieldset class="widget inner" id="shipMethod">
+	<div class="w-head">
+		<h3>
+			<span>Shipping Method</span>
+		</h3>
+	</div>
+   <div class="scart_t "><span>Shipping Methods</span></div>
+	<div class="main-section1">
+		<p style="display:none;" class="warning">No Shipping Method Available At This Time</p>
+		<table class="tb-shippingMethod" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr class="color">
+				  <th width="20%">Shipping Method</th>
+					<th>Estimated Shipping Time</th>
+					<th>Shipping Cost</th>
+				</tr>
+				</thead>
+			<tbody>
+			
+				<?php foreach ($shippingList as $shippingMethod => $shippingInfo):
+					if($shippingInfo->visible):
+				?>
+				<tr>
+					<th valign="top" width="25%"><input type="radio" onclick="changeShipping(this.value)" name="shipping_method" value="<?php echo $shippingMethod;?>" id="radio-<?php echo $shippingMethod;?>">
+					<strong><?php echo $shippingInfo->name;?></strong></th>
+					<td width="50%"><?php echo $shippingInfo->description;?></td>
+					<td valign="top" class="shipping-count">
+						<span id="shipping-count-<?php echo $shippingMethod;?>" class="chargeFee red">Select To Count.</span>
+					</td>
+				</tr>
+				<?php endif;
+				endforeach;?>
+
+			</tbody>
+		</table>
+		<div class="extraInfo">	
+		</div>
+	</div>
+</fieldset>
+</div>

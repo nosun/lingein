@@ -1,0 +1,66 @@
+<?php echo $this->render('before_body.phtml'); ?>
+<?php global $user;?>
+<body style="background:none;">
+<div class="logo_head">
+  <div class="logo1"><a href="<?php echo url('');?>"><img src="<?php echo $tpldir ?>/images/logo1.gif" alt="" /></a></div>
+</div>
+<div class="shoppingContainers">
+  <div class="payshopping"><img src="<?php echo $tpldir ?>/images/payshopping1.gif" alt="" /></div>
+    <div style="background-color:#CCFFCC"><?php echo themeMessages(); ?></div>
+    <div class="boxcontent margin">
+
+        <div class="shoping_text clear"><span>Payment </span></div>
+        <?php foreach (getMessages() as $message): ?>
+          <h3 style="color:#F00;font-weight:blod;font-size:16px; margin:10px 0px 0px 280px;"><?php echo $message['message'] ?></h3>
+      <?php endforeach ?>
+        <table width="95%" align="center" cellspacing="0" cellpadding="0" class="cart">
+        <tbody>
+        <?php if (isset($orderInfo)): ?>
+            <tr>
+                <td width="32%" align="right" class="dotted">Order No:</td>
+                <td width="68%" class="dotted"><?php echo isset($orderInfo->number)? $orderInfo->number : null;?></td>
+            </tr>
+            <tr>
+                <td align="right" class="dotted">Shipping Method:</td>
+                <td class="dotted"><?php echo isset($orderInfo->shipping->name)? $orderInfo->shipping->name : null;?></td>
+            </tr>
+            <tr>
+                <td align="right" class="dotted">Payment Method:</td>
+                <td class="dotted"><?php echo isset($orderInfo->payment->name) ? $orderInfo->payment->name : null;?></td>
+            </tr>
+            <tr>
+                <td align="right" class="dotted">Create at:</td>
+                <td class="dotted"><?php echo isset($orderInfo->created)? date('F d, Y H:i:s',$orderInfo->created) : null;?></td>
+            </tr>
+            <tr>
+                <td align="right" class="dotted">Payable total:</td>
+                <td class="dotted"><div style="color:#ff0000; font-size:16px; font-family:Georgia, 'Times New Roman', Times, serif;"><?php echo isset($orderInfo->pay_amount) ? c($orderInfo->pay_amount) : null?></div></td>
+            </tr>
+             <tr>
+                <td height="50"></td>
+                 <td>
+<?php if(! isset($orderInfo->payment->online) || $orderInfo->payment->online) :
+ echo isset($submitform) ? $submitform : null;
+ endif;
+ ?>
+              </td>
+            </tr>
+            <tr> <form action="<?php echo $user->uid ? url('order/info/'.$orderInfo->oid) : url('user/login');?>">
+                <td colspan="2" align="right"><input type="submit" class="view" value="" /></td></form>
+            </tr>
+         <?php endif;?>
+        </tbody>
+        </table>
+
+    
+    </div>
+
+</div>
+<div class="shopfoot">
+    <p>MSN: iwantlingerie@hotmail.com, Email: customer-support@iwantlingerie.com</p>
+    <p>Copyright © 2012 <a href="http://www.iwantlingerie.com">www.iwantlingerie.com</a> All rights reserved</p>
+    <p>Alphabetical Index: A - B - C - D - E - F - G - H - I - J - K - L - M - N - O - P - Q - R - S - T - U - V - W - X - Y - Z - 0-9</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<?php if(isset($recommandProductList) && $recommandProductList):?>
+
+<div id="p-recommend" class="p-widget fl">
+<h2>RECOMMENDED PRODUCTS</h2>
+<div class="productlist">
+  <?php shuffle($recommandProductList);
+    $recommand_count = 0;
+    foreach ($recommandProductList as $v):
+      if(!isset($v))
+      	continue;
+      if($recommand_count >= 3)
+        break;
+      $recommand_count++;?>
+<dl><dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url) ?>"><img alt="" src="<?php echo urlimg('118x178',$v->filepath)?>"></a></dt>
+<dd><a title="<?php echo $v->name;?>" href="<?php echo url($v->url) ?>"><?php $str = explode(',', $v->name); echo $str[0];?>
+</a><span class="price"><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?> <?php echo isset($v->price)? c($v->price) : null;?></span>
+</dd></dl>
+<?php endforeach;?>
+</div>
+</div>
+<?php endif;?>

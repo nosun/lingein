@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body style="zoom:1">
+<?php global $user; ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<?php $this->render('parts/navigation.phtml'); ?>
+
+<div class="container">
+<div class="main-content">
+	<div class="user-forms">
+            <div class="user-login">
+                <h1>Returning Customer</h1>
+                <div class="user-forms-border">
+                <h2>Sign in to your account for a fast, easy checkout. </h2>
+                <?php echo themeMessages() ?>
+                <div id="client_message" style="display:none"></div>
+                <form action="<?php echo url('user/login');?>" method="post">
+					<div class="login_content">
+	                    <div class="name">
+	                    	<span>Username/Email:</span> <br/>
+	                    	<input type="text" value="" name="username"  class="elmbBlur"/>
+	                    </div>
+	                    <div class="passwd">
+	                    	<span>Password:</span> <br/>
+	                    	<input type="password" value="" name="password"  class="elmbBlur"/>
+	                    </div>
+	                    <div>
+                    		<div class="login-forgetpw"><a href="<?php echo url('user/getPassword')?>">Forget Password? </a></div>
+	                    	<div class="login-submit"><input type="submit" class="login-submit textbtn" value="Sign In"/></div>
+	                    </div>
+                  	</div>
+                </form>
+                </div>
+                
+                <div class="user-forms-border">
+                <h2>Create an Account</h2>
+                 <p>Register to enjoy personalized services, including:</p> 
+                 <ul class="vs"> 
+                 	<li>Online Order Status</li>
+					<li class="mobile-hide">Order History</li>
+                 	<li>Edit Address</li>
+                 	<li class="mobile-hide">Edit Password</li> 
+                 	<li class="mobile-hide">Checkout Preferences</li>
+                 </ul> 
+                  <a class="secondary add2Cart" href="<?php echo url('/user/register');?>">Create an Account</a> 
+                </div>
+
+            </div>
+   </div>
+</div>
+</div>
+
+<div class=" clears"></div>
+
+<?php echo $this->render('parts/footer.phtml'); ?>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/common.js'; ?>" type="text/javascript"></script>
+</body>
+</html>

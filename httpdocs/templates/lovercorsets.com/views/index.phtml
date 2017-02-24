@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+<?php $this->render('parts/header.phtml');?>
+
+<div class="main-content">
+<div class="general-">
+
+<?php $this->render('modules/slider.phtml');?>
+
+<!--  
+<div class="banner"><a href="<?php echo url('new-arrivals.html');?>"><img src="<?php echo $this->themeResourceURI('images/Dimensions.jpg');?>" /></a></div> 
+-->
+
+<ul>
+  <li><a href="<?php echo url('overbust-corset.html');?>"><img alt="overbust corsets" src="<?php echo $this->themeResourceURI('images/overbust-corsets.jpg');?>" /></a></li>
+  <li><a href="<?php echo url('underbust-corset.html');?>"><img alt="underbust corsets" src="<?php echo $this->themeResourceURI('images/underbust-corsets.jpg');?>" /></a></li>
+  <li><a href="<?php echo url('plus-size-corsets.html');?>"><img alt="plus size corsets" src="<?php echo $this->themeResourceURI('images/plus-size-corsets.jpg');?>" /></a></li>
+  <li class="last"><a href="<?php echo url('steel-boned-corsets.html');?>"><img alt="steel boned corsets" src="<?php echo $this->themeResourceURI('images/steel-boned-corsets.jpg');?>" /></a></li>
+</ul>
+<br class="clear" />
+<div class="homepage-spotlight-footer">
+<div class="sml left-headline">Find club dresses, party dresses starting at only $18.</div>
+<div class="mid">Other cheap dresses include evening gowns, cocktail dresses, clubbing dresses, bandage dresses, sequins and animal prints among other cute dresses. Items usually shipped worldwide. <br/> Also browse from a wide selection of cheap corset tops.</div>
+<div class="sml right-button"><a class="shopping-button" href="<?php echo url('corsets.html');?>">SHOP ALL</a></div>
+</div>
+</div>
+</div>
+
+<?php echo $this->render('parts/footer.phtml'); ?>
+<?php echo $this->render('parts/after_body.phtml');?>
+
+<script src="<?php echo $tpldir. '/javascripts/jquery.flexslider.js';?>" type="text/javascript"></script>
+<script type="text/javascript">
+// Can also be used with $(document).ready()
+$(window).load(function() {
+    $('.flexslider').flexslider(
+		{controlNav: "thumbnails",slideshowSpeed: 300000, animationDuration: 600}
+	);
+	$('.flex-caption').each(function(){
+		var flexabstract = $('p.abstract', $(this));
+		var flexdetail = $('p.detail', $(this));
+		if(!(flexabstract.length&&flexdetail.length)){
+			$('h3', $(this)).css({'display':'none'});
+		}
+		});
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<?php global $user;?>
+<div id="global_action">
+	<div id="utility" class="innercontainer">
+	
+	<div id="welcome_section">
+		<div class="logo"><a href="<?php echo url('');?>"><img src="<?php echo url('templates/babydoll-lingerie.net/images/logo.png');?>" alt=""/></a></div>
+	</div>
+	
+	<div id="user_panel">
+      <form action="<?php echo url('pitems');?>" method="post">
+      <div class="search">
+           <input name="keyword" id="search_keyword" type="text" class="text" value="<?php echo isset($search_keywords) ? plain($search_keywords) : 'sexy lingerie';?>" onfocus="if(this.value=='What would you like to save on today'){this.value='';}"  onblur="if(this.value==''){this.value='sexy lingerie';}" />
+           <a id="header_search_keyword" href="javascript:void(0)"><img src="<?php echo url('templates/babydoll-lingerie.net/images/sousuo.png');?>" /><!--  <button type="submit" class="button">GO</button>--></a>
+     </div>
+      </form>
+	
+	<div id="shoppingCart"><span>Cart&nbsp;<em class="cart_item_number"><?php echo isset($goodsInCart)? $goodsInCart : 0; ?></em> &nbsp;Item</span>
+		<a class="button top-checkout" href="<?php echo url('cart');?>" style="">Check Out</a>
+	</div>
+	
+	
+	
+	
+	<ul>
+		<li id="up_help" style="margin-left:10px;">&nbsp;|&nbsp;<a href="<?php echo url('article/contact-us.html');?>" rel="nofollow" class="b">Help</a></li>	
+	
+	<li id="up_signup">
+
+<?php if ($user->uid): ?>
+			<a href="<?php echo url('order/list/');?>">My Orders</a> or 
+			<a href="<?php echo url('user/logout') ?>">Logout</a>
+<?php else: ?>
+			<a href="<?php echo url('user/login');?>">Sign In</a> or 
+			<a href="<?php echo url('user/register');?>">Join Free</a>
+<?php endif;?>
+		</li>
+
+
+		
+	</ul>
+	
+	<div class="currency">
+		<ul id="cur_selector" class="dropdown">
+		<li><a title="" href="#" id="yourCurrency"><?php
+                      if (!isset($_SESSION['currency'])) {
+                        $_SESSION['currency'] = 'USD';
+                      }
+                      echo $_SESSION['currency']
+                    ?></a>
+		<ul>
+<?php	if ($currencyList && count($currencyList) >0) :
+            foreach ($currencyList as $k => $v) :
+                if ($v->visible) :?>
+             <li><a title="<?php echo $v->name ?>" class="flag <?php echo $v->name?>" rel="nofollow" href="#" target="_top"><?php echo $v->name; ?></a></li>
+<?php 			endif;
+            endforeach;
+         endif; ?>
+            </ul>
+		</li>
+	</ul>
+	</div>
+	
+	
+	</div>	
+	
+
+	</div>
+<?php $this->render('parts/navigation.phtml')?>
+</div>
+<div class="clear"></div>

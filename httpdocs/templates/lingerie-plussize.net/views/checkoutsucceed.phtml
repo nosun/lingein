@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+<?php global $user; ?>
+
+<?php $this->render('parts/header.phtml'); ?>
+<div class="main-content">
+<div class="widget fancy">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr>
+      <td width="20%"><span class="step_count">1.Shopping Cart</span></td>
+      <td width="7%"><span class="arrow spirit"></span></td>
+      <td width="20%"><span class="step_count">2.Place Order</span></td>
+      <td width="7%"><span class="arrow spirit"></span></td>
+      <td width="20%"><span class="step_count step_count_active">3.Payment</span></td>
+      <td width="6%"><span class="arrow spirit"></span></td>
+      <td width="20%"><span class="step_count">4.Payment Completed</span></td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+
+<div class="general checkout-result">
+<?php if(count(getMessages(false)) > 0):?>
+<div class="result_box"><?php echo themeMessages(); ?></div>
+<?php endif;?>
+<?php if (isset($orderInfo)): ?>
+
+<div class="userlinks">
+  <div class="widget-inner">
+	<table>
+		<tbody><tr>
+        <td><div class="widget-inner">
+          <h3>Order Summary</h3>
+          <table>
+            <tbody>
+              <tr>
+			<th>Order #:</th>
+			<td><?php echo isset($orderInfo->number)? $orderInfo->number : null;?></td>
+		</tr>
+		<tr>
+			<th>Amount:</th>
+			<td><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?> <?php echo isset($orderInfo->pay_amount) ? c($orderInfo->pay_amount) : null?></td>
+		</tr>
+		<tr>
+			<th>Shipping:</th>
+			<td><?php echo isset($orderInfo->shipping->name)?$orderInfo->shipping->name : null;?></td>
+		</tr>
+		<tr>
+			<th>Payment:</th>
+			<td><?php echo isset($orderInfo->payment->name) ? $orderInfo->payment->name : null;?></td>
+		</tr>
+		<tr>
+			<th>Payment Status:</th>
+			<td><?php
+                if($orderInfo->status_payment==0):
+                   echo '<strong style="color:#A72D2C">Not Paid</strong>';
+                elseif($orderInfo->status_payment==1):
+                   echo '<strong style="color:#CF0275">Paid</strong>';
+                endif;
+              ?></td>
+
+		</tr>
+		<tr>
+			<th>Created:</th>
+			<td><?php echo isset($orderInfo->created)? date('F d, Y H:i:s',$orderInfo->created) : null;?></td>
+		</tr>
+     </tbody>
+  </table>
+        </div></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="other-funcs">
+	<a href="<?php echo url("/product/list/");?>" class="button light" title="Continue Shopping"><span><span>Continue Shopping</span></span></a>
+	<br/>
+    <a href="<?php echo url('order/info/'.$orderInfo->oid);?>" class="button light" title="View Order"><span><span>View Order</span></span></a>   
+</div>
+<?php endif;?>
+</div>
+
+<div class="main-block">
+<div class="status-info">
+<?php if ($orderInfo->status_payment==1):?>
+	<h3>Thank you for shopping! </h3>
+		<p>Your payment for the order <?php echo isset($orderInfo->number)? $orderInfo->number : null;?> has been received!</p>
+		<p>Please be patient, it may take 5-7 days before the order arrived your home.</p>
+<?php elseif($orderInfo->status_payment==0):?>
+		<h3>Directly Pay through Paypal Online:</h3>
+<div id="order_payment">
+<?php if(! isset($orderInfo->payment->online) || $orderInfo->payment->online) :
+ echo isset($submitform) ? $submitform : null;
+ endif;
+ ?>
+</div>
+
+		<ul class="info-list">
+		<li>You should receive an email notification at <span style="color:#990000;"><?php echo $user->email?></span> with your order summary shortly.
+		<div class="info-box red">If you didn't find the order email within 5 minutes, it probably resides in your spam folder. The email provider may treat some hot words as sensitive to spam.</div></li>
+		<?php if (isset($orderInfo->payment->name) && ($orderInfo->payment->name == 'Western Union' ||$orderInfo->payment->name == '西联汇款')):?>
+		<li>The information below will be needed to complete your payment at Western Union.  The information link can also be found in your email notification.            <div class="info-box">
+            	<ul>
+                    <li>Beneficiary:He Liangdong</li>
+                    <li>First Name:Liangdong</li>
+                    <li>Last Name:He</li>
+                    <li>Address:Guangzhou City, Guangdong, China </li>
+                    <li>Country:CHINA</li>
+            	</ul>
+            </div>
+            <div class="extraInfo">
+            Customers who choose to pay via Western Union are responsible for all local Western Union handling fees. Therefore, customers should confirm the total payment amount with their local Western Union.            </div>
+        </li>
+		<?php endif;?>
+		<?php if (isset($orderInfo->payment->name) && ($orderInfo->payment->name == 'Wire Transfer')):?>
+		<li>The information below will be needed to complete your payment if you prefer wire transfer to us.  The information can also be found in your email notification.            <div class="info-box">
+            	<ul>
+					<li>Bank Name: THE INDUSTRIAL AND COMMERCIAL BANK OF CHINA GUANGDONG PROVINCIAL BRANCH</li>
+					<li>Benificiary Name: He Liangdong </li>
+                    <li>First Name: Liangdong</li>
+                    <li>Last Name: He</li>
+                    <li>SWIFT Code: ICBKCNBJGDG</li>
+                    <li>Beneficiary Account Number: 6222023602094984184</li>
+                    <li>Address:Guangzhou City, Guangdong, China </li>
+                    <li>Country:CHINA</li>
+            	</ul>
+            </div>
+            <div class="extraInfo">
+            Customers who choose to pay via Wire Transfer are responsible for all bank wire transfer handling fees. Therefore, customers should confirm the total payment amount with the banks involved in the wire transfer.            </div>
+        </li>
+		<?php endif?>
+		<li>If you have special needs or any unclear questions, you can seek help using live chat or email us. We will reply you within 24 hours.</li>
+		<li>Enjoy the shopping!</li>
+		</ul>
+<?php endif?>
+		</div>
+</div>
+
+
+
+</div>
+</div>
+
+
+
+
+
+<?php echo $this->render('parts/footer.phtml'); ?>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/common.js'; ?>" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+<?php global $user; ?>
+<div style="width:100%;height:100%;background:#000000">
+<?php $this->render('parts/top_bar.phtml');?>
+<div class="container">
+<?php $this->render('parts/header.phtml'); ?>
+<div class="main-content">
+<?php $this->render('modules/ads_topslot.phtml')?>
+
+<div class="general">
+<?php $this->render('modules/slider.phtml');?>
+<div id="prodcut-channels" class="main-block">
+<?php $this->render('modules/new-arrival.phtml');?>
+<?php $this->render('modules/recommand.phtml');?>
+<?php $this->render('modules/discounted.phtml');?>
+</div>
+<?php echo $this->render('parts/body_left.phtml'); ?>
+</div>
+</div>
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+</div>
+
+<?php echo $this->render('parts/after_body.phtml'); ?>
+<script src="<?php echo $tpldir. '/javascripts/jquery.flexslider.js';?>" type="text/javascript"></script>
+<script type="text/javascript">
+// Can also be used with $(document).ready()
+$(window).load(function() {
+    $('.flexslider').flexslider(
+		{controlNav: "paging",slideshowSpeed: 3000, animationDuration: 600}
+	);
+	$('.flex-caption').each(function(){
+		var flexabstract = $('p.abstract', $(this));
+		var flexdetail = $('p.detail', $(this));
+		if(!(flexabstract.length&&flexdetail.length)){
+			$('h3', $(this)).css({'display':'none'});
+		}
+		});
+});
+
+</script>
+</body>
+</html>

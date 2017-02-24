@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+<?php global $user ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<div class="container">
+<?php $this->render('parts/header.phtml'); ?>
+<div class="main-content">
+<?php $this->render('parts/breadcrumb.phtml')?>
+
+<div class="general article">
+
+<?php $this->render('contents/c_intro.phtml');?>
+
+<div class="main-block">
+
+<div class="widget">
+	<div class="w-head">
+		<h2><?php echo $articleInfo->title;?></h2>
+	</div>
+</div>
+
+<!--  here comes the contents -->
+<?php echo isset($pageInfo->content) ? $pageInfo->content : null?>
+<?php if(isset($templatefile) && $templatefile){$this->render($templatefile);}?>
+</div>
+
+<div class="body-left">
+
+<div id="wrapper-left">
+
+<div id="cat-lists" class="widget">
+
+<div class="w-head ordinary">
+	<h2 class="side-subcat-title">Pages </h2>
+</div>
+<div class="side-subcat-div">
+    <ul>
+    	<?php if(isset($pageList)):?>
+    	<li>Pages</li>
+    	<?php foreach($pageList as $k=>$v):
+    	?>
+    	<li><a href="<?php echo isset($v->url) ? $v->url : null;?>" class="b <?php if($pageInfo->title == $v->title) echo 'red'?>">
+    		    <?php echo isset($v->title) ? $v->title : null;?></a>
+    	</li>
+        <?php 
+          endforeach;
+          endif;
+        ?>
+	</ul>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+<div class="general_bottom"></div>
+</div>
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+</body>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+</html>

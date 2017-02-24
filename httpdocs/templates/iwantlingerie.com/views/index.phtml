@@ -1,0 +1,89 @@
+<?php echo $this->render('before_body.phtml'); ?>
+
+<body><?php echo $this->render('header.phtml'); ?>
+<div class="bodyer"><div class="body_left"><div class="general_top"></div><div class="general">
+	<div class="clear" id="KinSlideshow" style="visibility:hidden;"><?php
+            if(isset($hdpArr) && $hdpArr):
+              foreach ($hdpArr as $v):
+           ?><a href="<?php echo $v->url ?>"><img src="<?php echo urlimg('760x280',$v->filepath); ?>" alt="<?php echo $v->title;?>" width="760" height="280" /></a><?php
+              endforeach;
+             endif;
+            ?></div>
+            <div id="wrapper-b" class="widget" style="margin-bottom:0;"><div class="w-b w-Introduction" id="Introduction"><div class="h3">About  <h1 class="seoH">IWantLingerie.com</h1></div><div id="self-intro">
+            <span class="company_brand">IWantLingerie.com</span><p>is a leading international online store for lingerie shopping without minimal order limitation. We sell all kinds of lingerie and costumes, including Bra & Panties, Corsets & Bustiers,Leg Wear and Bodystockings, Sexy Clubwear, etc. <span class="advanced-contents">You will be sure to find what you are looking for. <span>We currently own four modern manufacturers based in China, and had corporations with some large company like Yandy, <a href="http://goo.gl/q4qmi">Wholesale Corsets</a> and others. </span><span>We aim at lingerie wholesale and our price is the lowest across the Internet. </span><span>As an international wholesaler and manufacturer, our products are sold to more than 90 countries. </span><span>We have built long-term cooperation with over 500 leading retailers from different countries and area. </span><span>Besides, we have also owned 100,000+ registered individual customers who love our products’ high quality and cheap price. </span><span>IWantLingerie.com is fit for medium and small wholesale or retail business. </span><span>We sincerely look forward you to shopping online here and developing long-term relationship with us. </span><span>Just shop and place order online. You can contact us by using our live chat customer service through directly or ask for invoice through our contact email.</span>
+ OEM is also welcomed. </span>&nbsp;&nbsp;<a class="advanced-show">[+]</a></p></div></div><!-- widget-why-buy-from-us_5_eof --><!-- widget-other-sites --><!-- widget-other-sites_eof -->
+</div>
+<div class="width760"><div class="left" id="prodcutTab">
+<div class="w-rHeading"><h2><span>New Arrivals</span><span class="viewAll"> <b class="red">&gt;</b><a class="more" href="<?php echo url('new-arrivals.html');?>"> View All New Arrivals	</a></span></h2></div>
+<!-- New Arrived Products -->
+<div id="new_arrival" class="w-p10 w-bp-a w-productList w-grid w-relatedProdsGrid"><?php
+                  if(isset($newProductList) && $newProductList):
+                     $item_count = 0;
+                     foreach ($newProductList as $v):
+                       $item_count++;
+                ?><dl><dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url);?>" title="wholesale lingerie - <?php echo $v->name;?>"><img width="160" height="240" alt="<?php echo $v->name;?>, lingerie wholesale" title="<?php echo $v->name;?>" src="<?php echo urlimg('160x240', $v->filepath);?>"><em class="iconDiscount"><?php
+      			  echo round((1 - $v->price / $v->list_price) * 100, 0);
+      			?></em></a></dt>
+                	<dd class="prodName"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>""><?php echo $v->name;?></a></dd><dd class="oldPrice"><?php echo isset($v->list_price)? c($v->list_price) : null;?></dd><dd class="price"><a rel="nofollow" href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo isset($v->price)? c($v->price) : null;?></a></dd>
+                	<dd class="review"><!--  stars  --><?php if(isset($v->star) && $v->star):?>
+                            <?php echo $v->star;?><br/>
+                        <?php endif;?><!-- end of stars <span class="star starS5"><em>5 stars of 5</em></span>--></dd></dl><?php 
+                      if($item_count % 4 == 0){echo '<br class="clear">';}
+                  endforeach;
+                   endif;
+                ?></div><!-- Recommend Products --><div class="w-rHeading"><h2><span>Recommended Products</span><span class="viewAll"> <b class="red">&gt;</b><a class="more" href="<?php echo url('recommended.html');?>"> View All Recommended Products	</a></span></h2></div>
+                <div class="w-p10 w-bp-a w-productList w-grid w-relatedProdsGrid"><?php
+                  if(isset($recommendProductList) && $recommendProductList):
+                     foreach ($recommendProductList as $v):
+                ?>
+                <dl><dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url);?>" title="wholesale lingerie: <?php echo $v->name;?>"><img width="160" height="240" alt="<?php echo $v->name;?>, lingerie wholesale" title="<?php echo $v->name;?>" src="<?php echo urlimg('160x240', $v->filepath);?>"><em class="iconDiscount"><?php
+                	echo round((1 - $v->price / $v->list_price) * 100, 0);
+                ?></em></a></dt>
+                <dd class="prodName"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>""><?php echo $v->name;?></a></dd>
+                <dd class="oldPrice"><?php echo isset($v->list_price)? c($v->list_price) : null;?></dd><dd class="price"><a rel="nofollow" href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo isset($v->price)? c($v->price) : null;?></a></dd>
+                <dd class="review"><?php 
+                if(isset($v->star) && $v->star):?><?php echo $v->star;?><br/><?php 
+                endif;?></dd></dl><?php endforeach;
+                   endif;
+                ?></div><!-- Discounted Products -->
+                <div class="w-rHeading"><h2><span>Discounted Products</span><span class="viewAll"> <b class="red">&gt;</b><a class="more" href="<?php echo url('discounted.html');?>"> View All Discounted Products	</a></span></h2></div>
+                <div class="w-p10 w-bp-a w-productList w-grid w-relatedProdsGrid"><?php
+                  if(isset($disProductList) && $disProductList):
+                     foreach ($disProductList as $v):
+                ?>
+                <dl><dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url);?>" title="wholesale lingerie: <?php echo $v->name;?>"><img width="160" height="240" alt="<?php echo $v->name;?>, lingerie wholesale" title="<?php echo $v->name;?>" src="<?php echo urlimg('160x240', $v->filepath);?>"><em class="iconDiscount"><?php
+                	echo round((1 - $v->price / $v->list_price) * 100, 0);?></em></a></dt>
+                	<dd class="prodName"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>""><?php echo $v->name;?></a></dd>
+                    <dd class="oldPrice"><?php echo isset($v->list_price)? c($v->list_price) : null;?></dd><dd class="price"><a rel="nofollow" href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo isset($v->price)? c($v->price) : null;?></a></dd>
+                	<dd class="review"><?php if(isset($v->star) && $v->star):?><?php echo $v->star;?><br/><?php 
+                endif;?></dd></dl><?php endforeach;
+                   endif;
+                ?></div>
+                </div>
+            </div>
+        </div>
+        <div class="general_bottom"></div>
+    </div>
+	<div class="body_right"><?php echo $this->render('body_left.phtml'); ?><div class="head_d"></div><div class="Shop_d"></div></div>
+<div id="wrapper-b" class="widget">
+	<div class="w-b w-whyBuyFromUs" id="whyBuyFromUs"><div class="h3">Why Shop at <h1 class="seoH">IWantLingerie.com</h1></div>
+	<div class="bestWholesale"> <h4><span></span>Great Choice for A Better Life</h4><p>IWantLingerie.com is the global online sexy lingerie related items retailer and wholesaler aimed assisting you for a better life. We are providing various kind of sexy lingerie, sexy costume, sexy corsets and bustiers, sexy bras and panties and also sexy clothes for special occasions at unbeatable prices. For convenient shopping and everyday savings, make IWantLingerie.com a part of your life today!</p></div>
+	<div class="freeToJoin"> <h4><span></span>High Quality With Global Standards</h4><p>Every IWantLingerie.com sexy lingerie product undergoes an extensive testing and quality control procedure, ensuring each and every sexy underwear item purchased meets global quality standards. IWantLingerie.com offers only the highest quality products, allowing customers to shop with confidence.</p></div>
+	<br class="clear"><div class="noMinOrders"><h4><span></span>Low Prices Direct From Factory Suppliers</h4><p>As a China-based global online wholesaler and retailer, IWantLingerie.com has developed long lasting ties with many factories, distributors and warehouses throughout the Chinese lingerie wholesale community. Eliminating unnecessary costs and delivering the lowest possible prices to customers worldwide, IWantLingerie.com is committed to providing high quality fancy sexy lingerie for low price.</p></div>
+	<div class="fastDelivery"> <h4><span></span>Easy &amp; Safe Online Shopping</h4><p>With a wide variety of payment options, IWantLingerie.com offers convenience to customers worldwide. Purchasing options include wire transfer, Western Union and PayPal. IWantLingerie.com has a payment method that works for you, with VeriSign's world renowned secure payment technology keeping your information safe at all times.</p></div><br class="clear">
+	<div class="easyToOrder"> <h4><span></span>Fast Delivery Around The Globe</h4><p>Partnering with internationally trusted logistic service providers such as DHL, EMS and UPS, IWantLingerie.com ships to over 100 countries around the world. A variety of expedited shipping methods means there's a convenient delivery option for every budget.</p></div>
+	<div class="secure">  <h4><span></span>Convenient &amp; Friendly Customer Service</h4><p>IWantLingerie.com offers excellent, comprehensive customer service every step of the way. You can make Live Chats Online, with your messengers and you can also email us for your concerns and questions. Once you've made a purchase, our customer service representatives are on-hand to answer questions through our website's easy to use Live Chat system. Shop with confidence and save with IWantLingerie.com!</p></div>
+</div></div>
+</div><?php echo $this->render('footer.phtml'); ?></body><?php echo $this->render('after_body.phtml'); ?>
+<script type="text/javascript">
+$(document).ready(function(){$('.w-Introduction div#self-intro .advanced-show').click(function(){
+    		if($('.w-Introduction div#self-intro .advanced-contents').css('display') == 'none'){
+    			$('.w-Introduction div#self-intro .advanced-contents').css({'display':'inline'});
+    			$(this).text('[-]');
+    		}else if($('.w-Introduction div#self-intro .advanced-contents').css('display') == 'inline'){
+    			$('.w-Introduction div#self-intro .advanced-contents').css({'display':'none'});
+    			$(this).text('[+]');
+    		}
+		});});
+</script>
+</html>

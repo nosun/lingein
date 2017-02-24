@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body style="zoom:1">
+<?php global $user; ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<?php $this->render('parts/navigation.phtml'); ?>
+<div class="container">
+<div class="main-content">
+<div class="general article">
+
+<?php $this->render('contents/a_category.phtml');?>
+
+<div class="main-block main-block1">
+
+<div class="widget">
+<div class="w-head">
+	<h2><?php echo isset($articleInfo->name)?$articleInfo->name:"Knowledge Base";?></h2>
+</div>
+</div>
+
+<!--  here comes the contents -->
+<ul>
+<?php foreach ($articleList as $k => $v) : ?>
+		<li><a href="<?php echo url($v->url);?>" class="" title="<?php echo isset($v->title) ? $v->title : null ?>"><?php echo isset($v->title) ? ucwords($v->title) : null ?></a></li>
+<?php endforeach;?>
+	</ul>
+</div>
+
+
+
+
+</div>
+<div class="general_bottom"></div>
+</div>
+</div>
+
+<div class=" clears"></div>
+
+<?php echo $this->render('parts/footer.phtml'); ?>
+</body>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+</html>

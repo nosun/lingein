@@ -1,0 +1,15 @@
+<div id="product-abstract">
+<?php list($product_item_name, $product_item_id) = split(',', $product->name);?>
+<h1 id="prHead"><?php echo $product_item_name;?></h1>
+
+
+<?php $this->render('contents/p_parameters.phtml')?>
+
+
+
+<?php $this->render('contents/p_orderprice.phtml')?>
+
+
+
+<?php $this->render('contents/p_fields.phtml')?>
+</div>

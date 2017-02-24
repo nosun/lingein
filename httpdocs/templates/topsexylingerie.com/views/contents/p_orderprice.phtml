@@ -1,0 +1,14 @@
+<?php $product->price = isset($product->price)?$product->price:$product->sell_price;?>
+
+<table class="prices">
+	<tbody>
+	<tr class="listPrice">
+		<td style="width:100px;">Market Price:</td>
+		<td><span style="color:#000;font-size:12px;"><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?>&nbsp;&nbsp;<del><?php echo isset($product->list_price) ? c($product->list_price) : null;?></del></span></td>
+
+	</tr>
+	<tr class="price" id="salePrice">
+			<th colspan="2" style="color:#DB2659;"><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?>&nbsp;&nbsp;<span id="infoprice"><?php echo isset($product->price) ? c($product->price):null;?></span></th>
+			</tr>
+	</tbody>
+</table>

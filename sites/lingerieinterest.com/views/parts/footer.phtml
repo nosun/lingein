@@ -1,0 +1,47 @@
+<div class="footer">
+<div id="customerHelp" class="w-bp">
+  <div>
+  <?php if(isset($helpList) && isset($articleTypeList)):
+  $articleTypeCount = 0;
+  foreach($helpList as $index => $articleList):
+  	if($index != 'news'):
+  	$articleTypeCount++;
+  	if($articleTypeCount > 4):
+  		break;
+  	endif;
+  	?>
+  <dl><dt><?php echo $articleTypeList[$index]->name;?></dt><?php 
+          	foreach ($articleList as $v):
+          ?><dd><a href="<?php echo url($v->url)?>"><?php echo $v->title;?></a></dd><?php 
+          	endforeach;
+          ?></dl>
+  <?php endif;
+  endforeach;
+  endif?>
+  </div>
+</div>
+
+<div class="widget w-customeGuide" id="customerGuide">
+	<div class="col" id="newsLetter">
+		<fieldset><h3>Subscribe to our <em>Newsletter</em></h3><p>Get updates, discounts, and special offers from today!</p>
+			<input type="text" class="text" value="Enter Your Email" id="mailAddress"><button id="submitMailAddress" class="textbtnGray">Subscribe</button>
+		</fieldset></div>
+</div>
+
+<p>Lingerieinterest.com is a global hot lingerie online company that delivers high quality cheap lingerie to consumers world-widely. Since 2007, we have offered our customers more than 10,000 types of cheap sexy lingerie at attractive prices.</p>
+
+<p>As one of the pioneers in the field of cheap sexy lingerie, our hot lingerie are mainly in cheap corsets, babydoll lingerie, sexy costumes, and teddy lingerie, etc. As one of the largest hot lingerie online stores that export items to more than 100 countries, quality is always our foundation!</p>
+
+
+<div id="copyright">
+<span class="floatleft">
+           	<?php $siteInfo = Bl_Config::get('siteInfo');echo $siteInfo['copyright'];?>
+        </span>
+
+<div class="floatright">
+			Mail to: <a href="mailto:<?php echo $siteInfo['email'];?>"><?php echo $siteInfo['email'];?></a> for any help.
+</div>
+
+
+</div>
+</div>

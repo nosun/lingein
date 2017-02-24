@@ -1,0 +1,142 @@
+<?php global $user?>
+<div class="cart-list">
+<form class="form-cartpost" id="itemsForm" method="post" action="<?php echo url('cart/cartpost');?>">
+<input id="cart_submit" type="hidden" name="checkout"/>
+<table class="cart-list-table" cellspacing="0" cellpadding="0">
+	<thead>
+		<tr>
+             <th width="5%" class="prDesc"></th>
+             <th width="30%" class="">ITEM NAME</th>
+             <th width="15%" class="prAttrs">ITEM SPEC</th>
+             <th width="20%" class="prQuant">QUANTITY</th>
+             <th width="8%" style="text-align:center;">Unit price</th>
+             <th width="3%" rowspan="1" class="a-center">EDIT</th>
+             <th width="8%" class="prAmount" style="text-align:center;">Subtotal</th>
+        </tr>
+    </thead>
+<tbody>     
+<?php if ($cartInfo->product) :
+foreach ($cartInfo->product as $k => $v): ?>
+<tr id="cartitem_<?php echo isset($v->cart_item_id) ? $v->cart_item_id : null ?>" class="cart-item-tr <?php if(isset($v->stock_qty) && ($v->stock_qty < $v->qty)) echo 'disable';?>" valign="top" >
+    <td class="prImage" style="border-bottom:1px solid #ccc;">
+    	<a href="<?php echo url($v->url);?>" title="<?php echo isset($v->name) ? $v->name : null ?>"><img alt="<?php echo isset($v->name) ? $v->name : null ?>" title="<?php echo isset($v->name) ? $v->name : null ?>" src="<?php echo urlimg('60x90', $v->filepath) ?>"/></a>
+    </td>
+    <td class="prName" style="text-align:left;border-bottom:1px solid #ccc;" >
+		<input type="hidden" class="checkitem" name="cart_item_id_checked[]" checked value="<?php echo isset($v->cart_item_id) ? $v->cart_item_id : null ?>"/>
+		<h4><a href="<?php echo url($v->url);?>" title="<?php echo isset($v->name) ? $v->name : null ?>"><?php echo isset($v->name) ? $v->name : null ?></a></h4>
+    </td>
+    <td class="prAttrs" style="text-align:left;border-bottom:1px solid #ccc;">
+<?php if(isset($v->data) && $v->data):
+	  	foreach($v->data as $dk => $dv):?>
+			<dl class="prAttr"><dt><?php echo $dk;?>: </dt><dd><?php echo $dv;?></dd></dl>
+<?php endforeach;endif;?>
+    </td>
+    <!-- 
+    <td class="prSize" style="text-align:left;border-bottom:1px solid #ccc;">
+<?php if(isset($v->data) && $v->data):
+	  	foreach($v->data as $dk => $dv):
+	  	    if($dk == 'Size'):
+			echo '<p class="prAttr">'.$dv.'</p>';
+            endif;
+		endforeach;
+      else: echo '&nbsp;';
+      endif;?>
+    </td>
+     -->
+    <td class="prQuant" style="border-bottom:1px solid #ccc;">
+		<input type="hidden" value="<?php echo isset($v->pid) ? $v->pid : null ?>" name="pids[]"/>
+        <input type="hidden" value="<?php echo isset($v->cart_item_id) ? $v->cart_item_id : null ?>" name="cart_item_ids[]"/>
+    	<input value="<?php echo isset($v->qty) ? $v->qty : null ?>" name="qtys[]" size="3" alt="<?php echo isset($v->qty) ? $v->qty : null ?>" id="<?php echo isset($v->cart_item_id) ? $v->cart_item_id : null ?>" class="ajax_qty elmbBlur" title="<?php echo $v->sell_min ? $v->sell_min : 0 ?>,<?php echo $v->sell_max ? $v->sell_max : 0 ?>" rel="<?php echo isset($v->price) ? $v->price : null ?>"/>
+		<?php if(isset($v->stock_qty) && ($v->stock_qty < $v->qty)):?>
+		<?php if($v->stock_qty > 0):?>
+		<p class="error_notice">Only <?php echo $v->stock_qty?> items left.</p>
+		<?php else:?>
+		<p class="error_notice">Out of stock.</p>
+		<?php endif;?>
+		<?php else:?>
+		<p class="error_notice" style="display:none;"></p>
+		<?php endif;?>
+    </td>
+    <td class="prPrice ar" style="border-bottom:1px solid #ccc;">
+		<p class="listPrice"><del><?php echo isset($v->list_price) ? c($v->list_price) : null;?></del></p>
+		<p class="price"><?php echo isset($v->price) ? c($v->price) : null;?></p>
+   </td>
+    <td class="a-center" style="border-bottom:1px solid #ccc;"><a href="<?php echo url('cart/deleteproductfromcart/'.$v->cart_item_id);?>" title="Remove" class="remove ir"><img src="<?php echo $this->themeResourceURI('images/btn_trash.gif');?>" /></a></td>
+    <td class="prAmount ar" style="border-bottom:1px solid #ccc;">
+        <span class="payPrice"><span class="numVal"><?php echo isset($v->qty) ? c($v->price * $v->qty) : null;?></span></span>
+    </td>
+</tr>
+<?php endforeach; endif;?>
+
+</tbody>
+
+<tfoot>
+<tr class="scTotalItems">
+<td colspan="7" style="padding:0">
+<table border="0" cellpadding="0" cellspacing="0" style="float:left;">
+ <tbody>
+ <tr>
+ <td id="cardTypes">
+ <p class="payInfo" id="acceptText"><strong>We Accept:</strong></p>
+ <img class="payInfo" id="cardBagdes" src="<?php echo $this->themeResourceURI('images/cardbadges.png');?>">
+ </td>
+</tr>
+<tr>
+<td id="returnsImg">
+ <img class="payInfo" id="verisign" src="<?php echo $this->themeResourceURI('images/verisign.gif');?>">
+  <div class="payInfo" id="assureLines">
+  <p id="assureHead"><strong>Shop With Confidence</strong></p>
+  <p>Your order is safe and secure.</p>
+  <p> Your satisfaction is 100% guaranteed.</p>
+  </div>
+ </td>
+ </tr>
+ </tbody>
+</table>
+<table width="100%;" bgcolor="#f0f0f0" style="width:345px;float:right;margin-top:30px; padding-top:10px;" cellpadding="0" cellspacing="0">
+<tbody>
+<tr class="scTotalItems">
+<td align="right"  class="total ar">TOTAL ITEMS:</td>
+<td class="total ar goods_number">
+	<!--<?php if ($cartInfo->product){ echo count($cartInfo->product);} ?>-->
+	<?php echo isset($goodsInCart)? $goodsInCart : 0; ?>
+</td>
+</tr>
+
+<tr class="scTotalSaving ar">
+	<td align="right" class="total ar" >TOTAL SAVINGS:</td>
+	<td class="total ar"><span class="numVal"><?php echo isset($cartInfo->total_save_amount) ? c($cartInfo->total_save_amount) : null?></span></td>
+</tr>
+<tr>
+ <td colspan="2" align="right"><a href="<?php echo url('cart');?>" class="contShopping left"><img src="<?php echo $this->themeResourceURI('images/b_update.gif');?>"></a></td>
+</tr>
+<tr class="srcSumAmount" bgcolor="#7e7e7e" style="font-size:16px;color:#FFF;">
+<td height="37" class="total ar" colspan="2">
+	<strong>CART TOTAL</strong>
+    <strong class="totalPrice"><span class="numVal"><?php echo isset($cartInfo->goods_amount) ? c($cartInfo->goods_amount) : null?></span></strong>
+</td>
+	
+</tr>
+</tbody>
+</table>
+<table style="float:right;width:240px;">
+ <tbody>
+ <tr class="last" >
+ <td><a title="Continue Shopping" class="checkoutBtn" href="<?php echo url('browse/all.html');?>"><img src="<?php echo $this->themeResourceURI('images/b_continuesp.gif');?>"></a></td>
+<td class="checkout-types"  align="right" style="padding:0 0 0 0	;">
+<?php if(isset($user) && $user->uid):?>
+	<a title="Proceed to Checkout" class="checkoutBtn <?php if(isset($cartInfo->lacking) && $cartInfo->lacking == true) echo 'disabled';?>" href="javascript:submit_shopping_cart('checkout')">Check Out</a>
+<?php else:?>
+    <a title="Proceed to Checkout" class="checkoutBtn <?php if(isset($cartInfo->lacking) && $cartInfo->lacking == true) echo 'disabled';?>" href="<?php echo url('user/login/')?>">Check Out</a>
+<?php endif?></td>
+</tr>
+ </tbody>
+</table>
+</td>
+
+</tr>
+</tfoot>
+</table>
+
+</form>
+</div>

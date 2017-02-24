@@ -1,0 +1,81 @@
+<div class="widget">
+<div class="w-head">
+<h3>Order History</h3>
+</div>
+<div class="w-content">
+<p>You can find orders by selecting a date period below.</p>
+<div class="user_edit">
+<blockquote>
+<form action="<?php echo url('order/list');?>" method="post"
+	id="form_order">
+<table border="0" class="form tb-orderhistory">
+	<tbody>
+		<tr>
+			<th>Order No.</th>
+			<td><input type="text"
+				value="<?php echo isset($number) ? $number : null?>" name="number"
+				class="elmbBlur" /></td>
+		</tr>
+		<tr>
+			<th>Date Ranges</th>
+			<td align="left"><input type="text"
+				class="datepicker elmbBlur" name="startTime"
+				value="<?php echo isset($startTime) ? $startTime : null?>" />&nbsp;
+			-- &nbsp;<input type="text"
+				value="<?php echo isset($endTime) ? $endTime : null?>"
+				name="endTime" class="datepicker elmbBlur" /></td>
+		</tr>
+		<tr>
+			<th>Order Status</th>
+			<td>
+			<div class="custom-select"><select name="status" class="select">
+			                	<option value="any">Any</option>
+			                	<option value="0">Pending</option>
+				                <option value="1">Processing</option>
+				                <option value="2">Shipped</option>
+				                <option value="-1">Cancelled</option>
+			</select>
+			<button class="button" type="submit">Search</button>
+			</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</form>
+</blockquote>
+<table class="u-order-tbl">
+	<thead>
+		<tr>
+			<th>Order ID</th>
+			<th>Last Update</th>
+			<th align="center">Order Status</th>
+			<th align="center">Payment Status</th>
+			<th align="right">Total</th>
+			<th align="right">Details</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($ordersList as $k => $v) : ?>
+		<tr>
+			<td><a href="<?php echo url('order/info/'.$v->oid);?>"><?php echo isset($v->number)? $v->number : null;?>
+			</a></td>
+			<td><?php echo isset($v->created) && $v->created ? date('Y-m-d H:i:s', $v->created) : null ;?></td>
+			<td align="center"><?php if($v->status==0): echo 'Pending';
+	  elseif($v->status==1): echo 'Processing';
+	  elseif($v->status==2): echo 'Shipped';
+	  elseif($v->status==-1): echo 'Cancelled';
+	  elseif($v->status==-2): echo 'Deleted';
+	  endif;?></td>
+			<td align="center"><?php if($v->status_payment==0): echo 'Not Paid';
+	  elseif($v->status_payment==1): echo 'Paid';
+	  endif;?></td>
+			<td align="right"><?php echo isset($v->pay_amount) ? c($v->pay_amount) : null; ?></td>
+			<td align="right"><a href="<?php echo url('order/info/' . $v->oid)?>">View</a></td>
+		</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+
+		<?php $this->render('modules/pagination.phtml');?></div>
+</div>
+</div>

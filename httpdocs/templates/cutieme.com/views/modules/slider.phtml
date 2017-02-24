@@ -1,0 +1,24 @@
+<div class="banner">
+<div class="flex-container" style="">
+<div class="flexslider">
+<?php if(isset($hdpArr) && $hdpArr):?>
+  <ul class="slides">
+  	<?php  
+	$index = 0;
+	foreach ($hdpArr as $v):
+	$index = $index + 1;
+	?>
+    <li flex-link="<?php echo $v->url ?>" flex-title="<?php echo $v->title;?>" class="slide_<?php echo $index;?>">
+    <a href="<?php echo $v->url;?>">
+      <img src="<?php echo urlimg('1000x569',$v->filepath); ?>"  title="<?php echo $v->title;?>" alt= '<?php echo $v->title;?>'/>
+    </a>
+    <div class="flex-caption"><h3><?php echo $v->title;?></h3>
+  	<?php echo $v->description;?>
+    </div>
+    </li>
+    <?php endforeach;?>
+  </ul>
+      <?php endif;?>
+</div>
+</div>
+</div>

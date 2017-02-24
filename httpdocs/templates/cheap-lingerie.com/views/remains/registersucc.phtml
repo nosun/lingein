@@ -1,0 +1,49 @@
+<?php echo $this->render('before_body.phtml'); ?>
+<body>
+<?php echo $this->render('header.phtml'); ?>
+
+<div id="wrapper" class="wrapper ff-verdana">
+  <!-- <div class="framework_top"></div> -->
+  <div id="wrapper-t-l-660" class="framework">
+        <div class="widget w-regSuccessInfo">
+        <h3>Your Account Has Been Created!</h3>
+        
+        <h4>Congratulations! Your new account has been successfully created!</h4>
+        
+        <ul>
+        <li>You can now take advantage of member privileges to enhance your online shopping experience with us.</li> 
+        <li>If you have ANY questions about the operation of this online shop, please email the store owner.</li>
+        <li>A confirmation has been sent to the provided email address. If you have not received it within the hour, please <a href="<?php echo url('article/contact-us.html')?>" class="red">contact us</a>.</li>  
+        </ul>
+
+    </div>
+  <!-- <div class="framework_bottom"></div> -->
+</div>
+
+
+<div id="wrapper-t-r-230">
+<div class="widget w-regSuccessRightLists">
+	<h3 style="padding:5px;">Account</h3>
+	<ul>
+		<li><a href="" class="red">Personal Settings</a></li>
+		<li><a href="" class="red">Change Password</a></li>
+		<li><a href="" class="red">Order History</a></li>
+		<li><a href="" class="red">Log Out</a></li>
+	</ul>
+
+</div>
+  <div>
+  	<a href="<?php echo url('product/list/')?>" class="textbtnGray">Continue Shopping</a>
+  </div>
+
+<!-- widget-check-out-success-order-sum_eof -->		</div>
+
+
+
+</div>
+
+
+<?php echo $this->render('footer.phtml'); ?>
+</body>
+<?php echo $this->render('after_body.phtml'); ?>
+</html>

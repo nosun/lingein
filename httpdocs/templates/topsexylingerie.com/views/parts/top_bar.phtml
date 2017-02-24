@@ -1,0 +1,21 @@
+<?php global $user;?>
+<div id="global_action">
+	<div id="user_panel">
+	
+		<div class="welcome" style="float:left;"><strong>Best supplier for <a style="padding:0 0 0 0;" href='http://www.topsexylingerie.com/' ><font color="#B3B3B3">sexy lingerie and wholesale corsets!</font></a></strong></div>
+
+	
+	<ul>
+		<li id="up_signup">
+<?php if ($user->uid): ?>
+			<a href="<?php echo url('order/list/');?>" rel="nofollow" class="red">My Orders</a> or 
+			<a href="<?php echo url('user/logout') ?>" rel="nofollow" class="red">Logout</a>
+<?php else: ?>
+			<a href="<?php echo url('user/login');?>" rel="nofollow" class="red">Sign In</a> or 
+			<a href="<?php echo url('user/register');?>" rel="nofollow" class="red">Join Free</a>
+<?php endif;?>
+		</li>
+		</ul>
+
+		</div>
+</div>

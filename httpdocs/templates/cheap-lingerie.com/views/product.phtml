@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+<?php $this->render('parts/header.phtml');?>
+<div class="main-content">
+<?php $this->render('parts/breadcrumb.phtml')?>
+<?php $this->render('contents/p_intro.phtml')?>
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/products.js'; ?>" type="text/javascript"></script>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/common.js'; ?>" type="text/javascript"></script>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/comments.js'; ?>" type="text/javascript"></script>
+</body>
+</html>

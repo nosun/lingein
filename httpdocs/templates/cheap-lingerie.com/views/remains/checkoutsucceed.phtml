@@ -1,0 +1,150 @@
+<?php echo $this->render('before_body.phtml'); ?>
+<?php global $user;?>
+<body style="background:none;">
+<div class="widget w-simpleHeader">
+	<div class="logo"><a href="<?php echo url('');?>"><img class="simpleHeaderImg" alt=" i want lingerie" title=" i want lingerie " src="<?php echo $tpldir ?>/images/logo2.png"></a></div>
+	    <?php if ($orderInfo->status_payment==0):?>
+	    <div class="cartStep2"></div>
+	    <?php elseif($orderInfo->status_payment==1):?>
+	    <div class="cartStep3"></div>
+	    <?php endif?>
+</div>
+
+<div id="wrapper" class="wrapper ff-verdana">
+
+    <div style="background-color:#CCFFCC; display:none"><?php echo themeMessages(); ?></div>
+    
+<div id="wraper-t">
+
+<?php if (isset($orderInfo)): ?>
+	<div id="wrapper-t-l-560">
+		<!-- widget-check-out-success-info -->
+<div class="widget w-checkOutSuccessInfo">
+<?php if ($orderInfo->status_payment==1):?>
+	<h3>Thank you for shopping with us! Your payment for the order <?php echo isset($orderInfo->number)? $orderInfo->number : null;?> has been received!</h3>
+		<h4>Please be patient, it may take 5-7 days before the order arrived your home.</h4>
+<?php elseif($orderInfo->status_payment==0):?>
+	<h3>You just placed an order!</h3>
+		<h4>Your next step is to complete your payment and email us your payment details.</h4>
+	<div id="order_payment">
+<?php if(! isset($orderInfo->payment->online) || $orderInfo->payment->online) :
+ echo isset($submitform) ? $submitform : null;
+ endif;
+ ?>
+		</div>
+		
+		<ul class="infoList">
+		<li>You should receive an email notification at <span style="color:#990000;"><?php echo $user->email?></span> with your order summary shortly.
+		<div class="infobox red">If you didn't find the order email within 5 minutes, it probably resides in your spam folder. The email provider may treat some hot words as sensitive to spam.</div></li>
+		<?php if (isset($orderInfo->payment->name) && ($orderInfo->payment->name == 'Western Union' ||$orderInfo->payment->name == '西联汇款')):?>
+		<li>The information below will be needed to complete your payment at Western Union.  The information link can also be found in your email notification.            <div class="infobox">
+            	<ul>
+                    <li>Beneficiary:He Liangdong</li>
+                    <li>First Name:Liangdong</li>
+                    <li>Last Name:He</li>
+                    <li>Address:Guangzhou City, Guangdong, China </li>
+                    <li>Country:CHINA</li>
+            	</ul>
+            </div>
+            <div class="extraInfo">
+            Customers who choose to pay via Western Union are responsible for all local Western Union handling fees. Therefore, customers should confirm the total payment amount with their local Western Union.            </div>
+        </li>
+		<?php endif?>
+		
+		
+		<?php if (isset($orderInfo->payment->name) && ($orderInfo->payment->name == 'Wire Transfer')):?>
+		<li>The information below will be needed to complete your payment if you prefer wire transfer to us.  The information can also be found in your email notification.            <div class="infobox">
+            	<ul>
+					<li>Bank Name: THE INDUSTRIAL AND COMMERCIAL BANK OF CHINA GUANGDONG PROVINCIAL BRANCH</li>
+					<li>Benificiary Name: He Liangdong </li>
+                    <li>First Name: Liangdong</li>
+                    <li>Last Name: He</li>
+                    <li>SWIFT Code: ICBKCNBJGDG</li>
+                    <li>Beneficiary Account Number: 6222023602094984184</li>
+                    <li>Address:Guangzhou City, Guangdong, China </li>
+                    <li>Country:CHINA</li>
+            	</ul>
+            </div>
+            <div class="extraInfo">
+            Customers who choose to pay via Wire Transfer are responsible for all bank wire transfer handling fees. Therefore, customers should confirm the total payment amount with the banks involved in the wire transfer.            </div>
+        </li>
+		<?php endif?>
+		<li>If you have special needs or any unclear questions, you can seek help using live chat or email us. We will reply you within 24 hours.</li>
+		<li>Enjoy the shopping!</li>
+		
+		</ul>
+<?php endif?>
+		</div>
+<!-- widget-check-out-success-info_eof -->		</div>
+	<div id="wrapper-t-r-310">
+
+<div class="widget w-checkOutSuccessOrderSum">
+	<h3>Order Summary</h3>
+	<table>
+		<tbody><tr>
+			<th>Order Number: # </th>
+			<td> <strong class="red"><?php echo isset($orderInfo->number)? $orderInfo->number : null;?></strong></td>
+		</tr>
+		<tr>
+			<th>Total Amount: </th>
+			<td><strong class="red"><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?> <?php echo isset($orderInfo->pay_amount) ? c($orderInfo->pay_amount) : null?></strong></td>
+		</tr>
+		<tr>
+			<th>Shipping Method:</th>
+			<td><strong class="black">
+			
+                <?php 
+        		if (isset($orderInfo->shipping->name)){
+        		  if(strtoupper($orderInfo->shipping->name) == 'UPS'){
+        		    echo 'Expedited Shipping';
+        		  }else if(strtoupper($orderInfo->shipping->name) == 'EMS'){
+        		    echo 'Standard Shipping';
+        		  }else{
+        		    echo $orderInfo->shipping->name;
+        		  }
+        		}?>
+			
+			</strong></td>
+		</tr>
+		<tr>
+			<th>Payment Method: </th>
+			<td><strong class="black"><?php echo isset($orderInfo->payment->name) ? $orderInfo->payment->name : null;?></strong></td>
+		</tr>
+		<tr>
+			<th>Payment Status: </th>
+			<td><strong class="black">
+              <?php
+                if($orderInfo->status_payment==0):
+                   echo '<strong style="color:#A72D2C">Not Paid</strong>';
+                elseif($orderInfo->status_payment==1):
+                   echo '<strong style="color:#067205">Paid</strong>';
+                endif;
+              ?>
+			</strong></td>
+
+		</tr>
+		<tr>
+			<th>Create at:</th>
+			<td><strong class="black"><?php echo isset($orderInfo->created)? date('F d, Y H:i:s',$orderInfo->created) : null;?></strong></td>
+		</tr>
+     </tbody>
+  </table>
+
+</div>
+  <div class="other-funcs">
+       <form action="<?php echo $user->uid ? url('order/info/'.$orderInfo->oid) : url('user/login');?>">
+          <button type="submit" class="textbtn">View Your Order</button>
+       </form>
+       <a href="<?php echo url("/product/list/");?>" class="textbtn contShopping left" title="Continue Shopping">Continue Shopping</a>
+  </div>
+
+<?php endif;?>
+
+<!-- widget-check-out-success-order-sum_eof -->		</div>
+	
+	</div>
+
+
+</div>
+
+<?php echo $this->render('shop_footer.phtml'); ?>

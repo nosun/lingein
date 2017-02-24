@@ -1,0 +1,184 @@
+<?php echo $this->render('before_body.phtml'); ?>
+<body style="background:none;">
+<div class="logo_head">
+  <div class="logo1"><a href="<?php echo url('');?>"><img src="<?php echo $tpldir ?>/images/logo1.gif" alt="" /></a></div>
+</div>
+<div class="shoppingContainers" >
+    <div class="payshopping"><img src="<?php echo $tpldir ?>/images/payshopping.gif" alt="" /></div>
+    <?php echo themeMessages(); ?>
+    <div class="boxcontent margin">
+      <form action="" method="post" name="checkoutForm" onsubmit="javascript: return checkCartShipping()">
+        <input type="hidden" name="goods_amount" id="goods_amount" value = "<?php echo isset($cartInfo->goods_amount) ? $cartInfo->goods_amount : '0'; ?>">
+			  <input type="hidden" name="goods_number" id="goods_number" value = "<?php echo isset($cartInfo->goods_number) ? $cartInfo->goods_number : '0'; ?>">
+			  <input type="hidden" name="goods_weight" id="goods_weight" value = "<?php echo isset($cartInfo->goods_weight) ? $cartInfo->goods_weight : '0'; ?>">
+			  <input type="hidden" name="fromcart" value="<?php echo isset($fromcart) ? $fromcart : 0?>">
+			  <input type="hidden" name="ordertoken" value="<?php echo isset($ordertoken) ? $ordertoken : 0?>">
+			  <input type="hidden" id="delivery_cid" name="delivery_cid" >
+			  <input type="hidden" id="delivery_pid" name="delivery_pid" >
+			  <input name="shipping" id="input_shipping_money" type="hidden" value="0" />
+      <div class="shoping_text clear"><span>Consignee Information</span></div>
+        <table width="95%" align="center" cellspacing="1" cellpadding="0" class="cart">
+        <tbody>
+            <tr>
+                <td width="14%" align="right" bgcolor="#f1f1f1">E-mail</td>
+              <td width="86%"><input type="text" class="text" title="E-mail can't for empty" id="delivery_email" name="delivery_email" value="<?php echo isset($address->delivery_email) ? $address->delivery_email : ''; ?>"/> (The E-Mail will automatically become your account number and E-Mail default password the same)</td>
+            </tr>
+            <tr>
+                <td align="right" bgcolor="#f1f1f1">First Name</td>
+              <td><input type="text" class="text" id="delivery_first_name" name="delivery_first_name" value="<?php echo isset($address->delivery_first_name) ? $address->delivery_first_name : ''; ?>"/></td>
+            </tr>
+            <tr>
+                <td align="right" bgcolor="#f1f1f1">Last Name</td>
+              <td><input type="text" class="text" title="recipient last name can't for empty" id="delivery_last_name" name="delivery_last_name" value="<?php echo isset($address->delivery_last_name) ? $address->delivery_last_name : ''; ?>"/></td>
+            </tr>
+            <tr>
+                <td align="right" bgcolor="#f1f1f1">Telephone</td>
+              <td><input type="text" class="text" title="Telephone and mobile phone can not also be empty" id="delivery_mobile" name="delivery_mobile" value="<?php echo isset($address->delivery_mobile) ? $address->delivery_mobile : ''; ?>" /></td>
+            </tr>
+            <tr>
+                <td align="right" bgcolor="#f1f1f1">City</td>
+              <td><input type="text" class="text" title="Receiving city can't for empty" id="delivery_city" name="delivery_city" value="<?php echo isset($address->delivery_city) ? $address->delivery_city : ''; ?>"/></td>
+            </tr>
+            <tr>
+                <td align="right" bgcolor="#f1f1f1">Country</td>
+              <td><select name="select" class="select" id="select_countries" title="Country can not for empty">
+                   <?php foreach($countries as $k => $v) : ?>
+                    <option value="<?php echo $k ?>" <?php if(isset($address->delivery_cid) && $address->delivery_cid == $k) echo 'selected'; ?>><?php echo $v ?></option>
+                  <?php endforeach;?>
+                  </select>
+                  </td>
+            </tr>
+            <tr>
+                <td align="right" bgcolor="#f1f1f1">Province</td>
+                <td>
+                  <select name="select" class="select" id="select_provinces">
+                    <option value="0"></option>
+                    <?php foreach($provinces as $k => $v) : ?>
+                    <option value="<?php echo $k ?>" <?php if(isset($address->delivery_pid) && $address->delivery_pid == $k) echo 'selected'; ?>><?php echo $v ?></option>
+                    <?php endforeach;?>
+                  </select>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" bgcolor="#f1f1f1">Address</td>
+              <td><input type="text" class="text" title="Delivery Address can't for empty" id="delivery_address" name="delivery_address" value="<?php echo isset($address->delivery_address) ? $address->delivery_address : ''; ?>"/></td>
+            </tr>
+            <tr>
+                <td align="right" bgcolor="#f1f1f1">Zip Code</td>
+              <td><input type="text" class="text" title="Postal Code can't for empty" id="delivery_postcode" name="delivery_postcode" value="<?php echo isset($address->delivery_postcode) ? $address->delivery_postcode : ''; ?>"/></td>
+            </tr>
+        </tbody>
+        </table>
+       <div class="shoping_text clear"><span>Delivery Mode</span></div>
+      <table width="100%" align="center" cellspacing="1" cellpadding="0" class="cart">
+        <tbody>
+            <?php if(isset($shippingList) && $shippingList):
+            foreach ($shippingList as $k => $v):
+             if ($v->status == 1 && (!isset($v->visible) || $v->visible)):
+          ?>
+            <tr>
+                <td width="7%" align="right" valign="middle"><input type="radio" id="radio1" value="<?php echo $k;?>" name="shipping_method" onclick="changeShipping(this.value)" /></td>
+                <td width="93%" align="left" valign="middle"><?php echo isset($v->name) ? $v->name : null;?>&nbsp;&nbsp;&nbsp;<?php echo isset($v->description) ? $v->description : null;?></td>
+          </tr>
+          <?php
+            endif;
+            endforeach;
+            endif;
+           ?>
+        </tbody>
+      </table>
+      <div class="shoping_text clear"><span>Payment Method</span></div>
+        <table width="100%" align="center" cellspacing="0" cellpadding="0" class="cart">
+        <tbody>
+        <?php
+          if(isset($paymentList) && $paymentList):
+          $i=1;
+          foreach ($paymentList as $k => $v) :
+          if ($v->status == 1 && (!isset($v->visible) || $v->visible)):
+          ?>
+            <tr>
+              <td width="7%" align="right" valign="middle"><input type="radio" <?php if($i==1){echo 'checked="checked"';}?> value="<?php echo isset($k) ? $k : null ;?>" name="payment_method" /></td>
+                <td width="93%" align="left" valign="middle"><strong><?php echo isset($v->name) ? $v->name : null;?></strong>    &nbsp;&nbsp;&nbsp;<?php echo isset($v->description) ? $v->description : null;?></td>
+          </tr>
+          <?php
+            $i++;
+            endif;
+            endforeach;
+            endif;
+           ?>
+        </tbody>
+        </table>
+      <div class="shoping_text clear"><span>Your Shopping Cart</span></div>
+         <form action="<?php echo url('cart/cartpost');?>" method="post">
+        <table width="100%" align="center" cellspacing="0" cellpadding="0" class="cart Shopping_cart">
+        <tbody>
+            <tr>
+                <td width="16%" align="center" class="line">Image</td>
+                <td width="24%" class="line">Name</td>
+                <td width="16%" class="line">Parameter</td>
+                <td width="8%" align="center" class="line">Quantity</td>
+                <td width="6%" align="center" class="line">Price</td>
+                 <td width="10%" align="center" class="line">Subtotal</td>
+                <td width="13%" align="center" class="line">operate</td>
+            </tr>
+<?php
+if ($cartInfo->product) :
+foreach ($cartInfo->product as $k => $v) : ?>
+            <tr>
+                <td align="center" class="dotted"><a href="<?php echo url($v->url);?>"><img src="<?php echo urlimg('67x67', $v->filepath) ?>" alt="" /></a></td>
+              <td class="dotted"><a href="<?php echo url($v->url);?>"><?php echo isset($v->name) ? $v->name : null ?></a></td>
+                <td class="dotted">
+                <?php if(isset($v->data) && $v->data):
+                          foreach($v->data as $dk => $dv):
+                            echo $dk.":".$dv.'<br />';
+                          endforeach;
+                          else:
+                            echo '&nbsp;';
+                          endif;
+                      ?></td>
+                <td align="center" class="dotted">
+                <input type="hidden" value="<?php echo isset($v->pid) ? $v->pid : null ?>" name="pids[]"/>
+                <input type="hidden" value="<?php echo isset($v->cart_item_id) ? $v->cart_item_id : null ?>" name="cart_item_ids[]"/>
+                <input type="hidden" name="qtys[]" value="<?php echo isset($v->qty) ? $v->qty : null ?>" />
+               <?php echo isset($v->qty) ? $v->qty : null ?></td>
+                <td align="center" class="dotted"><input type="hidden" name="item_pay_price[]" value="<?php echo isset($v->price) ? $v->price : null ?>" /><?php echo isset($v->price) ? c($v->price) : null ?></td>
+                <td align="center" class="dotted"><b><?php echo isset($v->qty) ? c($v->price * $v->qty) : null ?></b></td>
+                <td align="center" class="dotted"><a href="<?php echo url('cart/deleteproductfromcart/'.$v->cart_item_id);?>">delete</a></td>
+            </tr>
+<?php endforeach;
+endif;
+?>
+            <tr>
+                <td colspan="8">
+                    <span class="left"><a href="<?php echo url('product/list');?>"><img src="<?php echo $tpldir;?>/images/buttom_3.gif" alt="" /></a> <input type="submit" class="clear_cart" value="" name="delete" /></span>
+                    <span class="right">
+                   Amount:  <strong><?php echo isset($cartInfo->goods_amount) ? c($cartInfo->goods_amount) : null?></strong><br/> 
+                   Shipping Costs:<strong id="shipping_money"> <?php echo c(0);?></strong><br/>
+                   Total Payment:  <strong id="order_amount"><?php echo isset($cartInfo->goods_amount) ? c($cartInfo->goods_amount) : null?></strong>
+                    </span>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8" align="center"><input type="submit" class="check" value=""  name="checkout" /></td>
+            </tr>
+        </tbody>
+        </table>
+        </form>
+
+        </form>
+    </div>
+</div>
+
+
+<div class="shopfoot">
+    <p>MSN: iwantlingerie@hotmail.com, Email: customer-support@iwantlingerie.com</p>
+    <p>Copyright © 2012 <a href="http://www.iwantlingerie.com">www.iwantlingerie.com</a> All rights reserved</p>
+    <p>Alphabetical Index: A - B - C - D - E - F - G - H - I - J - K - L - M - N - O - P - Q - R - S - T - U - V - W - X - Y - Z - 0-9</p>
+</div>
+</body>
+<?php echo $this->render('after_body.phtml'); ?>
+</html>
+<?php foreach(getMessages() as $k => $v) : ?>
+    <script type="text/javascript">alert('<?php echo $v['message']?>');</script>
+<?php endforeach;?>

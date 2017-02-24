@@ -1,0 +1,14 @@
+<div class="c_viewoptions filter">
+    <div class="showType">
+    <ul>
+    <li><label>Items Per Page:</label></li>
+    <?php if (isset($pageRows) && ($pageRows == 'all'||$pageRows =='All')):?>
+    	<li><a class="select" href="javascript:void(0)">60</a></li>
+    	<li><span style="padding:0 10px;">All</span></li>
+    	<?php else:?>
+    	<li><span style="padding:0 10px;">60</span></li>
+    	<li><a class="select" href="javascript:void(0)">All</a></li>
+    	<?php endif;?>
+    </ul>
+    </div>
+</div>

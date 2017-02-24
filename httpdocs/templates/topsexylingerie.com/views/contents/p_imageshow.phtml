@@ -1,0 +1,31 @@
+<div class="w-prodImages" id="product-image-intro" style="height: 578px;">
+
+<div class="left_blt">&nbsp;</div>
+<div class="left_blb">&nbsp;</div>
+	<div id="w-featurePics" style="position:relative;">
+    	<a href="<?php echo url('images/'.$product->bigfilepath);?>" target="_blank">
+    		<img id="main-display-pic" src="<?php echo url('images/'.$product->bigfilepath);?>"/>
+   		</a>
+	</div>
+	
+    <div class="sli" id="photo2">
+    <a rel="example_group2" style="display:block;" id="see_one_1" title="<?php echo $product->title;?>" href="<?php echo url('images/'.$product->bigfilepath);?>">See  Larger image</a>
+    </div>
+
+<div id="prodthumbnails" class="thumbnail"  style="min-height: 66px;">
+<ul>
+<?php 
+	if($product->fid):?><li class="xls_imgc"><a href="<?php echo url('images/'.$product->filepath);?>"  class="current" style="margin-top: 0px;" rel="zoom1" rev="<?php echo url('images/'.$file->filepath);?>"><img src="<?php echo urlimg('118x178', $product->filepath) ?>" border="0" /></a></li><?php 
+	endif;?><?php
+        $thumbnail_count = 0;
+        foreach ($product->files as $i => $file):
+          $thumbnail_count++;
+        ?><li class="<?php echo ($product->filepath == $file->filepath)?'xls_imgc':'xls_img';?>"><a href="javascript:void(0)"  class="<?php if($product->filepath == $file->filepath){echo 'current';}?>" rel="zoom1" style="margin-top: 0px;<?php if($thumbnail_count > 3) echo 'display:none;'?>" rev="<?php echo url('images/'.$file->filepath);?>"><img src="<?php echo urlimg('118x178', $file->filepath) ?>" alt="<?php echo isset($file->alt)? plain($file->alt):null; ?>" border="0" /></a></li><?php 
+        endforeach ?>
+</ul> 
+    <div class="clear"></div>       
+</div>
+
+<!-- </div> -->	
+
+</div>

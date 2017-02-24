@@ -1,0 +1,280 @@
+<?php echo $this->render('before_body.phtml'); ?>
+<?php global $user;?>
+<body style="background:none;">
+<div class="widget w-simpleHeader">
+	<div class="logo"><a href="<?php echo url('');?>"><img class="simpleHeaderImg" alt=" i want lingerie" title=" i want lingerie " src="<?php echo $tpldir ?>/images/logo2.png"></a></div>
+	    <div class="cartStep1"></div>
+</div>
+	<div id="wrapper" class="wrapper ff-verdana">
+
+    <?php echo themeMessages(); ?>
+    <div id="client_message" style="display:none"></div>
+      <form action="" method="post" name="checkoutForm" class="disable_on_submit" onsubmit="javascript: return checkCartShipping()">
+        <input type="hidden" name="goods_amount" id="goods_amount" value = "<?php echo isset($cartInfo->goods_amount) ? $cartInfo->goods_amount : '0'; ?>">
+			  <input type="hidden" name="goods_number" id="goods_number" value = "<?php echo isset($cartInfo->goods_number) ? $cartInfo->goods_number : '0'; ?>">
+			  <input type="hidden" name="goods_weight" id="goods_weight" value = "<?php echo isset($cartInfo->goods_weight) ? $cartInfo->goods_weight : '0'; ?>">
+			  <input type="hidden" name="fromcart" value="<?php echo isset($fromcart) ? $fromcart : 0?>">
+			  <input type="hidden" name="ordertoken" value="<?php echo isset($ordertoken) ? $ordertoken : 0?>">
+			  <input type="hidden" id="delivery_cid" name="delivery_cid" >
+			  <input type="hidden" id="delivery_pid" name="delivery_pid" >
+			  <!--  <input name="shipping" id="input_shipping_money" type="hidden" value="0" />-->
+        <fieldset class="widget w-scCartSum" id="cartsum">
+            <div class="w-rHeadingV2">
+        		<h2><span>Cart Summary</span></h2>
+            </div>
+            <div class="mainbox w-shoppingCart">
+                <table width="100%" class="#">
+        			<tbody>
+        				<tr>
+        					<th class="prDesc">ITEM</th>
+        					<th class="prQuant">Quantity</th>
+        					<th class="prItemAmount">ITEM PRICE</th>
+        					<th class="prAmount">PRICE</th>
+        				</tr>
+        				
+<?php
+if ($cartInfo->product) :
+foreach ($cartInfo->product as $k => $v) : ?>
+        					
+        <tr>
+        	<td class="productList grid-m-l">
+        		<dl>
+        			<dt><img height="85" alt="<?php echo isset($v->name) ? $v->name : null ?>" title="<?php echo isset($v->name) ? $v->name : null ?>" src="<?php echo urlimg('118x178', $v->filepath) ?>"></dt>
+        			<dd>
+        				<h4><?php echo isset($v->name) ? $v->name : null ?></h4>
+        				
+        			<?php if(isset($v->data) && $v->data):
+                          foreach($v->data as $dk => $dv):
+                            echo '<p class="prAttr">'.$dk." : ".$dv.'</p>';
+                          endforeach;
+                          else:
+                            echo '&nbsp;';
+                          endif;
+                      ?>
+        			</dd>
+        		</dl>
+        	</td>
+        	<td class="prQuant">
+                <input type="hidden" value="<?php echo isset($v->pid) ? $v->pid : null ?>" name="pids[]"/>
+                <input type="hidden" value="<?php echo isset($v->cart_item_id) ? $v->cart_item_id : null ?>" name="cart_item_ids[]"/>
+                <input type="hidden" name="qtys[]" value="<?php echo isset($v->qty) ? $v->qty : null ?>" />
+                <?php echo isset($v->qty) ? $v->qty : null ?></td>
+        	
+        	<td class="prItemAmount"><input type="hidden" name="item_pay_price[]" value="<?php echo isset($v->price) ? $v->price : null ?>" /><?php echo isset($v->price) ? c($v->price) : null ?></td>
+        	<td class="prAmount"><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?>&nbsp;<strong><?php echo isset($v->qty) ? c($v->price * $v->qty) : null ?></strong></td>
+        </tr>
+        
+<?php endforeach;
+endif;
+?>
+		<tr>
+        	<td colspan="4" class="edit"><a class="gray u" href="<?php echo url('cart/')?>">Edit Shopping Cart</a></td>
+        </tr>
+     </tbody>
+  </table>   
+ </div>
+</fieldset>
+<fieldset class="widget w-shippingAddr" id="shipAddr">
+    <div class="w-rHeadingV2">
+		<h2><span>Shipping Address</span></h2>
+    </div>
+    <div class="mainbox">
+	<ul>
+                        <li style="display:none;">
+				            	<a class="textbtn" href="#" id="addAddress">Add a New Shipping Address</a>
+            </li>
+                        <li class="removeBorder editAddr" id="addressForm">
+					<input type="hidden" name="edit_address_id" id="addressId">
+										<a style="display:none;" href="#" class="cancel" id="cancelAddr">Cancel</a>
+					<p><span class="required">*</span>&nbsp;<span class="indicates">Indicates required fields.</span></p>
+				 	<table class="tb-shippingAddr">
+						<tbody>
+							<tr>
+								<td></td>
+							</tr>
+							<tr>
+								<th><label>Your Name:</label></th>
+								<td class="recipient">
+									<div>
+										<input type="text" class="text elmbBlur" id="delivery_first_name" name="delivery_first_name" value="<?php echo isset($address->delivery_first_name) ? $address->delivery_first_name : ''; ?>"/>									<p><span class="required">*</span>&nbsp;First Name</p><p class="errorInfo"></p>
+									</div>
+									<div>
+										<input type="text" class="text elmbBlur" title="recipient last name can't for empty" id="delivery_last_name" name="delivery_last_name" value="<?php echo isset($address->delivery_last_name) ? $address->delivery_last_name : ''; ?>"/>
+										<p><span class="required">*</span>&nbsp;Last Name</p><p class="errorInfo"></p>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th><label>Your Email:</label></th>
+								<td>
+								<input type="text" class="text elmbBlur readonly" title="E-mail can't for empty" id="delivery_email" name="delivery_email" readonly="readonly" value="<?php echo isset($user->email) ? $user->email : ''; ?>"/> &nbsp;(The E-Mail is the same as your account email.)
+								</td>
+							</tr>
+							<tr>
+								<th><span class="required">*</span><label>Delivery Address:</label></th>
+								<td>
+									<input type="text" class="text elmbBlur" title="Delivery Address can't for empty" id="delivery_address" name="delivery_address" value="<?php echo isset($address->delivery_address) ? $address->delivery_address : ''; ?>"/>
+									<p class="errorInfo"></p>
+								</td>
+							</tr>
+							<tr>
+								<th><span class="required">*</span><label>City:</label></th>
+								<td>
+									<input type="text" class="text elmbBlur" title="Receiving city can't for empty" id="delivery_city" name="delivery_city" value="<?php echo isset($address->delivery_city) ? $address->delivery_city : ''; ?>"/>									<p class="errorInfo"></p>
+								</td>
+							</tr>
+							<tr>
+								<th><span class="required">*</span><label>Destination Country:</label></th>
+								<td>
+                                    <select name="select" class="select elmbBlur" id="select_countries" title="Country can not for empty">
+                                    <?php foreach($countries as $k => $v) : ?>
+                                        <option value="<?php echo $k ?>" <?php if(isset($address->delivery_cid) && $address->delivery_cid == $k) echo 'selected'; ?>><?php echo $v ?></option>
+                                    <?php endforeach;?>
+                                    </select>
+								</td>
+							</tr>
+							<tr id="zoneId" <?php if(isset($address->delivery_province) && $address->delivery_pid == 0) echo 'style="display:none;"'; ?>>
+								<th><span class="required">*</span><label>State / Province / Region:</label></th>
+								<td>
+                                  <select name="select" class="select elmbBlur" id="select_provinces">
+                                    <?php foreach($provinces as $k => $v) : ?>
+                                    <option value="<?php echo $k ?>" <?php if(isset($address->delivery_pid) && $address->delivery_pid == $k) echo 'selected'; ?>><?php echo $v ?></option>
+                                    <?php endforeach;?>
+                                  </select>
+								</td>
+							</tr>
+					<!-- if the provinces information is not provided for the country, use this section -->
+        					<tr id="state" <?php if(isset($address->delivery_province) && $address->delivery_pid == 0) echo 'style="display:table-row;"'; else echo 'style="display:none;"' ?>>
+        						<th><label>State / Province / Region:</label></th>
+        						<td>
+        							<input type="text" class="text elmbBlur" id="delivery_or_province" name="delivery_or_province" value="<?php echo isset($address->delivery_province) ? $address->delivery_province : ''; ?>"/>
+								</td>
+        					</tr>
+							<tr>
+								<th><span class="required">*</span><label>ZIP / Postal Code:</label></th>
+								<td>
+									<input type="text" class="text elmbBlur" title="Postal Code can't for empty" id="delivery_postcode" name="delivery_postcode" value="<?php echo isset($address->delivery_postcode) ? $address->delivery_postcode : ''; ?>"/>									<p class="errorInfo"></p>
+								</td>
+							</tr>
+							<tr>
+								<th><span class="required">*</span><label>Phone Number:</label></th>
+								<td>
+<input type="text" class="text elmbBlur" title="Telephone and mobile phone can not also be empty" id="delivery_mobile" name="delivery_mobile" value="<?php echo isset($address->delivery_mobile) ? $address->delivery_mobile : ''; ?>" /> &nbsp;Example: +1 9549031647-535
+									<p class="errorInfo"></p>
+									<p class="clearfix"></p>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<input type="reset" style="display:none;" id="resetAddr">
+	    	</li>
+        </ul>
+    </div>
+</fieldset>
+<!-- widget-sc-shipping-method -->
+<fieldset class="widget w-shippingMethod" id="shipMethod">
+	<div class="w-rHeadingV2">
+		<h2>
+			<span>Shipping Method</span>
+		</h2>
+	</div>
+	<div class="mainbox">
+		<p style="display:none;" class="warning">No Shipping Method Available At This Time</p>
+		<table>
+			<tbody>
+				<tr class="bd">
+					<th>Shipping Method</th>
+					<th>Estimated Shipping Time</th>
+					<th>Shipping Cost</th>
+				</tr>
+				<tr>
+					<td valign="top" class="nowrap"><input type="radio" onclick="changeShipping(this.value)" name="shipping_method" value="ups" id="radio1">
+					<label for="sm_chinaups">Expedited Shipping</label></td>
+					<td>3 - 5 business days. More cheaper when purchased items reached some amount.</td>
+					<td valign="top" class="nowrap">
+						<span id="shipping-count-ups" class="chargeFee red">Select To Count.</span>
+					</td>
+				</tr>
+				<tr>
+					<td valign="top" class="nowrap"><input type="radio" onclick="changeShipping(this.value)" name="shipping_method" value="ems" id="radio1">
+					<label for="sm_ems">Standard Shipping</label></td>
+					<td>6 - 8 business days. Cheaper if the shopping items are not many.</td>
+					<td valign="top" class="nowrap">
+						<span id="shipping-count-ems" class="chargeFee red">Select To Count.</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="extraInfo">	
+		</div>
+	</div>
+</fieldset>
+<!-- widget-sc-shipping-method_eof --><!-- widget-choose-payment-method -->
+<fieldset class="widget w-choosePaymentMethod" id="choosePymt">
+	<div class="w-rHeadingV2">
+		<h2>
+			<span>Payment Method</span>
+		</h2>
+	</div>
+	<div class="mainbox">
+		<table width="100%" cellspacing="0" cellpadding="0" align="center" class="cart">
+        <tbody>
+          <tr>
+              <td width="7%" valign="middle" align="right"><input type="radio" onclick="changePayment(this.value)" name="payment_method" value="paypal"></td>
+                <td width="93%" valign="middle" align="left"><strong>PayPal</strong>    &nbsp;&nbsp;&nbsp;PayPal is the largest online purchasing platform,<span class="red">Credit Card/Debt Card User can currently use this option for your payment.</span></td>
+          </tr>
+          <tr>
+              <td width="7%" valign="middle" align="right"><input type="radio" onclick="changePayment(this.value)" name="payment_method" value="western"></td>
+                <td width="93%" valign="middle" align="left"><strong>Western Union</strong>    &nbsp;&nbsp;&nbsp;The world's leading money transfer company, 3-5 days delay might occur using this payment method.</td>
+          </tr>
+          <tr>
+              <td width="7%" valign="middle" align="right"><input type="radio" onclick="changePayment(this.value)" name="payment_method" value="wiretransfer"></td>
+                <td width="93%" valign="middle" align="left"><strong>Wire Transfer</strong>    &nbsp;&nbsp;&nbsp;Directly Transfer Money to us, you may need pay extra wire transfer fees to the bank. 5-7 days delay might occur using this payment method.</td>
+          </tr>
+        </tbody>
+        </table>
+	</div>
+</fieldset>
+<div class="scCartAmountSum">
+<table class="widget clearfix" id="subTotal">
+	<!-- Grand Total -->
+	<tfoot>
+		<tr id="cartAmount">
+			<th width="100%">Grand Total:<em><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?></em></th>
+			<td><strong id="order_amount"><?php echo isset($cartInfo->goods_amount) ? c($cartInfo->goods_amount) : null?></strong></td>
+		</tr>
+	</tfoot>
+	<tbody>
+		<tr>
+			<!-- subtotal -->
+			<th>Subtotal
+			<?php
+    			if ($cartInfo->product){
+    			  echo '(' . count($cartInfo->product) . ' item)';
+    			} 
+			?>:<em><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?></em></th>
+			<td><strong id="ot_subtotal"><?php echo isset($cartInfo->goods_amount) ? c($cartInfo->goods_amount) : null?></strong></td>
+		</tr>
+		<tr id="shippingCharges">
+			<!-- Shipping Charges-->
+						<th>(+) Shipping Charges:<em><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?></em></th>
+			<td><strong id="shipping_money"><?php echo c(0);?></strong></td>
+		</tr>
+		<tr id="paymentCharge">
+			<!-- Shipping Charges-->
+						<th>(+) Payment Fee:<em><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?></em></th>
+			<td><strong id="payment_money"><?php echo c(0);?></strong></td>
+		</tr>
+		<tr>
+			<td colspan="3"></td>
+		</tr>
+	</tbody>
+</table>
+<fieldset class="clearfix" id="submitCart">
+    <input type="submit" class="litb-btn placeOrderBtn ir check right" id="orderFormSubmit" value=""  name="checkout"/>
+    <p class="clearfix">Every order you place with us is safe and secure.</p>
+</fieldset>
+</div>
+</form>
+</div>
+<?php echo $this->render('shop_footer.phtml'); ?>

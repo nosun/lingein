@@ -1,0 +1,21 @@
+<div class="grid">
+<?php	if(isset($productList) && $productList):
+			$showItemCount = 0;
+          	foreach ($productList as $k => $v):
+          	$showItemCount++;?>
+          	
+<?php if($showItemCount % 4 == 1):echo '<div  class="line-wrapper">'; endif;?>
+<dl <?php if($showItemCount % 4 == 0):echo 'class="last"';endif;?>>
+		<dt><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>">
+				<img alt="<?php echo $v->name;?>" title="<?php echo $v->name;?>" src="<?php echo urlimg('187x276',$v->filepath)?>"/>
+      	</a></dt>
+      	<dd class="prodName"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo $v->name;?></a></dd>
+      	<dd><span class="oldPrice"><del><?php echo isset($v->list_price)? c($v->list_price) : null;?></del></span>
+      	<span class="price"><?php echo isset($v->price)? c($v->price) : null;?></span>
+      	</dd>
+
+	</dl>
+<?php if($showItemCount % 4 == 0):echo '</div>';endif;endforeach;?>
+<?php if($showItemCount % 4 != 0): echo '</div>';endif;?>
+<?php endif;?>
+</div>

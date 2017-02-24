@@ -1,0 +1,11 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title><?php echo plain(isset($docTitle)? $docTitle : ''); ?></title><?php 
+if (isset($docKeywords)): ?><meta name="keywords" content="<?php echo plain($docKeywords);?>" /><?php 
+else:?><meta name="keywords" content="" /><?php 
+endif; ?><?php if (isset($docDescription)): ?><meta name="description" content="<?php echo plain($docDescription);?>" /><?php 
+else:?><meta name="description" content="" /><?php 
+endif; ?><?php echo isset($metas) ? $metas : null ?><?php echo $styles ?>
+<link href="<?php echo $tpldir ?>/css/main.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $tpldir ?>/css/flexslider.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $tpldir ?>/css/MagicZoom.css" rel="stylesheet" type="text/css" />
+</head>

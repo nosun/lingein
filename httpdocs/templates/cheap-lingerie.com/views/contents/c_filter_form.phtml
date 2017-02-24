@@ -1,0 +1,5 @@
+<form id="browse_filter" style="display:none" method="post" action="<?php echo url('browsefilter') ?>">
+	<input type="hidden" name="orderby" value="<?php echo isset($orderby) ? $orderby : 'pid DESC'?>"/>
+	<input type="hidden" name="pageRows" value="<?php echo isset($pageRows) ? $pageRows : '60'?>"/>
+	<input type="hidden" name="listMode" value="<?php echo isset($listMode) ? $listMode : 'photo'?>"/>
+</form>

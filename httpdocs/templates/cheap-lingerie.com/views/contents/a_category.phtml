@@ -1,0 +1,20 @@
+<div class="body-left">
+
+<div id="wrapper-left">
+
+<div id="cat-lists" class="widget">
+<div class="side-subcat-div  side-subcat-div1">
+<?php if(isset($helpList)):foreach($helpList as $k=>$article_list):?>
+
+    <ul><li class="side-subcat"><span class="top-cat"><?php echo ucwords($k);?></span></li>
+<?php foreach ($article_list as $v):?>
+		<li><a href="<?php echo url($v->url)?>" class="<?php if($articleInfo->title == $v->title) echo 'red selected'?>"><?php echo ucwords($v->title);?></a></li>
+<?php endforeach;?>
+	</ul>
+<?php endforeach;endif;?>
+</div>
+
+</div>
+</div>
+<?php ?>
+</div>

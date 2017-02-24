@@ -1,0 +1,37 @@
+<div class="widgetfancy">
+<div class="w-head" style="margin-top:20px;">
+<h1 style="margin-left:0;">User Password Information</h1>
+</div>
+<div class="w-content">
+
+            <form action="" method="post" name="changePwdForm" onsubmit="javascript:return checkChangePwd()">
+             <?php echo themeMessages() ?>
+             <div class="user_edit">
+                  <table>
+                    <tbody>
+                      <tr>
+                        <th>Username:</th>
+                        <th>Old Password<span class="required explanation">*</span>:</th>
+                      </tr>
+                      <tr>
+                        <td><input type="text" readonly="readonly" value="<?php echo isset($user->name) ? $user->name : null ?>" class="elmbBlur input readonly"></td>
+                        <td> <input type="password" name="oldpwd" value="" class="elmbBlur input" title="old password is not empty!"></td>
+                      </tr>
+                      <tr>
+                        <th>New Password<span class="required explanation">*</span>:</th>
+                        <th>Retype New Password<span class="required explanation">*</span>:</th>
+                     </tr>
+                      <tr>
+                        <td> <input type="password" name="newpwd" value="" class="elmbBlur input" title="new password is not empty!"></td>
+                        <td> <input type="password" name="newpwd2" value="" class="elmbBlur input" title="comfirm password is not empty!"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="Save-Reset">
+                  <button class="button" type="submit"><span><span>Save Changes</span></span></button>
+	              <button class="button" type="reset"><span><span>Reset Form</span></span></button>
+                </div>
+              </div>
+            </form>
+</div>
+</div>

@@ -1,0 +1,10 @@
+<?php if(isset($topsearch) && $topsearch): ?>
+<div class="Title_head_there margin">Popular Search</div>
+        <div class="PopularSearch">
+<?php	
+	 foreach ($topsearch as $k => $v):
+?>
+            	<a href="<?php echo url('search/' . preg_replace('/[^0-9a-zA-Z]+/', '-', trim($v)))?>" title="<?php echo $v?>"><?php echo $v?></a>
+<?php endforeach;?> </div>
+        <div class="Shop_d"></div>
+<?php endif; ?>

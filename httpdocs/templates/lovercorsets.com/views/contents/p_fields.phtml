@@ -1,0 +1,62 @@
+<form name="cart_quantity_frm" method="post" class="widget pr-fields disable_on_submit" action="<?php echo url('cart/productpost');?>" id="prOrder">
+    <input type="hidden" value="<?php echo isset($product->pid) ? $product->pid : null ?>" name="pid">
+	<div class="clearfix prOrderOptions">
+<div class="fl">
+	<?php foreach ($product->fields as $fieldName => $field):
+    if(!empty($product->{'field_' . $fieldName})):?>
+			<?php if ($field->multiple):
+			  		if($field->required==1){
+			    		$sel_cont = ' class=" required" title="Choose At Least 1'. ucwords($field->name).'"';
+            		}else{
+              			$sel_cont = '';
+            		}?>
+            		<div class="custom-select">
+            		<dl>
+            		<dt><label><span>Please Select </span><?php echo $field->name;?>*</label>
+						<label class="error_notice error" style="display:none;">Choose At Least 1 <?php echo $fieldName;?>. </label>
+						<label class="success_notice" style="display:none;"></label>
+					</dt>
+            		<dd class="<?php echo $fieldName;?>">
+            		<?php if(count($product->{'field_' . $fieldName}) === 1):?>
+            			<button class="button button1 pressed" value="<?php echo $product->{'field_' . $fieldName}[0];?>"><span><span><?php echo $product->{'field_' . $fieldName}[0];?></span></span></button>
+            		<?php else:?>
+	                  <?php foreach ($product->{'field_' . $fieldName} as $k => $v):
+	                    if($v):
+	                      if(isset($field->default_value) && $field->default_value && $field->default_value == $v ):?>
+							  <button class="button button1 pressed" value="<?php echo $v;?>"><span><span><?php echo $v;?></span></span></button>
+	                  <?php else:?>
+					       <button class="button button1" value="<?php echo $v;?>"><span><span><?php echo $v;?></span></span></button>
+	                  <?php endif;
+	                  endif;
+	                  endforeach;?>
+					  <?php endif;?>
+	                  </dd>
+	                  <?php if($field->required==1):?>
+	                  <dd class="required">* Required Fields</dd>
+	                  <?php endif;?>
+            		</dl>
+                  </div>
+
+	             <?php if(isset($field->default_value) && $field->default_value && in_array($field->default_value,$product->{'field_' . $fieldName}) ):?>
+	             	<input type="hidden" value="<?php echo $field->default_value?>" name="data[<?php echo $field->name;?>]" id="attr_<?php echo $fieldName;?>"/>
+	             <?php else:?>
+	             	<input id="attr_<?php echo $fieldName;?>" type="hidden" value="" name="data[<?php echo $field->name?>]">
+	             <?php endif;?>
+	            <?php else:?>
+	            	<label><?php echo isset($product->{'field_' . $fieldName}) ? plain($product->{'field_' . $fieldName}) : null;?></label>
+              		<input type="hidden" id="attr_'.$field->field_name.'" value="<?php echo plain($product->{'field_' . $fieldName});?>" name="data[<?php echo $field->name;?>]"/>
+            <?php endif;?>
+    <?php endif;
+    endforeach; ?>
+</div>
+	<div class="custom-input last">
+		<div class="qty_num">
+			<label>Quantity: </label>
+			<input type="text" size="3"  class="numcheck" value="<?php echo isset($product->sell_min) && $product->sell_min ? $product->sell_min : 1 ?>" name="qty" title="<?php echo isset($product->sell_min) ? $product->sell_min : 0 ?>,<?php echo isset($product->sell_max) ? $product->sell_max : 0 ?>" value="1" />
+			<input type="hidden" value="Add to Cart" name="cart">
+			<a class="cart-add" href="javascript:void(0);"><button class="add2Cart button" value="Add to cart"><span><span>Add to Cart</span></span></button></a>
+		</div>
+	</div>
+
+  </div>
+</form>

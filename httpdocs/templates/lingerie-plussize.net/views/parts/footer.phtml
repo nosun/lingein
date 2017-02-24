@@ -1,0 +1,41 @@
+<div class="footer">
+<div class="footer-wrapper">
+<div id="customerHelp" class="w-bp" style="width:">
+  <div>
+  <?php if(isset($helpList) && isset($articleTypeList)):
+  $articleTypeCount = 0;
+  foreach($helpList as $index => $articleList):
+  	if(strcasecmp($index, 'news')):
+  	$articleTypeCount++;
+  	if($articleTypeCount > 4):
+  		break;
+  	endif;
+  	?>
+  <dl><dt><?php echo $articleTypeList[$index]->name;?></dt><?php 
+          	foreach ($articleList as $v):
+          ?><dd><a href="<?php echo url($v->url)?>"><?php echo $v->title;?></a></dd><?php 
+          	endforeach;
+          ?></dl>
+  <?php endif;
+  endforeach;
+  endif?>
+  </div>
+</div>
+<div class="widget w-customeGuide" id="customerGuide">
+	<div class="col" id="newsLetter">
+		<fieldset><h3>Subscribe to our <em>Newsletter</em></h3><p>Get updates, discounts, and special offers from today!</p>
+			<input type="text" class="text" value="Enter Your Email" id="mailAddress"><button id="submitMailAddress" class="textbtnGray">Subscribe</button>
+		</fieldset>
+	</div>
+</div>
+</div>
+<br class="clears" />
+<div id="copyright">
+<span class="floatleft">
+           	<?php $siteInfo = Bl_Config::get('siteInfo');echo $siteInfo['copyright'];?>
+        </span>
+<span style="float:right;">
+			Any Questions Please Email to: <a href="mailto:<?php echo $siteInfo['email'];?>"><?php echo $siteInfo['email'];?></a>
+</span>
+</div>
+</div>

@@ -1,0 +1,24 @@
+<div id="product-abstract">
+<h1 id="prHead"><?php echo $product->name;?></h1>
+
+<div class="params">
+<?php if($product->brand):?>
+<div class="param"><span class="label"><strong>Brand </strong></span><?php echo isset ($product->brand->name) ? $product->brand->name : null ;?></div>
+<?php endif;?>
+<?php if($product->number):?>
+<div class="param"><span class="label"><strong>Product SN: &nbsp;</strong></span><?php echo  isset($product->number) ? $product->number : null;?></div>
+<?php endif;?>
+<div class="param"><span class="label"><strong>Status: &nbsp;</strong></span><?php if ($product->status):?>In Stock<?php else:?>Not In Stock<?php endif;?></div>
+</div>
+
+
+<?php $this->render('contents/p_orderprice.phtml')?>
+
+<?php $this->render('contents/p_parameters.phtml')?>
+
+
+<?php $this->render('contents/p_fields.phtml')?>
+
+
+<?php echo $this->render('contents/p_related.phtml'); ?>
+</div>

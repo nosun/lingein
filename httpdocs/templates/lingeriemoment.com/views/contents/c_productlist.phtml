@@ -1,0 +1,20 @@
+<div class="grid" id="layout-container">
+<?php	if(isset($productList) && $productList):
+			$showItemCount = 0;
+          	foreach ($productList as $k => $v):
+          		if($showItemCount > 0 && $showItemCount % 4 == 0):?>
+    <br class="clear"/>
+<?php 			endif;
+          	$showItemCount++;?>
+	<dl>
+		<dt><a href="<?php echo url($v->url);?>" title='<?php echo $v->name;?>'><img alt='<?php echo $v->name;?>' title='<?php echo $v->name;?>' src="<?php echo urlimg('180x324',$v->filepath)?>"/></a></dt>
+      	<dd class="prodName"><a href="<?php echo url($v->url);?>" title='<?php echo $v->name;?>'><?php echo $v->name;?></a></dd>
+      	<dd class="prices"><span class="oldPrice"><?php echo isset($v->list_price)? c($v->list_price) : null;?></span>
+      	<span class="price"><?php echo isset($v->price)? c($v->price) : null;?></span></dd>
+      	<!--  dd class="oldPrice"><?php echo isset($v->list_price)? c($v->list_price) : null;?></dd>
+      	<dd class="price"><?php echo isset($v->price)? c($v->price) : null;?></dd>-->
+	</dl>
+<?php 	endforeach;
+      	endif;?>
+<br class="clear"/>
+</div>

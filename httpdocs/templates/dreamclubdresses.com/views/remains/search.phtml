@@ -1,0 +1,126 @@
+<?php echo $this->render('before_body.phtml'); ?>
+<body><?php echo $this->render('header.phtml'); ?><div class="bodyer"><h1 id="breadcrumb"><?php echo themeBreadcrumb() ?></h1> 
+  <div class="body_left"><div class="general">
+  	<div class="Product_narration"><div class="top"><?php echo ucwords($keyword)?></div><div><?php echo plain($docDescription) ?></div></div>
+	<div class="widget w-resultNavBar"> <p><strong><?php echo $productCount ?></strong> product items <?php if (isset($keyword) && ($keyword != '')) {echo 'under '. $keyword .'.';}?></p>
+	<div class="widget w-pagination"><ul><?php echo $pagination;?></ul></div></div>
+        <form id="browse_filter" style="display:none" method="POST" action="<?php echo url('itemfilter') ?>"><input type="hidden" name="keyword" value="<?php echo $keyword?>"/>
+        	<input type="hidden" name="orderby" value="<?php echo isset($orderby) ? $orderby : 'pid DESC'?>"/><input type="hidden" name="pageRows" value="<?php echo isset($pageRows) ? $pageRows : '48'?>"/><input type="hidden" name="listMode" value="<?php echo isset($listMode) ? $listMode : 'photo'?>"/></form>
+	<div class="w-resultSortBarNew" id="resultSortBarNew">
+            <div class="sort-by"><span class="sort-label">Sort: </span> <?php 
+            if(!isset($orderby) || $orderby == 'pid DESC' || $orderby == ''){
+            	  echo '<span>Default</span>';
+            	}else{
+            	  echo '<a rel="nofollow" onclick="" href="javascript:filter_option(\'orderby\', \'pid DESC\')">Default</a>';
+            	}
+            	echo ' | ';
+            	if(isset($orderby) && $orderby == 'updated DESC'){
+            	  echo '<span>New Arrival</span>';
+            	}else{
+            	  echo '<a rel="nofollow" onclick="" href="javascript:filter_option(\'orderby\', \'updated DESC\')">New Arrival</a>';
+            	}
+            	echo ' | ';
+            	if(isset($orderby) && $orderby == 'sell_price ASC'){
+            	  echo '<span>Low Price</span>';
+            	}else{
+            	  echo '<a rel="nofollow" onclick="" href="javascript:filter_option(\'orderby\', \'sell_price ASC\')">Low Price</a>';
+            	}
+            	echo ' | ';
+            	if(isset($orderby) && $orderby == 'sell_price DESC'){
+            	  echo '<span>High Price</span>';
+            	}else{
+            	  echo '<a rel="nofollow" onclick="" href="javascript:filter_option(\'orderby\', \'sell_price DESC\')">High Price</a>';
+            	}
+            	?></div>
+		<div class="right"><dl class="viewType"><dd class="gallery"><span>gallery</span></dd><dd class="list"><a rel="nofollow" href="">List</a></dd></dl>
+          <dl class="showType"><dt>Show:</dt>
+              <dd><select class="pageRows" name="pageRows"><option value="16" <?php if (!isset($pageRows) || $pageRows == '16') echo 'selected'?>>16</option>
+              <option value="24" <?php if (isset($pageRows) && $pageRows == '24') echo 'selected'?>>24</option>
+              <option value="48" <?php if (isset($pageRows) && $pageRows == '48') echo 'selected'?>>48</option>
+              <option value="96" <?php if (isset($pageRows) && $pageRows == '96') echo 'selected'?>>96</option>
+              <option value="32" <?php if (isset($pageRows) && $pageRows == '192') echo 'selected'?>>192</option></select></dd>            
+          </dl></div></div>
+        <div class="w-productList w-grid w-relatedProdsGrid w-p10"><?php
+                  if(isset($productList) && $productList):
+                    $showItemCount = 0;
+                    foreach ($productList as $k => $v):
+                    if($showItemCount > 0 && $showItemCount % 4 == 0){
+                      echo '<br class="clear"/>';
+                    }
+                    $showItemCount++;
+                ?><dl><dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>">
+                			<img width="160" height="240" alt="<?php echo $v->name;?>" title="<?php echo $v->name;?>" src="<?php echo urlimg('160x240',$v->filepath)?>"><em class="iconDiscount"><?php
+                			  echo round((1 - $v->price / $v->list_price) * 100, 0);
+                			?></em></a></dt>
+                		<dd class="prodName"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo str_replace(',', ', ', $v->name);?></a></dd>
+                		<dd class="oldPrice"><?php echo isset($v->list_price)? c($v->list_price) : null;?></dd>
+                		<dd class="price"><a rel="nofollow" href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo isset($v->price)? c($v->price) : null;?></a></dd>
+                		<dd class="review"><?php /*if(isset($v->pid) && $v->pid):?>
+                            <?php echo widgetCallFunction('fivestars', 'getaveragestars', $v->pid)?>
+                            <!--  <span class="review_count">122 reviews</span><br/> -->
+                        <?php endif;*/?>
+                        <form class="buynowdirectly" method="POST" action="<?php echo url('cart/productpost');?>"><p><input type="hidden" value="<?php echo isset($v->pid) ? $v->pid : null ?>" name="pid"><input type="hidden" value="1" name="qty"><?php 
+                          if($v->status):
+                              $default_fields = array();
+                                $canOrderDirectly = true;
+                                foreach ($v->fields as $fieldName => $field){
+                                  if(!empty($v->{'field_' . $fieldName})){
+                                    if ($field->multiple){
+                                      if(count($v->{'field_' . $fieldName})==1){
+                                        //we can use default field value to make the direct order.
+                                        $default_fields[$fieldName] = $v->{'field_' . $fieldName}[0];
+                                      }else{
+                                        //need go to details page and make the value.
+                                        $canOrderDirectly = false;
+                                        break;
+                                      }
+                                    }
+                                  }
+                                }
+                                if($canOrderDirectly){
+                                  foreach($default_fields as $field_name=>$field_value){
+                                    echo '<input name="'.$field_name.'" type="hidden" value="'.$field_value.'">';
+                                    echo '<input name="data['.$field_name.']" type="hidden" value="'.$field_value.'">';
+                                  }
+                                  echo '<input type="submit" class="buynow" value="" name="cart">';
+                                }else{
+                                  echo '<a class="textbtn contShopping left" href="'.url($v->url).'">View Details</a>';
+                                }
+                                endif;?></p></form></dd></dl><?php 
+			  endforeach;
+                   endif;
+                ?></div>
+<div class="w-resultSortBarNew" id="resultSortBarNew"><div class="sort-by sort-bottom">
+            	<span class="sort-label">Sort: </span><?php 
+            	if(!isset($orderby) || $orderby == 'pid DESC' || $orderby == ''){
+            	  echo '<span>Default</span>';
+            	}else{
+            	  echo '<a rel="nofollow" onclick="" href="javascript:filter_option(\'orderby\', \'pid DESC\')">Default</a>';
+            	}
+            	echo ' | ';
+            	if(isset($orderby) && $orderby == 'updated DESC'){
+            	  echo '<span>New Arrival</span>';
+            	}else{
+            	  echo '<a rel="nofollow" onclick="" href="javascript:filter_option(\'orderby\', \'updated DESC\')">New Arrival</a>';
+            	}
+            	echo ' | ';
+            	if(isset($orderby) && $orderby == 'sell_price ASC'){
+            	  echo '<span>Low Price</span>';
+            	}else{
+            	  echo '<a rel="nofollow" onclick="" href="javascript:filter_option(\'orderby\', \'sell_price ASC\')">Low Price</a>';
+            	}
+            	echo ' | ';
+            	if(isset($orderby) && $orderby == 'sell_price DESC'){
+            	  echo '<span>High Price</span>';
+            	}else{
+            	  echo '<a rel="nofollow" onclick="" href="javascript:filter_option(\'orderby\', \'sell_price DESC\')">High Price</a>';
+            	}
+            	?></div>
+    <div class="right">	<div class="widget w-pagination"><ul><?php echo $pagination;?></ul></div></div>
+    </div></div>
+    <div class="general_bottom"></div></div>
+  <div class="body_right"><?php echo $this->render('body_left.phtml'); ?></div></div>
+  <?php echo $this->render('footer.phtml'); ?>
+</body>
+<?php echo $this->render('after_body.phtml'); ?>
+</html>

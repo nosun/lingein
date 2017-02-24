@@ -1,0 +1,47 @@
+<div class="footer">
+<div id="customerHelp" class="w-bp">
+  <div>
+  <?php if(isset($helpList) && isset($articleTypeList)):
+  $articleTypeCount = 0;
+  foreach($helpList as $index => $articleList):
+  	if($index != 'news'):
+  	$articleTypeCount++;
+  	if($articleTypeCount > 4):
+  		break;
+  	endif;
+  	?>
+  <dl><dt><?php echo $articleTypeList[$index]->name;?></dt><?php 
+          	foreach ($articleList as $v):
+          ?><dd><a href="<?php echo url($v->url)?>"><?php echo $v->title;?></a></dd><?php 
+          	endforeach;
+          ?></dl>
+  <?php endif;
+  endforeach;
+  endif?>
+  
+  <dl><dt>Popular Categories</dt>
+  <dd></dd>
+  </dl>
+  
+    <dl class="customerGuide">
+    	<dt>Subscribe</dt>
+    	<dd><img src="<?php echo url('templates/babydoll-lingerie.net/images/yj.png');?>"/></dd>
+    	<dd><input class="text" value="Enter Your Email" id="mailAddress" type="text">
+    	<button id="submitMailAddress" class="textbtnGray">Subscribe</button>
+    	</dd>
+    </dl>
+  
+  </div>
+</div>
+<div class="clear"></div>
+<div id="copyright">
+<span class="floatleft">
+           	<?php $siteInfo = Bl_Config::get('siteInfo');echo $siteInfo['copyright'];?>
+        </span>
+<span style="float:right;">
+			Any Questions Please Email to: <a href="mailto:<?php echo $siteInfo['email'];?>"><?php echo $siteInfo['email'];?></a>
+</span>
+</div>
+</div>
+
+

@@ -1,0 +1,29 @@
+
+
+<!-- 页面的logo部分 -->
+<div id="header">
+
+	<!-- logo图片 -->
+      <div class="logo"><a href="<?php echo url('');?>"></a></div>
+    <!-- logo图片结束 -->
+     
+     
+      <!-- 搜索框，这个搜索框你可以根据你的需要把它放在页面不同的位置 -->
+      <div class="search">
+      <form action="<?php echo url('pitems');?>" method="post">
+           <input name="keyword" id="search_keyword" type="text" class="text" value="<?php echo isset($search_keywords) ? plain($search_keywords) : 'sexy lingerie';?>" onfocus="if(this.value=='What would you like to save on today'){this.value='';}"  onblur="if(this.value==''){this.value='sexy lingerie';}" />
+           <a id="header_search_keyword" href="javascript:void(0)"><button type="submit"></button></a>
+      </form>
+     </div>
+     <!-- 搜索框模块结束 -->
+
+
+	<!-- 购物车部分，包括目前购物车中有几个产品，以及一个下单的链接，这块有js代码，购物车中的产品会动态显示。你可以移动购物车部分到页面的其他位置，但是  id="shoppingCart" <em class="cart_item_number"> 这两个尽量保留，其它都可以改-->
+	<div id="shoppingCart"><span>Cart&nbsp;<em class="cart_item_number"><?php echo isset($goodsInCart)? $goodsInCart : 0; ?></em> &nbsp;Item</span>
+			<a class="button top-checkout" href="<?php echo url('cart');?>" style="">Check Out</a>
+	</div>
+	<!-- 结束购物车部分 -->
+
+
+</div>
+

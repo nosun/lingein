@@ -1,0 +1,75 @@
+<?php echo $this->render('before_body.phtml'); ?>
+<body>
+<?php echo $this->render('header.phtml'); ?>
+
+<div class="bodyer">
+  <!--  <div class="framework_top"></div> -->
+  <div class="framework">
+
+        <div class="login">
+            <div class="login_l">
+                <h1>Sign In</h1>
+                <h2>Registered users please login here !</h2>
+                
+                <form action="<?php echo url('user/login');?>" method="post">
+                <ul class="login_dengl">
+                    <li><span>Username/Email:</span> 
+                    <div class="fl">
+                    	<input type="text" value="" name="username"  class="elmbBlur"/>
+                    </div>
+                    </li>
+                    <li><span>Password:</span> 
+                    <div class="fl">
+                    	<input type="password" value="" name="password"  class="elmbBlur"/>
+                    </div>
+                    </li>
+                    <li><div class="login_submit"><a class="login_forgetpw" href="<?php echo url('user/getPassword')?>">Forget Password? </a><input type="submit" class="Formsubmit" value="" /> </div></li>
+                    <li><div class="login_cs">Have any questions, please click <a href="<?php echo url('articletype/help.html');?>">help</a> or contact <br />
+    customer service <?php echo isset($contactway['telephone']) ? $contactway['telephone'] : null;?> </div>
+                    </li>
+                </ul>
+                </form>
+            </div>
+
+            <div class="login_r">
+                <h1>Register a New Account</h1>
+                <h2>Users do not have accounts, please register here!</h2>
+                <?php echo themeMessages() ?>
+                <div id="client_message" style="display:none"></div>
+                <form action="<?php echo url('user/register');?>" method="post" autocomplete="off"  name="regForm" onsubmit="javascript:return checkRegister()">
+                <ul class="login_dengl">
+                    <li><span>Username:</span> 
+                    <div class="fl"><input type="text"  name="username"<?php if (isset($_POST['username'])) echo ' value="' . $_POST['username'] . '"' ?> class="elmbBlur"/>
+                    <div class="smallfont">Less than 12 characters</div>
+                    </div>
+					</li>
+                    <li><span>E-mail:</span> 
+                    <div class="fl">
+                    	<input type="text" name="email"<?php if (isset($_POST['email'])) echo ' value="' . $_POST['email'] . '"' ?> class="elmbBlur"/>
+                    </div>
+                    </li>
+                    <li><span>Password:</span> 
+                    <div class="fl">
+                    	<input type="password"  name="password"  class="elmbBlur">
+                    </div>
+                    </li>
+                    <li><span>Confirm Password:</span> 
+                    <div class="fl">
+                    	<input type="password"  name="confirm_password"  class="elmbBlur"/>
+                    </div>
+                    </li>
+                    <li><div class="register_submit"><input type="submit" class="Formregister" value="" /></div></li>
+                </ul>
+                </form>
+            </div>
+        </div>
+
+    </div>
+  <!-- <div class="framework_bottom"></div>  -->
+</div>
+
+
+<?php echo $this->render('footer.phtml'); ?>
+</body>
+<?php echo $this->render('after_body.phtml'); ?>
+</html>

@@ -1,0 +1,11 @@
+<div id="product-abstract">
+<h1 id="prHead"><?php echo $product->name;?>
+	<span id="pRate">
+	<?php if(isset($product->pid) && $product->pid):
+        echo widgetCallFunction('fivestars', 'getaveragestars', $product->pid, true);
+    endif;?>
+    </span></h1>
+<?php $this->render('contents/p_parameters.phtml')?>
+<?php $this->render('contents/p_orderprice.phtml')?>
+<?php $this->render('contents/p_fields.phtml')?>
+</div>

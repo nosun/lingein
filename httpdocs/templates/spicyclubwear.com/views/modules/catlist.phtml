@@ -1,0 +1,15 @@
+<div id="cat-lists" class="widget">
+<?php $isTag = isset($termInfo) && $termInfo->vid == Taxonomy_Model::TYPE_TAG;?>
+<div class="w-head contrast">
+	<h2 class="side-subcat-title"><?php echo /*(isset($termInfo)&& $termInfo->name && !$isTag) ? ucwords($termInfo->name) : */'Categories';?></h2>
+</div>
+<div class="side-subcat-div">
+<?php if(isset($category)): foreach($category as $k=>$v):?>
+    <ul><li><a href="<?php echo url(categoryURL($v->path_alias));?>" class="top-cat" style="<?php if(isset($termInfo) && $v->name == $termInfo->name)  echo 'font-weight:bold!important;'?>"><?php echo ucwords($v->name);?></a></li>
+<?php foreach($v->sub as $k2=>$v2):?>
+		<li><a href="<?php echo url(categoryURL($v2->path_alias));?>" <?php if(isset($termInfo) && $v2->name == $termInfo->name)  echo 'class="red b"'?>><?php echo ucwords($v2->name);?></a></li>
+<?php endforeach;?>
+	</ul>
+<?php endforeach;endif;?>
+</div>
+</div>

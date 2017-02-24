@@ -1,0 +1,6 @@
+<?php if(isset($termInfo) && $termInfo):?>
+	<div class="cat-intro">
+		<h1><?php echo $termInfo->name;?></h1>
+		<div class="cat-desc"><?php echo isset($termInfo->description) ? $termInfo->description : null;?></div>
+    </div>
+<?php endif;?>

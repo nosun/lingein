@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+<?php global $user ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<div class="container">
+<?php $this->render('parts/header.phtml'); ?>
+<div class="main-content">
+
+<?php $this->render('parts/body_left.phtml'); ?>
+<div class="general cat">
+<?php $this->render('parts/breadcrumb.phtml')?>
+
+<?php $this->render('contents/c_intro.phtml');?>
+            <div class="found_cur"><em>We found <b>
+                    <?php echo $productCount;?></b> items of <strong><?php echo $termInfo->name;?></strong>!</em>
+            </div>
+
+<div id="produc-channels" class="main-block">
+
+<div id="productlist">
+
+<div class="w-head cat-filters"> 
+<div class="pysort">
+<?php $this->render('contents/c_filter_form.phtml');?>
+<?php $this->render('modules/pagination.phtml');?>
+<div class="w-resultSortBar" id="resultSortBar">
+	<?php $this->render('contents/c_viewoptions.phtml')?>
+	<?php $this->render('contents/c_sortoptions.phtml')?>
+</div>
+</div>
+</div>
+
+<div class="widget">
+<?php $this->render('contents/c_productlist.phtml');?>
+</div>
+<br class="clears"/>
+	<?php $this->render('modules/pagination.phtml');?>
+</div>
+<!-- extral intro for this category -->
+<?php if(isset($docvar3)):?>
+<div class="advanced_intro"><?php echo $docvar3;?></div>
+<!-- end of extral intro -->
+<?php endif;?>
+<?php echo $this->render('contents/c_comments.phtml');?>
+</div>
+
+
+</div>
+<div class="general_bottom"></div>
+</div>
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+
+</body>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+</html>

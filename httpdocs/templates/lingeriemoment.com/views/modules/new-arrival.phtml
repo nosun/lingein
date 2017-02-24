@@ -1,0 +1,33 @@
+<?php if(isset($newProductList) && $newProductList):?>
+<div class="widget prodslide" id="hotsNow">
+
+<ul class="flex-direction-nav prodslide-nav"><li><a href="javascript:void(0);" class="flex-prev">Previous</a></li><li><a href="javascript:void(0);" class="flex-next">Next</a></li></ul>
+<div style="position:relative;overflow:hidden;height:260px;">
+<?php
+	$item_count = 0;
+    	foreach ($newProductList as $v):
+        $item_count++;
+?>
+<?php if($item_count % 6 == 1):?>
+<div class="prodsliderow active <?php echo 'prodsliderow-'. floor($item_count / 6);?>">
+	<dl class="slide-proditem first"> 
+<?php else:?>
+	<dl class="slide-proditem">
+<?php endif;?>
+	<dt style="width:140px;height:200px;border:1px solid #999999;overflow:hidden;"><a title='<?php echo $v->name;?>' href="<?php echo url($v->url);?>" title='<?php echo $v->name;?>' >
+		<img alt='<?php echo $v->name;?>' title='<?php echo $v->name;?>' src="<?php echo urlimg('140x200', $v->filepath);?>" style="width:140px;">
+      	</a>
+    </dt>
+    <dd class="prodName"><a href="<?php echo url($v->url);?>" title='<?php echo $v->name;?>'><?php echo $v->name;?></a></dd>
+</dl>
+<?php if($item_count % 6 == 0):echo '</div>';endif;endforeach;?>
+<?php if($item_count % 6 != 0):echo '</div>';endif;?>
+</div>
+
+<!--  <a href="<?php echo url('new-arrivals.html');?>" class="more right">More »</a>-->
+</div>
+<?php endif;?>
+
+
+
+

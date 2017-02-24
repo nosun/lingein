@@ -1,0 +1,84 @@
+<?php global $user ?>
+<div class="widget w-prReviews black" id="prReviews">
+	<a name="have_reviews"></a> <a id="customer_reviews" name="customer_reviews"></a>
+	<h2 class="fancyHeading clearfix"><span class="current">Customer Reviews</span></h2>
+	<div class="prRevewsActsV2 clearfix"><?php 
+	$grades = widgetCallFunction('fivestars', 'getStars', $product->pid);
+	$gradesTotal = 0;
+	$sumTotal = 0;
+	if(isset($grades)) :?>
+	<ul class="ratingCount"><?php 
+	  foreach($grades as $k=> $v):
+  		$gradesTotal += $k * $v;
+  		$sumTotal += $v;
+		?><li><span class="star starS<?php echo $k?>"></span> <span>(<?php echo $v;?>)</span></li><?php 
+	  endforeach;?></ul>
+	<div><p class="prRatingV2">Average rating:&nbsp;<?php 
+	$averageStarsHtml = widgetCallFunction('fivestars', 'getaveragestars', $product->pid, false);
+				 if($averageStarsHtml == false){
+				   
+				 }else{
+				   echo $averageStarsHtml;
+				 }
+				?>&nbsp;<strong class="score"><span itemprop="ratingValue"><?php if($sumTotal > 0){ echo round($gradesTotal/$sumTotal, 2);}?></span></strong>&nbsp;<a class="reviewNums" href="">(<span><?php echo $product->visits + 100?> views, </span><span itemprop="reviewCount"><?php echo $commentCount;?></span> reviews)</a>
+	</p></div><?php 
+	endif;?><p class="right"><a srcname="writeReview" class="textbtn signToRedirect toogleWriteReview" target="_self"href="#write-a-review">Write a review</a></p>
+	</div>
+<div class="widget w-reviews" id="reviews"><?php
+if($commentList) :
+foreach($commentList as $v) : ?><a name="my_review"></a>
+	<div class="widget w-review"><ul class="reviewerInfo">
+			<li><?php echo widgetCallFunction('fivestars', 'getcommentstars', $v->cid)?></li>
+			<li><span class="lightGray">By</span>&nbsp;<cite class="b"><?php echo $v->nickname;?></cite></li>
+			<li><cite class="lightGray"><?php echo date('M d, Y', $v->timestamp);?></cite></li></ul>
+			<div class="reviewDetails"><h4 class="reviewTitle"><?php echo $v->subject;?></h4><div class="reviewInfo"><p><?php echo $v->comment?></p></div>
+			<div class="commentAction"><a reply="<?php echo count($v->children);?>" class="Dlink commentsCount" href="#">Reply(<?php echo count($v->children);?>)</a><?php 
+/*echo 'Was this review helpful?
+<a class="textbtnGray" href=""><span id="usefulCount" class="Dlink useful reviewLike">(0)</span> </a>
+<a class="textbtnGray" href=""><span id="usefulDownCount" class="Dlink useful usefulDown reviewLike">(0)</span> </a> 
+<a class="Dlink fbComment" href="#">Share to facebook</a>' */?>
+		</div></div>
+<?php if(count($v->children) > 0):?><div class="w-reviewReplys">
+<?php 
+foreach($v->children as $k=>$reply): ?><span class="arrow"></span>
+<div class="reviewReply"><div><p><?php echo $reply->comment;?></p></div>
+<p class="writer"><span class="lightGray">By</span> <cite <?php if($reply->nickname == 'Administrator') echo 'class = "Dlink litb"'; else echo 'class = "replier"'; ?>><?php echo ($reply->nickname);?></cite> <cite class="lightGray">at <?php echo date('M d, Y', $reply->timestamp);?></cite></p>
+</div><?php 
+endforeach;?></div><?php 
+endif;?><div class="writeReply hasLayout"><?php 
+if($user->uid > 0):?><form action="<?php echo url('comment/addReply');?>">
+<input type="hidden" value="<?php echo $user->uid;?>" name="uid" />
+<input type="hidden" value="<?php echo $v->cid;?>" name="replyid" />
+<div class="textareaHolder"><textarea name="review_comment" class="default" style="width: 552px; height: 50px;">Add your reply here...</textarea></div>
+<p class="errors"></p>
+<button class="textbtn" name="post">Post</button></form><?php 
+else: ?><p class="errors">After <a class="loginReply" href="<?php echo url('user/login/')?>">login</a>, you can reply this review.</p><?php 
+endif;?></div>
+</div><?php
+endforeach;
+endif;
+?><!--  <p class="right"><a class="circleArrowRight" href="#">See all 3 customer reviews</a></p>-->
+</div>
+</div>
+
+<?php if($user->uid > 0):?>
+<div class="Reviews" id="write-a-review" style="display:none">
+	<div class="widget write-review-prod"><div class="redTitle">Write a review for this product</div>
+		<form method="post" id="post_review" name="guestBookForm" action="<?php echo url('comment/insert');?>">
+			<input type="hidden" name="comment_token" value="<?php echo isset($comment_token) ? $comment_token : null?>" />
+			<input type="hidden" name="pid" value="<?php echo isset($product->pid) ? $product->pid : null?>" />
+			<p class="errorInfo"></p><?php 
+			if(isset($grades)):?><h4>Rating: <span class="star starB5 starH0" title="Average" id="star-rating" class="star starB0 starH0" title="Excellent"></span><span class="gray" id="star-tip"></span></h4><?php 
+			endif;?>
+			<div><input type="hidden" id="rating" value="5" name="rating" /><p id="ratingErr" class="errorInfo"></p></div>
+			<h4>Showing Name:</h4><div><input type="text" class="wirte-review-text" value="<?php echo plain($user->nickname !== '' ? $user->nickname : $user->name) ?>" maxlength="15" name="nickname" />
+			<p class="errorInfo"></p></div>
+			<h4>Review Title:</h4><div><input type="text" class="wirte-review-text" value="" maxlength="50" name="subject" />
+			<p class="errorInfo"></p></div>
+			<h4>Review content:</h4><div><textarea maxlength="3000" id="reviewContent" class="wirte-review-content" name="comment"></textarea>
+			<p class="errorInfo"></p><p>Remaining characters:<span class="b" id="reContentChar">3000</span>&nbsp;Please don't exceed 3,000 characters.</p></div>
+			<p class="warning hide"></p>
+			<div><button type="submit" id="reviewSubmit" class="textbtn">Submit</button><a id="cancelWriteReview" class="u" href="#prReviews">Cancel</a></div>
+		</form></div>
+</div>
+<?php endif;?>

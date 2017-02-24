@@ -1,0 +1,117 @@
+<div class="cart-list">
+<?php global $user ?>
+<fieldset class="widget inner" id="shipAddr">
+    <div class="w-head">
+		<h2><span>Shipping Address</span></h2>
+    </div>
+    <div class="main-section">
+	<input type="hidden" id="delivery_rid" name="delivery_rid" value="<?php if (count($addressList) > 0){echo $addressList[0]->rid;} ?>" />
+	<ul id="checkout_shipaddr_panel">
+		<?php $isFirst = true; ?>
+		<?php foreach ($addressList as $address): ?>
+		<li rid="<?php echo $address->rid;?>" onclick="chooseAddress(this);">
+			<input type="radio" <?php if ($address->default){echo "checked";} else {if($isFirst){echo "checked";}} $isFirst=false; ?> class="address_sel_radio" />
+			<label>
+				<strong>(<span title="delivery_first_name"><?php echo $address->delivery_first_name;?></span>
+				<span title="delivery_last_name" style="margin-right:5px"><?php echo $address->delivery_last_name;?></span>)</strong>
+				<span title="delivery_address"><?php echo $address->delivery_address; ?></span>
+				<span title="delivery_city"><?php echo $address->delivery_city; ?></span>
+				<span title="delivery_province"><?php echo $address->delivery_province; ?></span>
+				<span title="delivery_country"><?php echo $address->delivery_country; ?></span>
+				<span title="delivery_postcode"><?php echo $address->delivery_postcode; ?></span>
+				&nbsp;Tel:<span title="delivery_mobile"><?php echo $address->delivery_mobile; ?></span>
+				<span title="delivery_cid" style="display:none"><?php echo $address->delivery_cid; ?></span>
+				<span title="delivery_pid" style="display:none"><?php echo $address->delivery_pid; ?></span>
+				<span title="delivery_default" style="display:none"><?php echo $address->default; ?></span>
+				<a href="javascript:void(0)" style="font-weight:bold; margin-left:10px; text-decoration:underline;" onclick="editAddress(this, <?php echo $address->rid;?>);">Edit</a>
+			</label>
+		</li>
+		<?php endforeach;?>
+    </ul>
+	<div style="display:<?php echo empty($addressList) ? 'block' : 'none';?>;margin:10px 15px 0px 0px; border:solid 1px #ccc; border-radius:3px;" class="editAddressTb" id="editAddressTb" >
+		<p class="explanation"><span class="required">*</span>&nbsp;<span class="indicates">Indicates required fields.</span></p>
+		<table class="tb-shippingAddr form" cellspacing="0" cellpadding="0" style="margin-left:30px;">
+  				<tbody>
+  					<tr>
+  						<th class="recipient"><input type="hidden" value="" name="rid" id="rid" /><label>First Name<span class="required">*</span>:</label></th>
+    					<td>
+    						<input name="delivery_first_name" id="delivery_first_name" type="text" class="text elmbBlur" onblur="CheckIsNull('delivery_first_name','sp_fname');FormatName(this);">
+        					<span id="sp_fname" style="color: red; display: none;">First Name can not be empty!</span>
+        				</td>
+        			</tr>
+        			<tr>
+        				<th class="recipient"><label>Last Name<span class="required">*</span>:</label></th>
+        				<td>
+    						<input name="delivery_last_name" id="delivery_last_name" type="text" class="text elmbBlur" onblur="CheckIsNull('delivery_last_name','sp_lname');FormatName(this);">
+        					<span id="sp_lname" style="color: red; display: none;">Last Name can not be empty!</span>
+        				</td>
+  					</tr>
+  					<tr>
+  						<th><label>Delivery Address<span class="required">*</span></label></th>
+                        <td>
+                            <input name="delivery_address" id="delivery_address" type="text" onblur="CheckIsNull('delivery_address','sp_address1');FormatName(this);" class="text elmbBlur" ></input>
+                            <span id="sp_address1" style="color: red; display: none;">Address can not be empty!</span>
+                            <p style="line-height: 15px;padding: 5px 0;width:354px;"><span style="">Example:</span>apartment, suit, unit, building, floor, etc</p>
+                            <p style="line-height: 15px; padding: 5px 0px; width: 354px; display: none;" id="SaudiId"><span style="color:red">Note:</span>To make sure the parcel can be delivered successfully, please leave your exact house number and street name.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<th><label>City<span class="required">*</span>:</label></th>
+                        <td class="recipient">
+                            <input name="delivery_city" id="delivery_city" type="text" class="text elmbBlur" onblur="CheckIsNull('delivery_city','sp_city');FormatName(this);">
+                            <span id="sp_city" style="color: red; display: none;">City can not be empty!</span>
+                        </td>
+                    </tr>
+                    <tr>
+  						<th><label>Destination Country<span class="required">*</span></label></th>
+    					<td>
+    						<div class="custom-select">
+    						<select id="delivery_cid_select" name="delivery_cid_select" class="select elmbBlur" title="Country can not for empty">
+    							<?php foreach($countries as $k => $v) : ?>
+                             		<option value="<?php echo $k ?>" <?php if(isset($address->delivery_cid) && $address->delivery_cid == $k) echo 'selected'; ?>><?php echo $v ?></option>
+                                <?php endforeach;?>
+                            </select>
+                            <span id="sp_country" style="color: red; display: none;">Please select a country!</span>
+                            </div>
+    					</td>
+  					</tr>
+  					<tr>
+  						<th><label>State / Province / Region<span class="required">*</span>:</label></th>
+    					<td class="recipient">
+    						<?php if (isset($provinces)) : ?>
+    							<div class="custom-select">
+        						<select id="delivery_pid_select" name="delivery_pid_select" class="select elmbBlur">
+        							<?php foreach($provinces as $k => $v) : ?>
+        								<option value="<?php echo $k; ?>"><?php echo $v; ?></option>
+        							<?php endforeach; ?>
+    							</select>
+    							</div>
+    							<input name="delivery_province" id="delivery_province" type="text" class="select elmbBlur" onblur="CheckIsNull('delivery_province', 'sp_province');FormatName(this);" style="display:none">
+        				    <?php endif; ?>
+    						<span id="sp_province" style="color: red; display: none;">Please select or input a province!</span>
+    					</td>
+    				</tr>
+    				<tr>
+    					<th><label>ZIP/Postal Code<span class="required">*</span></label></th>
+    					<td class="recipient"><input name="delivery_postcode" id="delivery_postcode" type="text" class="text elmbBlur" onblur="CheckIsNull('delivery_postcode','sp_code');FormatName(this);"><span id="sp_code" style="color: red; display: none;">Zip can not be empty!</span></td>
+  					</tr>
+  					<tr>
+  						<th><label>Phone Number<span class="required">*</span>:</label></th>
+    					<td class="recipient">
+    						<input name="delivery_mobile" id="delivery_mobile" type="text" class="text elmbBlur" onfocus="FocusPhone()" onblur="CheckPhone('delivery_mobile','sp_tel');FormatName(this);">
+    						<span id="sp_tel" style="color: red; display: none;">Phone input error!</span>
+    					</td>
+  					</tr>
+                  	<tr>
+                    	<td colspan="2" style="text-align:center">   
+                    		<input id="addAddressBtn" class="button editAddressBtn" name="" onclick="return AjaxEditAdress('<?php echo url('user/ajaxAddAddress');?>');" type="button" value="Save">
+                    		<input id="updateAddressBtn" class="button editAddressBtn" name="" onclick="return AjaxEditAdress('<?php echo url('user/ajaxUpdateAddress');?>');" type="button" value="Save" style="display:none"> 
+                        	<input name="" onclick="cancelEditAddress();" class="cancelEditAddressBtn" type="button" class="cancel" value="Cancel" />
+                    	</td>
+                  	</tr>
+				</tbody>
+			</table>
+    	</div>
+    </div>
+</fieldset>
+</div>

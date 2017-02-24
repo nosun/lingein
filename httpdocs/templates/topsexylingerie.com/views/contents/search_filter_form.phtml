@@ -1,0 +1,6 @@
+<form id="browse_filter" style="display:none" method="post" action="<?php echo url('itemfilter') ?>">
+	<input type="hidden" name="orderby" value="<?php echo isset($orderby) ? $orderby : 'pid DESC'?>"/>
+	<input type="hidden" name="pageRows" value="<?php echo isset($pageRows) ? $pageRows : '50'?>"/>
+	<input type="hidden" name="listMode" value="<?php echo isset($listMode) ? $listMode : 'photo'?>"/>
+	<input type="hidden" name="keyword" value="<?php echo isset($keyword) ? $keyword: ''?>"/>
+</form>

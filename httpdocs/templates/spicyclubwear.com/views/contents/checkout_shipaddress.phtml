@@ -1,0 +1,79 @@
+<?php global $user ?>
+<fieldset class="widget inner" id="shipAddr">
+    <div class="w-head">
+		<h2><span>Shipping Address</span></h2>
+    </div>
+    <div class="main-section">
+	<ul>
+		<li style="display:none;"><a class="textbtn" href="#" id="addAddress">Add a New Shipping Address</a></li>
+        <li class="removeBorder editAddr" id="addressForm">
+        	<input type="hidden" name="edit_address_id" id="addressId"/>
+			<a style="display:none;" href="#" class="cancel" id="cancelAddr">Cancel</a>
+			<p class="explanation"><span class="required">*</span>&nbsp;<span class="indicates">Indicates required fields.</span></p>
+			<table class="tb-shippingAddr" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<th><label>First Name<span class="required">*</span>:</label></th>
+					<td class="recipient">
+						<input type="text" class="text elmbBlur" id="delivery_first_name" name="delivery_first_name" value="<?php echo isset($address->delivery_first_name) ? $address->delivery_first_name : ''; ?>"/>
+						<p class="errorInfo"></p>
+					</td>
+					<th><label>Last Name<span class="required">*</span>:</label></th>
+					<td class="recipient">
+						<input type="text" class="text elmbBlur" title="recipient last name can't for empty" id="delivery_last_name" name="delivery_last_name" value="<?php echo isset($address->delivery_last_name) ? $address->delivery_last_name : ''; ?>"/>
+						<p class="errorInfo"></p>
+					</td>
+				</tr>
+				<tr>
+					<th valign="top" ><label>Email Address:</label></th>
+					<td><input type="text" class="text elmbBlur readonly" title="E-mail can't for empty" id="delivery_email" name="delivery_email" readonly="readonly" value="<?php echo isset($user->email) ? $user->email : ''; ?>"/>
+						<p class="explanation">(Same as your account email.)</p><p class="errorInfo"></p></td>
+
+					<th><label>Delivery Address<span class="required">*</span>:</label></th>
+					<td>
+						<input type="text" class="text elmbBlur" title="Delivery Address can't for empty" id="delivery_address" name="delivery_address" value="<?php echo isset($address->delivery_address) ? $address->delivery_address : ''; ?>"/>
+						<p class="errorInfo"></p>
+					</td>
+				</tr>
+				<tr>
+					<th><label>City<span class="required">*</span>:</label></th>
+					<td>
+						<input type="text" class="text elmbBlur" title="Receiving city can't for empty" id="delivery_city" name="delivery_city" value="<?php echo isset($address->delivery_city) ? $address->delivery_city : ''; ?>"/>									<p class="errorInfo"></p>
+					</td>
+				</tr>
+				<tr>
+					<th><label>Destination Country<span class="required">*</span>:</label></th>
+					<td>
+                        <div class="custom-select"><select name="select" class="select elmbBlur" id="select_countries" title="Country can not for empty">
+<?php foreach($countries as $k => $v) : ?>
+                             <option value="<?php echo $k ?>" <?php if(isset($address->delivery_cid) && $address->delivery_cid == $k) echo 'selected'; ?>><?php echo $v ?></option>
+<?php endforeach;?>
+                        </select>
+                        </div>
+					</td>
+					<th valign="top" ><label>State/Province/Region<span class="required">*</span>:</label></th>
+        			<td id="state" style="display:table-row;">
+        				<input type="text" class="text elmbBlur" id="delivery_or_province" name="delivery_or_province" value="<?php echo isset($address->delivery_province) ? $address->delivery_province : ''; ?>"/>
+					</td>
+				</tr>
+				<tr>
+					<th valign="top" ><label>ZIP/Postal Code<span class="required">*</span>:</label></th>
+					<td>
+						<input type="text" class="text elmbBlur" title="Postal Code can't for empty" id="delivery_postcode" name="delivery_postcode" value="<?php echo isset($address->delivery_postcode) ? $address->delivery_postcode : ''; ?>"/>									<p class="errorInfo"></p>
+					</td>
+
+					<th valign="top" ><label>Phone Number<span class="required">*</span>:</label></th>
+					<td>
+						<input type="text" class="text elmbBlur" title="Telephone and mobile phone can not also be empty" id="delivery_mobile" name="delivery_mobile" value="<?php echo isset($address->delivery_mobile) ? $address->delivery_mobile : ''; ?>" />
+						<p class="explanation">Example: +1 9549031647-535</p>
+						<p class="errorInfo"></p>
+						<p class="clearfix"></p>
+					</td>
+				</tr>
+			</tbody>
+			</table>
+			<input type="reset" style="display:none;" id="resetAddr"/>
+	    </li>
+    </ul>
+    </div>
+</fieldset>

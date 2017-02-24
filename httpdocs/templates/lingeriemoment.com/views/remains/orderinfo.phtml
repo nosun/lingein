@@ -1,0 +1,185 @@
+<div class="shopcart_top">
+	<h1 class="top">Order Information</h1>
+</div>
+
+
+
+
+
+		<div class="w-order-info">
+		<h2><span>Order Status</span></h2>
+			<dl>
+				<dt>Order No:</dt>
+        		<dd><?php echo $orderInfo->number;?></dd>
+				<dt>Order Status:</dt>
+				<dd>
+<?php
+  if($orderInfo->status==0): echo 'Pending payment';
+  elseif($orderInfo->status==1): echo 'Pending assessment';
+  elseif($orderInfo->status==2): echo 'completed';
+  elseif($orderInfo->status==-1): echo 'removed';
+  elseif($orderInfo->status==-2): echo 'deleted';
+  endif;
+?>
+				</dd>
+				<dt>Payment Status:</dt>
+        		<dd>
+<?php
+  if($orderInfo->status_payment==0):
+     echo 'Not Paid';
+  elseif($orderInfo->status_payment==1):
+     echo 'Paid';
+  endif;
+?>
+				</dd>
+				
+				
+				<dt>Create at :</dt>
+        		<dd><?php echo date('Y-m-d H:i:s',$orderInfo->created);?></dd>
+				
+				<dt>Payable total:</dt>
+        		<dd class="emphasis"><?php echo c($orderInfo->pay_amount);?></dd>
+        		
+				<dt>Delivery Number:</dt>
+        		<dd><?php echo isset($orderInfo->data['shipping_no']) ? plain($orderInfo->data['shipping_no']) : 'non-delivery'; ?></dd>
+			</dl>
+        </div>
+
+
+
+		<div class="w-order-info">
+		<h2><span>Order Detail</span></h2>
+			<div id="order-detail-tbl">
+			
+              <table width="95%" cellspacing="2" cellpadding="0" align="center">
+                <tbody>
+					<tr class="formHeader">
+                        <td align="center" height="29" bgcolor="#FFF7F7" class="In_line"><strong>Image</strong></td>
+                      <td height="29" bgcolor="#FFF7F7" class="In_line"><strong>Item Description</strong></td>
+                      <td align="center" width="79" bgcolor="#FFF7F7" class="In_line"><strong>Quantity</strong></td>
+                        <td align="center" width="84" bgcolor="#FFF7F7" class="In_line"><strong>Unit Price</strong></td>
+                        <td align="center" width="76" bgcolor="#FFF7F7" class="In_line"><strong>Sub Total</strong></td>
+                    </tr>
+<?php
+if (isset($orderInfo->items)):
+  foreach ($orderInfo->items as $k => $v):
+?>
+                      <tr>
+                        <td height="100" align="center"><a href="<?php echo url($v->url);?>"><img height="100" src="<?php echo urlimg('118x178', $v->filepath) ?>" alt="" /></a></td>
+                        <td align="left"><a href="<?php echo url($v->url);?>"><?php echo isset($v->name) ? $v->name : null ?></a><br />
+          <?php if(isset($v->data) && count($v->data)>0 && is_array($v->data)):
+                foreach($v->data as $dk => $dv):
+                echo '<p><strong>'. $dk. ':</strong> &nbsp;&nbsp;<span>' . $dv . '</p>';
+               endforeach;
+         else:
+                    echo null;
+                 endif;
+          ?>
+                        </td>
+                        <td align="center"><span><?php echo isset($v->qty) ? $v->qty : null ?></span></td>
+                        <td align="center"><span class="emphasis"><?php echo isset($v->pay_price) ? c($v->pay_price) : null; ?></span></td>
+                        <td align="center"><span class="emphasis"><?php echo isset($v->pay_price) ? c($v->qty * $v->pay_price) : null; ?></span></td>
+                      </tr>
+<?php
+  endforeach;
+endif;
+?>
+                      <tr>
+                        <td height="74" colspan="6" align="right" class="td-last">
+
+                        Subtotal:<span class="emphasis pad-lr-20"><?php echo c($orderInfo->total_amount);?></span> <br>
+<?php if (isset($orderInfo)): ?>
+          <?php
+           if (isset($orderInfo->fees)) :
+              foreach ($orderInfo->fees as $fee) :
+                if ($fee->fee_value) :
+                  echo $fee->fee_key . ':<span class="emphasis pad-lr-20">' . c($fee->fee_value) . '</span><br />';
+                endif;
+              endforeach;
+            endif;
+          ?>
+<?php endif ?>
+Total Payment:<span class="emphasis pad-lr-20"><strong><?php if (isset($orderInfo->pay_amount)) echo c($orderInfo->pay_amount) ?></strong></span>
+        </td>
+                      </tr>
+                      </tbody>
+              </table>
+		</div>
+	</div>
+
+
+
+
+
+
+		<div class="w-order-info">
+		<h2><span>Payment Information</span></h2>
+			<dl>
+				<dt>Payment method:</dt>
+        		<dd><?php echo isset($paymentList[$orderInfo->payment_method]->name) ? $paymentList[$orderInfo->payment_method]->name : null?></dd>
+				<dt>Payment Status:</dt>
+				<dd>
+<?php
+  if($orderInfo->status_payment==0):
+     echo 'Not Paid';
+  elseif($orderInfo->status_payment==1):
+     echo 'Paid';
+  endif;
+?>
+				</dd>
+<?php if($orderInfo->status_payment==0):?>&nbsp;&nbsp;<?php echo $submitform; endif;?>
+				
+
+			</dl>
+        </div>
+
+		<div class="w-order-info">
+		<h2><span>Shipping Information</span></h2>
+			<dl>
+				<dt>Delivery Method:</dt>
+        		<dd><?php 
+        		if (isset($shippingList[$orderInfo->shipping_method]->name)){
+        		  if(strtoupper($shippingList[$orderInfo->shipping_method]->name) == 'UPS'){
+        		    echo 'Expedited Shipping';
+        		  }else if(strtoupper($shippingList[$orderInfo->shipping_method]->name) == 'EMS'){
+        		    echo 'Standard Shipping';
+        		  }else{
+        		    echo $shippingList[$orderInfo->shipping_method]->name;
+        		  }
+        		}?>
+        		<dt>Delivery Costs:</dt>
+				<dd><?php echo isset($orderInfo->fees['shipping']->fee_value) ? c($orderInfo->fees['shipping']->fee_value) : ''; ?></dd>
+			</dl>
+        </div>
+
+		<div class="w-order-info">
+		<h2><span>Payment Address</span></h2>
+			<dl>
+				<dt>First Name:</dt>
+        		<dd><?php echo isset($orderInfo->delivery_first_name) ? $orderInfo->delivery_first_name : '--'; ?></dd>
+				<dt>Last Name:</dt>
+				<dd><?php echo isset($orderInfo->delivery_last_name) ? $orderInfo->delivery_last_name : '--'; ?></dd>
+				<dt class="pad-tb-8">Address:</dt>
+        		<dd class="pad-tb-8 dd-w500"><?php echo isset($orderInfo->delivery_address) ? $orderInfo->delivery_address : '--'; ?></dd>
+				<dt>City:</dt>
+				<dd><?php echo isset($orderInfo->delivery_city) ? $orderInfo->delivery_city : ''; ?></dd>
+				
+				<dt>State/Province:</dt>
+        		<dd><?php echo isset($orderInfo->delivery_province) ? $orderInfo->delivery_province : '--'; ?></dd>
+				<dt>Country:</dt>
+				<dd><?php echo isset($orderInfo->delivery_country) ? $orderInfo->delivery_country : '--'; ?></dd>
+
+				<dt>Postal/Zip Code:</dt>
+        		<dd><?php echo isset($orderInfo->delivery_postcode) ? $orderInfo->delivery_postcode : '--'; ?></dd>
+				<dt>Telphone:</dt>
+				<dd><?php echo isset($orderInfo->delivery_phone) ? $orderInfo->delivery_phone : '--'; ?></dd>
+				
+				<dt>Mobile Phone:</dt>
+        		<dd><?php echo isset($orderInfo->delivery_mobile) ? $orderInfo->delivery_mobile : '--'; ?></dd>
+				<dt>Email Address:</dt>
+				<dd><?php echo isset($orderInfo->delivery_email) ? $orderInfo->delivery_email : '--'; ?></dd>
+				
+				<dt>Delivery Time:</dt>
+				<dd><?php echo isset($orderInfo->delivery_time) ? $orderInfo->delivery_time : '--'; ?></dd>
+			</dl>
+        </div>

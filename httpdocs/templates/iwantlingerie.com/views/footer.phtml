@@ -1,0 +1,92 @@
+<div class="footer">
+<div id="customerHelp" class="w-bp">
+  <div><dl><dt>Our Policies</dt><?php 
+          if( isset($helpList['policies']) && $helpList['policies']): 
+          	foreach ($helpList['policies'] as $v):
+          ?><dd><a href="<?php echo url($v->url)?>" rel="nofollow"><?php echo $v->title;?></a></dd><?php 
+          	endforeach;
+          endif;
+          ?></dl>
+	<dl><dt>Shopping Guide</dt><?php 
+          if( isset($helpList['shopping-guide']) && $helpList['shopping-guide']): 
+          	foreach ($helpList['shopping-guide'] as $v):
+          ?>
+		<dd><a href="<?php echo url($v->url)?>" rel="nofollow" <?php if($v->title == "Size Chart") echo 'style="color:#A72D2C; font-weight:bold;"'?>><?php echo $v->title;?></a></dd>
+          <?php 
+          	endforeach;
+          endif;
+          ?></dl>
+	<dl><dt>Payment Method</dt><?php 
+          if( isset($helpList['payment']) && $helpList['payment']): 
+          	foreach ($helpList['payment'] as $v):
+          ?><dd><a href="<?php echo url($v->url)?>" rel="nofollow"><?php echo $v->title;?></a></dd><?php 
+          	endforeach;
+          endif;
+          ?></dl>
+	<dl><dt>About Shipping</dt><?php 
+          if( isset($helpList['shipping']) && $helpList['shipping']): 
+          	foreach ($helpList['shipping'] as $v):
+          ?><dd><a href="<?php echo url($v->url)?>" rel="nofollow"><?php echo $v->title;?></a></dd>
+          <?php 
+          	endforeach;
+          endif;
+          ?></dl>
+	<dl><dt>F. A. Q.</dt><?php 
+          if( isset($helpList['faq']) && $helpList['faq']): 
+          	foreach ($helpList['faq'] as $v):
+          ?>
+		<dd><a href="<?php echo url($v->url)?>" rel="nofollow"><?php echo $v->title;?></a></dd>
+          <?php 
+          	endforeach;
+          endif;
+          ?></dl>
+
+          </div>
+          <p><strong>127 </strong>Categories, <strong>2,235+</strong> Products, Worldwide shipping for sexy lingeries and related products.</p>
+</div>
+<div class="widget w-customeGuide" id="customerGuide">
+	<div class="col" id="productGuide"><p><a target="_top" href="<?php echo url('new-arrivals.html');?>">New Products</a> | <a target="_top" href="<?php echo url('recommended.html');?>">Recommanded Products</a> | <a target="_top" href="<?php echo url('hot-products.html');?>">Hot Products</a></p>
+		<h5>Compare Products and Vote Now!</h5>
+		<div class="hotProducts"><h5>Hot Categories</h5>
+        <p><a target="_top" href="<?php echo url('browse/pvc-latex-leather-lingerie.html')?>">Latex Lingerie</a>,
+          		<a target="_top" href="<?php echo url('browse/long-gowns-robes.html')?>">Sexy Sleepwear</a>, 
+          		<a target="_top" href="<?php echo url('browse/mini-skirt.html')?>">Short Skirts</a>,
+          		<a target="_top" href="<?php echo url('browse/mini-skirt.html')?>">Mini Skirts</a>,
+          		<a target="_top" href="<?php echo url('browse/sexy-bras.html')?>">Sexy Tops</a>,
+          		<a target="_top" href="<?php echo url('browse/sexy-panties.html')?>">Panties</a>,
+          		<a target="_top" href="<?php echo url('browse/sexy-swimwear.html')?>">Sexy Bathing Suits</a>, 
+          		<a target="_top" href="<?php echo url('browse/g-string.html')?>">G-string</a>, 
+          		<a target="_top" href="<?php echo url('sexy-stocking.html')?>">Sexy Stocking</a></p>
+        </div></div>
+	<div class="col" id="newsLetter">
+		<fieldset><h3>Subscribe to our <em>Newsletter</em></h3><p>Get updates, discounts, and special offers from today!</p>
+			<input type="text" class="text" value="Enter Your Email" id="mailAddress"><button id="submitMailAddress" class="textbtnGray">Subscribe</button>
+		</fieldset></div>
+</div>
+<div class="widget w-litbFooter"><div id="partners" class="widget w-partners">
+	<span class="paypal">paypal</span><span class="paypalVerified">paypal verified</span> 	<span class="imgInSide mcafee">mcafee verified</span><span class="delivery">dhl ups  ems</span>		<span class="banks">visa, master card, maestro, carte blue</span> 	<span class="westernUnion">western union</span><span class="verSign">verSign Trusted</span>
+</div></div>
+</div>
+<div id="copyright">
+<p style="font-family:Georgia;font-size:12px;">Perfect Lingerie, Boost Your Energy! Enjoy your online shopping experience for high quality <b>sexy lingerie, mini skirt, corsets and stocking</b> at IWantLingerie.com!</p>
+<p style="font-family:Georgia;font-size:12px;">Customer Service Email: <a href="mailto:mingdatrade@gmail.com" style="color:#8E3E1E;font-weight:bold;">mingdatrade@gmail.com</a>&nbsp; &nbsp; 
+<span class="footer_msn">MSN:</span><a style="color:#8E3E1E;font-weight:bold;" href="http://settings.messenger.live.com/Conversation/IMMe.aspx?invitee=464475a73b207003@apps.messenger.live.com&mkt=en-US&useTheme=true&themeName=pink&foreColor=444444&backColor=FFD5D5&linkColor=444444&borderColor=ED7B7B&buttonForeColor=AA3636&buttonBackColor=FAD6D6&buttonBorderColor=AA3636&buttonDisabledColor=FAD6D6&headerForeColor=444444&headerBackColor=F9A3A3&menuForeColor=E45A5A&menuBackColor=FFFFFF&chatForeColor=444444&chatBackColor=FEF6F6&chatDisabledColor=F6F6F6&chatErrorColor=760502&chatLabelColor=6E6C6C" target="_blank">mingdatrade@gmail.com</a></p>
+<p style="font-family:Georgia;font-size:12px;">Copyright &copy; 2006-2012 <a href="<?php echo url('');?>">I Want Lingerie</a> Ltd. All Rights Reserved. </p>
+</div>
+<!--  Visitor Monitor HTML v4.00 (Website=- None -,Ruleset=My Invite Ruleset,Floating Chat=- None - -->
+<script type="text/javascript">
+  var _bcvma = _bcvma || [];
+  _bcvma.push(["setAccountID", "862550217621906162"]);
+  _bcvma.push(["setParameter", "InvitationDefID", "3475849407985070738"]);
+  _bcvma.push(["pageViewed"]);
+  (function(){
+    var vms = document.createElement("script"); vms.type = "text/javascript"; vms.async = true;
+    vms.src = ('https:'==document.location.protocol?'https://':'http://') + "vmss.boldchat.com/aid/862550217621906162/bc.vms4/vms.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(vms, s);
+  })();
+</script>
+<noscript>
+<a href="http://www.boldchat.com" title="Visitor Monitoring" target="_blank"><img alt="Visitor Monitoring" src="https://vms.boldchat.com/aid/862550217621906162/bc.vmi?" border="0" width="1" height="1" /></a>
+</noscript>
+<div style="display: none; border: 1px solid black; background: white; font-family: Arial; font-size: 8pt; color: black;"><a href="http://www.boldchat.com" style="text-decoration: none; color: black;">Live chat</a> by BoldChat</div>
+<!-- / Visitor Monitor HTML v4.00 -->

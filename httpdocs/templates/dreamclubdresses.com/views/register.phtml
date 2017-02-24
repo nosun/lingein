@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+<?php global $user ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<div class="container">
+<?php $this->render('parts/header.phtml'); ?>
+
+
+<div class="main-content">
+<h1 id="breadcrumb"><a href="<?php echo url("");?>">Home</a>&nbsp;&gt;&nbsp; Register</h1>
+
+<div class="widget fancy">
+<div class="w-head">
+<h2>
+<span>Create an Account</span>
+</h2>
+</div>
+
+
+
+	<div class="user-forms">
+	<?php echo themeMessages() ?>
+	<div id="client_message" style="display:none"></div>
+            <div class="user-register">
+	        <form action="<?php echo url('user/register');?>" method="post" name="regForm" onsubmit="javascript:return checkRegister()">
+                <h1>Personal Information</h1>
+                <div class="user-forms-border">
+		                <div class="register_content user-info">
+		                    <div class="name">
+			                    <label>Username:<em>*</em></label> 
+			                    <input type="text"  name="username"<?php if (isset($_POST['username'])) echo ' value="' . $_POST['username'] . '"' ?> class="elmbBlur"/>
+			                    <div class="smallfont">Less than 12 characters</div>
+		                    </div>
+		                    <div class="email">
+			                    <label>E-mail:<em>*</em></label> 
+			                    <input type="text" name="email"<?php if (isset($_POST['email'])) echo ' value="' . $_POST['email'] . '"' ?> class="elmbBlur"/>
+		                    </div>
+		                </div>
+		        </div>
+                <h1>Login Information</h1>
+		        <div class="user-forms-border">
+		                <div class="register_content password">
+		                    <div class="passwd">
+			                    <label>Password:<em>*</em></label> 
+			                    <input type="password"  name="password"  class="elmbBlur"/>
+		                    </div>
+		                    <div class="cfm-passwd">
+		                    	<label>Confirm Password:<em>*</em></label> 
+		                    	<input type="password"  name="confirm_password"  class="elmbBlur"/>
+		                    </div>
+
+		                </div>
+		        </div>
+		        <div class="button-sets">
+		        <p class="required">* Required Fields</p>
+		        <p class="back-link"><a class="back-link" href="<?php echo url('');?>"><small>« </small>Back</a></p>
+		                    <div class="register-submit">
+		                    	<input type="submit" class="register-submit button" value="create an account" />
+		                    </div>
+		        </div>
+	                </form>
+            	
+        	</div>
+
+    </div>
+    
+</div>
+
+</div>
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/common.js'; ?>" type="text/javascript"></script>
+</body>
+</html>

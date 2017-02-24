@@ -1,0 +1,35 @@
+<?php if(isset($news_list) && $news_list):?>
+<?php if(isset($termInfo) && $termInfo):
+  $filtered_news = array();
+  foreach ($news_list as $v):
+  	if($v->tid == $termInfo->tid):
+  		$filtered_news[] = $v;
+	endif;
+  endforeach;
+  if(count($filtered_news) > 0):?>
+<div class="widget">
+<div class="w-head contrast"><h3>News!</h3></div>
+<div class="grid">
+<ul>
+<?php foreach ($filtered_news as $v2):?>
+	<li><a href="<?php echo url($v2->url);?>" style="font-weight:bold;"><?php echo $v2->title;?></a></li>
+<?php endforeach;?>
+</ul>
+</div>
+<a href="<?php echo url('articletype/news.html');?>" class="more right">More »</a>
+</div>
+<?php endif;?>
+<?php else:?>
+<div class="widget">
+<div class="w-head contrast"><h3>News!</h3></div>
+<div class="grid">
+<ul>
+<?php foreach ($news_list as $v):?>
+	<li><a href="<?php echo url($v->url);?>" style="font-weight:bold;"><?php echo $v->title;?></a></li>
+<?php endforeach;?>
+</ul>
+</div>
+<a href="<?php echo url('articletype/news.html');?>" class="more right">More »</a>
+</div>
+<?php endif;
+endif;?>

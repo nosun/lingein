@@ -1,0 +1,34 @@
+
+<?php if(isset($mostCommentedProducts)&& count($mostCommentedProducts) > 0 ):?>
+<div class="widget review-list"> 
+<div class="w-head">
+	<h2 class="clearfix">Reviews Of Popular Products</h2>
+<?php if(isset($showSeeAllLink) && $showSeeAllLink === true):?>
+	<a href="<?php echo url('review/' . $termInfo->path_alias . '.html');?>" class="more tiny">See All Products Reviews</a>
+<?php endif;?>
+</div>
+<?php foreach ($mostCommentedProducts as $k=>$v):?>
+<div class="review-items">
+<dl>
+	<?php if($v->popularComment):?>
+		<dt>
+		<a href="<?php echo url($v->url);?>" title="<?php echo $v->name?>">
+		<img width="98" height="138" class="allborder" title = "<?php echo $v->name?>" src="<?php echo urlimg('118x178',$v->filepath)?>">
+		</a>
+		</dt>
+		<dd>
+			<h4 class="featureTitle"><span class="star starS<?php echo $v->popularComment->grade?>"><em><?php echo $v->popularComment->grade?> stars of 5</em></span><span style="padding-left:20px;"><?php echo $v->popularComment->subject;?></span></h4>
+			<p class="featureMeta">By <strong><?php echo $v->popularComment->nickname;?><span class="time" style="font-size:x-small; font-weight:normal; font-style:italic;"> , <?php echo date('M d, Y', $v->popularComment->timestamp);?></span></strong></p>
+			<p class="prodMark">	
+				 This review is from: &nbsp;&nbsp;<span class="prod">
+				<?php echo '<a href="'.url('browse/' . $termInfo->path_alias . '.html').'">'.$termInfo->name.'</a> > '?> 
+				<a href="<?php echo url($v->url);?>" title="<?php echo $v->name?>"><?php echo $v->name?></a></span>
+				(<a rel="nofollow" href="<?php echo url($v->url.'#prReviews')?>"> <?php echo $v->comments_count;?></a>)
+			</p>
+			<div class="featuredContent"><div class="contentInfo"><p><?php echo $v->popularComment->comment;?></p></div></div>
+		</dd>
+	<?php endif;?>
+	</dl>
+</div><?php endforeach;?>
+</div>
+<?php endif;?>

@@ -1,0 +1,65 @@
+<?php echo $this->render('before_body.phtml'); ?>
+<body>
+<?php echo $this->render('header.phtml'); ?>
+
+<div class="widget" id="wrapper">
+  <h1 id="breadcrumb"><?php echo themeBreadcrumb() ?></h1>
+  <div id="wrapper-l-184">
+
+    <div class="bg_box_gray margin_t allborder clear big">
+    <h3 class="in_1em line_30px">IWantLingerie.com</h3>
+    	<div class="pad_10px pad_t">
+    
+    	<ul class="red_arrow_list big">	
+    	
+    	<?php 
+    	  if(isset($pageList)):
+    	  foreach($pageList as $k=>$v):
+    	?>
+    	<li><a href="<?php echo isset($v->url) ? $v->url : null;?>" class="b <?php if($pageInfo->title == $v->title) echo 'red'?>">
+    		    <?php echo isset($v->title) ? $v->title : null;?></a>
+    	</li>
+        <?php 
+          endforeach;
+          endif;
+        ?>
+    
+    	</ul>
+    	</div>
+    </div>
+    
+    
+<!-- widget-pro-attention_start -->	
+<div class="w-bp w-proAttention">
+	<a class="more" title="Visit Article Center" href="<?php echo url('articletype/all.html')?>">Visit Article Center &gt;&gt;</a>
+</div>
+<!-- widget-pro-attention_eof -->	
+    
+   </div>
+	
+	<div id="wrapper-r-757">
+	
+		<div class="right_big_con margin_t big">
+<ul class="border_b_d pad_bottom">
+    <h1 class="static_h1"><?php echo isset($pageInfo->title) ? $pageInfo->title : null;?></h1>
+</ul>
+<ul class="pad_1em">
+<!--  here comes the contents -->
+<?php echo isset($pageInfo->content) ? $pageInfo->content : null?>
+</ul>
+                <?php
+                    if(isset($templatefile) && $templatefile){
+                      $this->render($templatefile);
+                    }
+                   ?>
+</div>
+<div>   </div>		
+	</div>
+	
+</div>
+
+
+<?php echo $this->render('footer.phtml'); ?>
+</body>
+<?php echo $this->render('after_body.phtml'); ?>
+</html>

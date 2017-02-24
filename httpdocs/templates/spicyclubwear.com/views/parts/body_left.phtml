@@ -1,0 +1,9 @@
+<div class="body-left">
+	<div id="wrapper-left">
+	<?php $this->render('modules/catlist.phtml');?>
+	<!--<?php /*$this->render('modules/priceindex.phtml');*/?>-->
+	<?php if (isset($isHomeIndex) && $isHomeIndex === true){echo $this->render('modules/hotproducts.phtml');}?>
+	<?php /*$this->render('modules/newslist.phtml');*/?>
+	</div>
+<?php ?>
+</div>

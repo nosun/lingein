@@ -1,0 +1,24 @@
+<div class="widget">
+<div class="w-head">
+<h2>Welcome, <span class="header-uname"><?php echo ($user->nickname == '') ? $user->name : $user->nickname;?>!</span></h2>
+</div>
+<div class="w-content">
+<div class="uc-welcome">
+    <p class="welcome">Welcome to our member center! We will be happy to Serve you!</p>
+    <p class="last_login">Your last login time:<?php echo date('m-d-Y',$user->login_timestamp);?></p>
+</div>
+<div class="widget inner">
+<div class="w-head">
+<h2>User Information</h2>
+</div>
+
+<div class="uc-wrapper">
+    <div class="statistics">
+        <p>Your Integral: <?php if(isset($user->points)) echo $user->points;?></p>
+        <p>Your total orders' transactions: <?php if(isset($orderscount)) echo $orderscount?> </p>
+        <p>View your <a href="<?php echo url('order/list/')?>"><strong>order history</strong></a></p>
+    </div>
+</div>
+</div>
+</div>
+</div>

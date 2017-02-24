@@ -1,0 +1,8 @@
+<?php $product->price = isset($product->price)?$product->price:$product->sell_price;?>
+
+<div class="price" id="salePrice">
+	<span style="color: #f33b7e;"><?php echo isset($product->price) ? c($product->price):null;?></span>
+	<span class="listPrice"><del><?php echo isset($product->list_price) ? c($product->list_price) : null;?></span>
+	<span class="savingPrice">SAVE:<?php if (isset($product->price) && isset($product->list_price)) echo c($product->list_price - $product->price);?></span>
+</div>
+<div class="clears"></div>

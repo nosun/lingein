@@ -1,0 +1,17 @@
+<div class="sort-by filter"><label class="sort-label">Sort: </label> 
+<?php if(!isset($orderby) || $orderby == 'pid DESC' || $orderby == '' || $orderby == 'updated DESC'):?>
+	<span>Default</span> | 
+<?php else:?>
+    <a rel="nofollow" onclick="" href="javascript:filter_option('orderby', 'pid DESC')">Default</a> | 
+<?php endif;?>
+<?php if(isset($orderby) && $orderby == 'sell_price ASC'):?>
+    <span>Low Price</span> | 
+<?php else:?>
+    <a rel="nofollow" onclick="" href="javascript:filter_option('orderby', 'sell_price ASC')">Low Price</a> | 
+<?php endif;?>
+    <?php if(isset($orderby) && $orderby == 'sell_price DESC'):?>
+    <span>High Price</span>
+<?php else:?>
+    <a rel="nofollow" onclick="" href="javascript:filter_option('orderby', 'sell_price DESC')">High Price</a>
+<?php endif;?>
+</div>

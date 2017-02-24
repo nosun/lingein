@@ -1,0 +1,44 @@
+<?php echo $this->render('before_body.phtml'); ?>
+<body>
+<?php echo $this->render('header.phtml'); ?>
+<?php global $user;?>
+<div class="bodyer">
+  <!--  <div class="framework_top"></div> -->
+  <div class="framework">
+
+        <div class="width210 left">
+            <div class="shopping_top"><h1>Member Center</h1> Hello! <span><?php echo plain($user->nickname !== '' ? $user->nickname : $user->name) ?></span></div>
+            <div class="side_navigation">
+                <h2>My Account</h2>
+                    <ul>
+                        <li><a href="<?php echo url('order/list/first');?>">My Orders</a></li>
+                    </ul>
+                <h2>Account settings</h2>
+                    <ul>
+                        <li><a href="<?php echo url('user/panel');?>">Member Home</a></li>
+                        <li><a href="<?php echo url('user/info');?>">Personal Information</a></li>
+                        <li><a href="<?php echo url('user/pwd');?>">Change Password</a></li>
+                        <li><a href="<?php echo url('user/logout');?>">Exit</a></li>
+                    </ul>
+            </div>
+            <div class="side_navigation_bottom"></div>
+        </div>
+
+        <div class="right w-userPanel">
+<?php
+         $this->render($templatefile);
+      ?>
+
+
+        </div>
+
+    </div>
+  <!--  <div class="framework_bottom"></div> -->
+</div>
+
+<?php echo $this->render('footer.phtml'); ?>
+</body>
+<script src="<?php echo $tpldir;?>/javascripts/navigation.js" type="text/javascript"></script>
+<script src="<?php echo $tpldir;?>/javascripts/common.js" type="text/javascript"></script>
+<?php echo $this->render('after_body.phtml'); ?>
+</html>

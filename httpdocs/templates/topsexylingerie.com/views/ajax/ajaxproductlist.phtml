@@ -1,0 +1,17 @@
+<div class="w-head cat-filters"> 
+<div class="pysort">
+<?php $this->render('contents/c_filter_form.phtml');?>
+<?php $this->render('modules/pagination.phtml');?>
+<div class="w-resultSortBar" id="resultSortBar">
+	<?php $this->render('contents/c_viewoptions.phtml')?>
+	<?php $this->render('contents/c_sortoptions.phtml')?>
+</div>
+</div>
+</div>
+
+<div class="widget">
+<?php $this->render('contents/c_productlist.phtml');?>
+</div>
+<br class="clears"/>
+	<?php $this->render('modules/pagination.phtml');?>
+</div>

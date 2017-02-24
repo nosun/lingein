@@ -1,0 +1,13 @@
+<div id="product-abstract">
+<h1 id="prHead"><?php echo $product->name;?>
+	<span id="pRate">
+	<?php if(isset($product->pid) && $product->pid):
+        echo widgetCallFunction('fivestars', 'getaveragestars', $product->pid, true);
+    endif;?>
+    <!--  <a class="textbtnGray" href="#write-a-review" style="margin-bottom:5px;">Write a review</a>-->
+    </span></h1>
+<?php $this->render('contents/p_orderprice.phtml')?>
+<?php $this->render('contents/p_fields.phtml')?>
+<?php $this->render('contents/p_social.phtml')?>
+<?php $this->render('contents/p_parameters.phtml')?>
+</div>

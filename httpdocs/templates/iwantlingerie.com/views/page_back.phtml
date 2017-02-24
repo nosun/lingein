@@ -1,0 +1,50 @@
+<?php echo $this->render('before_body.phtml'); ?>
+<body>
+<?php echo $this->render('header.phtml'); ?>
+<div class="bodyer">
+  <div class="body_left">
+      <div class="general_top"></div>
+        <div class="general">
+
+            <div class="Title_head_five"><?php echo isset($pageInfo->title) ? $pageInfo->title : null;?></div>
+            <div class="news_view">
+                <div class="clear">
+                    <?php echo isset($pageInfo->content) ? $pageInfo->content : null?>
+                </div>
+                <?php
+                    if(isset($templatefile) && $templatefile){
+                      $this->render($templatefile);
+                    }
+                   ?>
+            </div>
+        </div>
+        <div class="general_bottom"></div>
+    </div>
+  <div class="body_right">
+        <?php echo $this->render('body_left.phtml'); ?>
+        <div class="head_d"></div>
+        <div class="clear margin"><script src="http://fashion-tribe.com/script/getadimg/newsadv/"></script></div>
+        <div class="Title_head_there margin">Shop by Price</div>
+        <?php echo $this->render('priceindex.phtml'); ?>
+        <div class="Shop_d"></div>
+        <div class="Title_head_there margin">Shop by Color</div>
+        <?php echo $this->render('colorindex.phtml'); ?>
+        <div class="Shop_d"></div>
+        <div class="clear margin"><a href="#"><img width="200" height="200" alt="" src="<?php echo $tpldir ?>/images/advertising_3.gif" /></a></div>
+        <ul class="The_bank">
+            <li><a href="#"><img width="51" height="32" alt="" src="<?php echo $tpldir ?>/images/tu_1.gif"></a></li>
+            <li><a href="#"><img width="51" height="32" alt="" src="<?php echo $tpldir ?>/images/tu_2.gif"></a></li>
+            <li><a href="#"><img width="51" height="32" alt="" src="<?php echo $tpldir ?>/images/tu_3.gif"></a></li>
+            <li><a href="#"><img width="51" height="32" alt="" src="<?php echo $tpldir ?>/images/tu_4.gif"></a></li>
+            <li><a href="#"><img width="51" height="32" alt="" src="<?php echo $tpldir ?>/images/tu_5.gif"></a></li>
+            <li><a href="#"><img width="51" height="32" alt="" src="<?php echo $tpldir ?>/images/tu_6.gif"></a></li>
+            <li><a href="#"><img width="51" height="32" alt="" src="<?php echo $tpldir ?>/images/tu_7.gif"></a></li>
+            <li><a href="#"><img width="51" height="32" alt="" src="<?php echo $tpldir ?>/images/tu_8.gif"></a></li>
+            <li><a href="#"><img width="51" height="32" alt="" src="<?php echo $tpldir ?>/images/tu_9.gif"></a></li>
+        </ul>
+    </div>
+</div>
+<?php echo $this->render('footer.phtml'); ?>
+</body>
+<?php echo $this->render('after_body.phtml'); ?>
+</html>

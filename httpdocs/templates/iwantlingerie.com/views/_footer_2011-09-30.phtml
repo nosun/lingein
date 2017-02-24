@@ -1,0 +1,77 @@
+<div class="footer">
+
+  <div class="foo_text">
+      <ul class="keyword">
+          <li><span>About us</span></li>
+<?php 
+if( isset($helpList['about']) && $helpList['about']): 
+	foreach ($helpList['about'] as $v):
+?>
+          <li><a href="<?php echo url($v->url)?>"><?php echo $v->title;?></a></li>
+<?php 
+	endforeach;
+endif;
+?>
+        </ul>
+        <ul class="keyword">
+          <li><span>Payment </span></li>
+<?php 
+if( isset($helpList['payment']) && $helpList['payment']): 
+	foreach ($helpList['payment'] as $v):
+?>
+          <li><a href="<?php echo url($v->url)?>"><?php echo $v->title;?></a></li>
+<?php 
+	endforeach;
+endif;
+?>
+        </ul>
+        <ul class="keyword">
+          <li><span>Shipping</span></li>
+<?php 
+if( isset($helpList['shipping']) && $helpList['shipping']): 
+	foreach ($helpList['shipping'] as $v):
+?>
+          <li><a href="<?php echo url($v->url)?>"><?php echo $v->title;?></a></li>
+<?php 
+	endforeach;
+endif;
+?>
+        </ul>
+        <ul class="keyword">
+          <li><span>FAQs</span></li>
+<?php 
+if( isset($helpList['faq']) && $helpList['faq']): 
+	foreach ($helpList['faq'] as $v):
+?>
+          <li><a href="<?php echo url($v->url)?>"><?php echo $v->title;?></a></li>
+<?php 
+	endforeach;
+endif;
+?>
+        </ul>
+        <div class="Newsletter">
+          <p><span>Newsletter</span></p>
+            <p class="foo_search"><input type="text" class="text" value="Enter Your Email" id="mailAddress"> <input type="button" class="blbuttom" value="" id="submitMailAddress" ></p>
+            <p class="text_t">Subscribe to our newsletter to
+receiveour special email offers
+and more.</p>
+        </div>
+
+
+    </div>
+
+    <div class="foo_nav">
+        <p class="nav"><a href="<?php echo url('');?>">Home</a>  |  <a href="<?php echo url('articletype/about.html');?>">About Us</a>  |  <a href="<?php echo url('articletype/shipping.html');?>">Shipping</a>  |  <a href="<?php echo url('articletype/payment.html');?>">Payment</a>  |  <a href="<?php echo url('articletype/faq.html');?>">FAQ</a>  |  <a href="<?php echo url('help.html');?>">Help</a>  |  <a href="<?php echo url('article/contact-us.html');?>">Contact Us</a></p>
+        <p class="Alphabetical">
+
+         Alphabetical Index:  | # |<?php
+              if (is_array($seoLinks) && count($seoLinks) >0) :
+                foreach ($seoLinks as $index => $link) :
+              ?>
+              <a href="<?php echo url($link);?>" style="display:inline;"><?php echo $index;?></a>
+              <?php endforeach;
+              endif; ?></p>
+        
+    </div>
+
+</div>

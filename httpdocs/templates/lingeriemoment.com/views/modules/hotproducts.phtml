@@ -1,0 +1,14 @@
+<?php if(isset($index_hotProductList) && $index_hotProductList):?>
+<div class="widget" id="hotsNow" >
+<div>
+<?php foreach ($index_hotProductList as $v):?>
+<div id="bestSellerBlock">
+	<a href="<?php echo url($v->url);?>">
+		<img src="<?php echo urlimg('140x181', $v->filepath);?>" title='<?php echo $v->name;?>' alt='<?php echo $v->name;?>'>
+	</a>
+</div>
+	<?php endforeach;?>
+</div>
+<a href="<?php echo url('hot-products.html');?>" class="more right">More »</a>
+</div>
+<?php endif;?>

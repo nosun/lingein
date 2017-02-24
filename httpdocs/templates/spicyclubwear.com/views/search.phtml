@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body><div style="width:100%;height:100%;background:#000000">
+<?php global $user ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<div class="container">
+<?php $this->render('parts/header.phtml'); ?>
+<div class="main-content">
+<?php $this->render('parts/breadcrumb.phtml')?>
+
+<?php $this->render('modules/ads_topslot.phtml')?>
+<div class="general cat">
+
+<?php $this->render('contents/search_intro.phtml');?>
+
+<div class="main-block">
+<div id="productlist" class="widget">
+<div class="w-head cat-filters"> 
+	<?php $this->render('modules/pagination.phtml');?>
+<?php $this->render('contents/search_filter_form.phtml');?>
+<div class="w-resultSortBar" id="resultSortBar">
+	<?php $this->render('contents/c_sortoptions.phtml')?>
+	<?php $this->render('contents/search_viewoptions.phtml')?>
+</div>
+</div>
+<?php $this->render('contents/c_productlist.phtml');?>
+
+<br class="clear"/>
+<div class="w-resultSortBar" id="resultSortBar" style="padding-top:10px;margin-top:10px;">
+	<?php $this->render('contents/c_sortoptions.phtml');?>
+	<?php $this->render('modules/pagination.phtml');?>
+</div>
+</div>
+
+<!-- extral intro for this category -->
+<?php if(isset($docvar3)):?>
+<div class="advanced_intro"><?php echo $docvar3;?></div>
+<!-- end of extral intro -->
+<?php endif;?>
+<?php echo $this->render('contents/c_comments.phtml');?>
+</div>
+
+<?php $this->render('parts/body_left.phtml'); ?>
+
+</div>
+<div class="general_bottom"></div>
+</div>
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+</div>
+</body>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+</html>

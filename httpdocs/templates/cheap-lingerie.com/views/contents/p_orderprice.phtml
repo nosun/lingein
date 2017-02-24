@@ -1,0 +1,16 @@
+<?php $product->price = isset($product->price)?$product->price:$product->sell_price;?>
+<table class="prices">
+	<tbody>
+	<tr class="listPrice"><th width="14%">List Price:</th>
+		<td width="2%"></td>
+		<td width="84%"><del><?php echo isset($product->list_price) ? c($product->list_price) : null;?></del></td>
+	</tr>
+	<tr class="savingPrice"><th>SAVE:</th>
+			<td>&nbsp;</td>
+			<td><?php if (isset($product->price) && isset($product->list_price))
+					    echo c($product->list_price - $product->price);?>
+			</td>
+	</tr>
+	</tbody>
+</table>
+<div class="price" id="salePrice"><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?>: <span style="padding-left:20px;"><?php echo isset($product->price) ? c($product->price):null;?></span></div>

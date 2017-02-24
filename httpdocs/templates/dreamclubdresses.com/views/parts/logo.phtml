@@ -1,0 +1,15 @@
+<div id="header">
+      <div class="logo"><a href="<?php echo url('');?>"></a></div>
+      
+
+      <div class="header-links">
+      <div class="search">
+      <form action="<?php echo url('pitems');?>" method="post">
+           <input name="keyword" id="search_keyword" type="text" class="text" value="<?php echo isset($search_keywords) ? plain($search_keywords) : 'sexy lingerie';?>" onfocus="if(this.value=='What would you like to save on today'){this.value='';}"  onblur="if(this.value==''){this.value='sexy lingerie';}" />
+           <a id="header_search_keyword" href="javascript:void(0)"><button type="submit" class="button">GO</button></a>
+      </form>
+     </div>
+     <?php $this->render('parts/navigation.phtml')?>
+     </div>
+
+</div>

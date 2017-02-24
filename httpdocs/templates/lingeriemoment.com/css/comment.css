@@ -1,0 +1,130 @@
+/*CSS FOR COMMENTS*/
+.star {background-image:url(../images/widget_fivestars/star_inone.png);background-repeat: no-repeat;}
+.star {display: inline-block;overflow: hidden;position: relative;vertical-align: middle;}
+.star em {left: -99999px;position: absolute;}
+.starS1, .starS2, .starS3, .starS4, .starS5, .starS0 {height: 15px;width: 70px;}
+.starS5 {background-position: 0 -36px;}
+.starS4 {background-position: -14px -36px;}
+.starS3 {background-position: -28px -36px;}
+.starS2 {background-position: -42px -36px;}
+.starS1 {background-position: -56px -36px;}
+.starS0 {background-position: -70px -36px;}
+.starB1, .starB2, .starB3, .starB4, .starB5, .starB0 {height: 18px;width: 100px;}
+.starB5 {background-position: 0 -18px;}
+.starB4 {background-position: -20px -18px;}
+.starB3 {background-position: -40px -18px;}
+.starB2 {background-position: -60px -18px;}
+.starB1 {background-position: -80px -18px;}
+.starB0 {background-position: -100px -18px;}
+.starH1, .starH2, .starH3, .starH4, .starH5 {height: 18px;width: 100px;}
+.starH5 {background-position: 0 0;}
+.starH4 {background-position: -20px 0;}
+.starH3 {background-position: -40px 0;}
+.starH2 {background-position: -60px 0;}
+.starH1 {background-position: -80px 0;}
+.w-prOrderInfo {padding: 0 10px;}
+
+/*Start CSS for Review*/
+h2.clearfix{margin: 20px 13px 0 0;letter-spacing: 2.5px;font-family: Georgia, 'Times New Roman', Times, Serif;font-size:17px;font-weight:normal}
+.w-prReviews {color: #522c1b;font: 12px Georgia, 'Times New Roman', Times, Serif;float:left;width:100%}
+.w-prReviews .prRevewsActsV2 {color: #999999;padding-bottom: 10px;padding-left: 10px;margin: 10px 10px 20px 10px;overflow: hidden;border-bottom: 1px solid #f1f1f1;}
+.w-prReviews .ratingCount {float: left;width: 111px;}
+.w-prReviews .prRatingV2 {float: left;font-size: 25px;margin: 30px 0 20px 0;padding-left: 10px;font-family: Georgia, 'Times New Roman', Times, Serif; font-weight:normal; color:#7E7F81;}
+.w-prReviews .prRatingV2 .score {font-size: 16px;margin: 0 5px;vertical-align: middle;}
+.w-prReviews .prRating .reviewNums, .w-prReviews .prRevewsActsV2 .reviewNums {color: #999999;font-size: 11px;}
+.w-prReviews .fancyHeadingS {border-bottom: medium none;color: #990000;font-size: 16px;}
+.w-prReviews p {margin: 5px 0;}
+.w-prReviews .reviewInfo {margin: 10px 0;overflow: hidden;width: 100%;}
+.w-prReviews .reviewInfo p{padding:0 0 10px 0;margin:0;font-size:14px line-height:1.5;font: 12px/1.55 Georgia, 'Times New Roman', Times, Serif;color:#7E7F81;}
+.w-prReviews .prRating {background-color: #F8F8F8;font-size: 14px;height: 24px;line-height: 24px;margin-bottom: 30px;margin-top: 0;padding: 10px;position: relative;}
+.w-prReviews .w-review {border-bottom: 1px solid #DDDDDD;margin-bottom: 20px;padding-bottom: 20px;position: relative;overflow:hidden;}
+.w-prReviews .w-reviews {padding: 0 10px;}
+.w-prReviews .w-review {border-bottom: 1px solid #DDDDDD;margin-bottom: 20px;padding-bottom: 20px;position: relative;}
+.w-review .reviewTitle{text-transform:capitalize;border-bottom: 1px dashed #E2CDC8;font-size: 16px!important;font-weight:bold;font-size:10px;font-family: Georgia, 'Times New Roman', Times, Serif;text-align:left;}
+.w-review .reviewerInfo {left: 0;position: absolute;top: 0;width: 111px;}
+.w-review .reviewerInfo a img {border: 1px solid #FFFFFF;}
+.w-review .reviewerInfo a:hover img {border: 1px solid #DDDDDD;}
+.w-review .reviewerInfo li {margin-bottom: 4px;overflow-x: hidden;width: 112px;}
+.w-review .reviewDetails, .w-review .w-reviewReplys, .w-review .writeReply {margin-left: 121px;width:70%}
+.w-review .reviewDetails .generalReview {font-size: 12px;}
+.w-review .reviewDetails .generalReview span a {padding: 0 5px;}
+.w-prReviews .commentAction {height: 25px;line-height: 25px;position: relative;color: #999999;font-size: 12px;text-align:left;}
+.w-prReviews .commentAction a{color:#999999;}
+.w-prReviews .commentAction .Dlink {padding: 1px 0 1px 18px;}
+.w-review .commentsCount{background:url("../images/comments-related.png") no-repeat scroll -2px -44px transparent;margin-right:5px;}
+.Dlink{padding-left: 20px;background:url("../images/favicon.ico") no-repeat scroll 0 0 transparent;}
+.useful{background-position:-2px -1072px;}
+.usefulDown{background-position:-2px -1296px;}
+.w-prReviews .commentAction .fbComment {height: 15px;line-height: 15px;position: absolute;right: 0;top: 5px;}
+a.fbComment{background-position:-2px -1184px;}
+.w-review .w-reviewReplys {display: none;padding-top: 5px;position: relative;}
+.w-review .w-reviewReplys .arrow {background: url("../images/comments-related.png") no-repeat scroll -2px -336px transparent;height: 11px;left: 30px;position: absolute;top: 1px;width: 18px;z-index: 1;}
+.w-review .reviewReply {background-color: #F8F8F8;border: 1px solid #DDDDDD;margin-top: 6px;padding: 8px;position: relative;color:#7E7F81;}
+.w-review .reviewReply p {margin: 0 5px;font: 11px/1.55 Georgia, 'Times New Roman', Times, Serif;}
+.w-review .reviewReply p.writer {margin: 5px;}
+.lightGray {color:#000;}
+.w-review .reviewReply .replier {font-weight: bold;}
+.w-review .writeReply {display: none;}
+.w-review .writeReply .textareaHolder {border: 1px solid #DDDDDD;margin: 6px 0;padding: 3px;}
+.textareaHolder textarea.default {color: #999999;}
+.textareaHolder textarea {border: medium none;width: 97%;}
+
+address, caption, cite, code, dfn, abbr, var {font-style: normal;font-weight: normal;font: 11px/1.55 Georgia, 'Times New Roman', Times, Serif;}
+
+.errors, .errorInfo{color: #A72D2C;margin: 0;}
+/*End CSS for Review*/
+
+/*Write a Review for this product css*/
+.write-review-prod .redTitle {margin: 20px 13px 0 0;border-bottom: 1px solid #e1e1e1;font-size:17px;color: #58585a;letter-spacing: 2.5px;font-family: Georgia, 'Times New Roman', Times, Serif;text-transform: uppercase;font-weight: bold;}
+
+.write-review-prod form {margin-left: 10px;}
+
+.write-review-prod .errorInfo {color: #A72D2C;margin: 0;}
+.write-review-prod h4 {color: #000000;margin-top: 10px;font-weight:bold;}
+.write-review-prod .star {}
+
+.write-review-prod h4 {color: #000000;margin:10px 20px 0 0;}
+.write-review-prod .right{float:left;}
+.write-review-prod .wirte-review-text {height: 30px;line-height: 30px;}
+.write-review-prod .wirte-review-text, .write-review-prod .wirte-review-content {border-color: #DDDDDD;border-style: solid;border-width: 2px 1px 1px;font-size: 12px;padding: 1px 5px;width:530px;}
+.write-review-prod .wirte-review-content {height: 210px;max-height:210px;}
+.wirte-review-text:hover{border-color: #DDDDDD!important;border-style: solid!important;border-width: 2px 1px 1px!important;}
+
+/*End of Write a Review*/
+#cancelWriteReview{float:left;margin:0 10px 10px 10px;}
+div.write-review{float: right;margin:40px 40px 30px;padding: 0;}
+div.write-review a.button{color:#FFF!important;}
+a#cancelWriteReview{color:#FFF;}
+
+/*END CSS FOR COMMENTS*/
+
+
+/*COMMENTS STYLE FOR CATEGORY*/
+/*for category featured contents*/
+.review-list{padding-top:10px;text-align:left;margin-right:10px;}
+.review-list p{padding:0; margin:0; line-height:1.4;}
+.review-list .w-head{padding:0;}
+.review-list .w-head h2{font-size: 17px!important;letter-spacing: 2.5px;font-family: Georgia, 'Times New Roman', Times, Serif;text-transform: uppercase;border-bottom: 1px solid #bbbbbb;color: #58585a!important;background:none!important;
+padding:0!important;}
+.review-list h2 span{color: #AE2F29;font-size: 14px;font-weight: bold;}
+.review-list h2 a.allContents{font-size:11px;font-weight:normal;font-style:italic;float:right;}
+.review-list{font-family:verdana,arial,helvetica,sans-serif;}
+.review-list .prodName{font-weight:bold;}
+.review-list h2 span{color: #AE2F29;font-size: 14px;font-weight: bold;}
+.review-list dl{border-bottom: 1px dotted #DDDDDD;/*font-family: verdana,arial,helvetica,sans-serif;*/padding: 10px 0;position: relative;width: 100%;margin:0;overflow:hidden;}
+.review-list dl:hover{background-color: #FFE8E0;}
+.review-list dl dt{display: inline;float: left;margin:0   16px;}
+.review-list dl dd{padding-right: 16px;padding-left: 128px;}
+.review-list dl dd h4{font-size:13px;}
+.review-list dl dd p.prodMark{padding: 5px 0;font-weight:bold;}
+.review-list dl dd .featuredContent{background: url("../images/quote-left.png") no-repeat scroll left top transparent;padding: 3px 0 0 0px;}
+.review-list dl dd .featuredContent .contentInfo{background: url("../images/quote-right.png") no-repeat scroll right bottom transparent;color: #333333;line-height: 16px;margin-bottom: 6px;padding-right: 32px;min-height:30px;font: 11px/1.55 Georgia, 'Times New Roman', Times, Serif;}
+.review-list dl dd .featuredContent .contentInfo p{margin: 0;padding: 0;line-height: 1.5;}
+.review-list dl dd .featureMeta{color: #999999;padding:5px 10px 5px 0;}
+.review-list dl dd .featureMeta strong{color: #333333;font-weight: bold;}
+.review-list h4.featureTitle{font-size: 14px;font-weight: bold;font-family: Georgia, 'Times New Roman', Times, Serif;}
+.review-list p.prodMark {padding-bottom: 5px;color: #cc0000;font-size: x-small;}
+.review-list p.prodMark a{font-weight:normal;border-top: 1px dotted #bbbbbb;border-bottom: 1px dotted #bbbbbb;font: 11px/1.55 Georgia, 'Times New Roman', Times, Serif;}
+.review-list p.prodMark a:hover{color:#000;}
+th{font-weight:normal}
+/*END OF COMMENTS STYLE FOR CATEGORY*/

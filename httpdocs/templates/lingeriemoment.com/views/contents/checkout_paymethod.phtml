@@ -1,0 +1,33 @@
+<fieldset class="widget inner" id="choosePymt">
+	<div class="w-head">
+		<h2>
+			<span>Payment Method</span>
+		</h2>
+	</div>
+	<div class="main-section">
+	<div style="float:left;margin-right:10px;">
+		<select name ="payment_method" class="usebox paymentmethod" onchange="changePayment(this.value)">
+        <?php foreach ($paymentList as $paymentMethod => $paymentInfo):
+			  if($paymentInfo->status == true && $paymentInfo->visible == true):?>
+			<option value="<?php echo $paymentMethod;?>"><?php echo $paymentInfo->name;?></option>
+		<?php endif;endforeach;?>
+		</select>
+	</div>
+	
+	<div class="payment_description">
+        <?php 
+        $payment_count = 0;
+        foreach ($paymentList as $paymentMethod => $paymentInfo):
+			  if($paymentInfo->status == true && $paymentInfo->visible == true):
+			  $payment_count++;?>
+			  <div class="payment_disc_detail <?php echo strtolower(str_replace(' ', '', $paymentInfo->name));?>"
+			  style="<?php echo ($payment_count == 1)? 'display:block':'display:none';?>">
+			  <?php echo $paymentInfo->description;?>
+			  </div>
+			  
+          <?php endif;
+          		endforeach;?>
+	</div>
+	
+	</div>
+</fieldset>

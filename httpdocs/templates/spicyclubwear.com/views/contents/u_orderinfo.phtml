@@ -1,0 +1,190 @@
+<div class="widget">
+<div class="w-head">
+<h2>Order Information</h2>
+</div>
+
+<div class="w-content">
+<div class="widget inner">
+<div class="w-head">
+<h2>Order Summary</h2>
+</div>
+	<table style="width:99%;">
+	<tr>
+		<th>Order No:</th>
+    	<td><?php echo $orderInfo->number;?></td>
+
+		<th>Order Status:</th>
+		<td><?php
+  if($orderInfo->status==0): echo 'Pending';
+  elseif($orderInfo->status==1): echo 'Processing';
+  elseif($orderInfo->status==2): echo 'Shipped';
+  elseif($orderInfo->status==-1): echo 'Cancelled';
+  elseif($orderInfo->status==-2): echo 'Deleted';
+  endif;
+?></td>
+	</tr>
+	<tr>
+		<th>Payment Status:</th>
+		<td><?php
+  if($orderInfo->status_payment==0):
+     echo 'Not Paid';
+  elseif($orderInfo->status_payment==1):
+     echo 'Paid';
+  endif;
+?></td>
+		<th>Create at :</th>
+		<td><?php echo date('Y-m-d H:i:s',$orderInfo->created);?></td>
+	</tr>
+	<tr>
+		<th>Payable total:</th>
+		<td class="emphasis"><?php echo c($orderInfo->pay_amount);?></td>
+		<th>Delivery Number:</th>
+		<td><?php echo isset($orderInfo->data['shipping_no']) ? plain($orderInfo->data['shipping_no']) : 'non-delivery'; ?></td>
+	</tr>
+	
+	</table>
+</div>
+
+<div class="widget inner">
+<div class="w-head">
+<h2>Order Detail</h2>
+</div>
+
+	<table cellspacing="2" cellpadding="0" class="u-order-tbl">
+		<thead>
+		<tr>
+		<th>Image</th>
+		<th>Item Description</th>
+		<th>Quantity</th>
+		<th>Unit Price</th>
+		<th>Sub Total</th>
+		</tr>
+		</thead>
+		<tbody>
+<?php if (isset($orderInfo->items)):
+  foreach ($orderInfo->items as $k => $v):?>
+		<tr>
+		<td><a href="<?php echo url($v->url);?>"><img height="100" src="<?php echo urlimg('118x178', $v->filepath) ?>" alt="" /></a></td>
+		<td><a href="<?php echo url($v->url);?>"><?php echo isset($v->name) ? $v->name : null ?></a>
+          <?php if(isset($v->data) && count($v->data)>0 && is_array($v->data)):
+                foreach($v->data as $dk => $dv):
+                echo '<p><strong>'. $dk. ':</strong> &nbsp;&nbsp;<span>' . $dv . '</p>';
+               endforeach;
+         else:
+                    echo null;
+                 endif;
+          ?></td>
+        <td align="center"><span><?php echo isset($v->qty) ? $v->qty : null ?></span></td>
+		<td align="center"><span class="emphasis"><?php echo isset($v->pay_price) ? c($v->pay_price) : null; ?></span></td>
+		<td align="center"><span class="emphasis"><?php echo isset($v->pay_price) ? c($v->qty * $v->pay_price) : null; ?></span></td>
+		</tr>
+<?php endforeach;endif;?>
+
+        </tbody>
+        <tfoot>
+        
+        <tr>
+        <td colspan="3"></td>
+        <th>Subtotal:</th>
+		<td class="sumval"><?php echo c($orderInfo->total_amount);?></td></tr>
+<?php if (isset($orderInfo)):
+      	if (isset($orderInfo->fees)) :?>
+           
+<?php foreach ($orderInfo->fees as $fee) :
+		if ($fee->fee_value) :?>
+		<tr>
+		<td colspan="3"></td><th><?php echo $fee->fee_key?></th>
+        <td class="sumval"><?php echo c($fee->fee_value) ?></td>
+        </tr>
+<?php endif;endforeach;
+      	endif;
+      endif ?>
+      <tr><td colspan="3"></td><th>Total Payment:</th><td class="sumval"><?php if (isset($orderInfo->pay_amount)) echo c($orderInfo->pay_amount) ?></td></tr>
+		</tfoot>
+	</table>
+</div>
+
+<div class="widget inner">
+<div class="w-head">
+<h2>Payment Information</h2>
+</div>
+<table style="width:99%;">
+<tbody>
+	<tr>
+		<th>Payment method:</th>
+        <td><?php echo isset($paymentList[$orderInfo->payment_method]->name) ? $paymentList[$orderInfo->payment_method]->name : null?></td>
+		<th>Payment Status:</th>
+		<td><?php if($orderInfo->status_payment==0):echo 'Not Paid';elseif($orderInfo->status_payment==1):echo 'Paid';endif;?></td>
+		<td><?php if($orderInfo->status_payment==0):?><?php echo $submitform; endif;?></td>
+	</tr>
+</tbody>
+</table>
+</div>
+
+<div class="widget inner">
+<div class="w-head">
+<h2>Shipping Information</h2>
+</div>
+<table style="width:99%;"><tbody>
+<tr>
+				<th>Delivery Method:</th>
+        		<td><?php if (isset($shippingList[$orderInfo->shipping_method]->name)):
+	        		  if(strtoupper($shippingList[$orderInfo->shipping_method]->name) == 'UPS'):
+	        		    echo 'Expedited Shipping';
+	        		  elseif(strtoupper($shippingList[$orderInfo->shipping_method]->name) == 'EMS'):
+	        		    echo 'Standard Shipping';
+	        		  else:
+	        		    echo $shippingList[$orderInfo->shipping_method]->name;
+	        		  endif;
+        		  endif;?></td>
+        		<th>Delivery Costs:</th>
+				<td><?php echo isset($orderInfo->fees['shipping']->fee_value) ? c($orderInfo->fees['shipping']->fee_value) : ''; ?></td>
+</tr>
+</tbody></table>
+        </div>
+
+<div class="widget inner">
+<div class="w-head">
+<h2>Shipping Address</h2>
+</div>
+<table style="width:99%;"><tbody>
+<tr>
+	<th>First Name:</th>
+    <td><?php echo isset($orderInfo->delivery_first_name) ? $orderInfo->delivery_first_name : '--'; ?></td>
+	<th>Last Name:</th>
+	<td><?php echo isset($orderInfo->delivery_last_name) ? $orderInfo->delivery_last_name : '--'; ?></td>
+</tr>
+<tr>
+	<th class="pad-tb-8">Address:</th>
+        <td colspan="3"><?php echo isset($orderInfo->delivery_address) ? $orderInfo->delivery_address : '--'; ?></td>
+
+</tr>
+<tr>
+	<th>City:</th>
+	<td><?php echo isset($orderInfo->delivery_city) ? $orderInfo->delivery_city : ''; ?></td>
+	<th>State/Province:</th>
+    <td><?php echo isset($orderInfo->delivery_province) ? $orderInfo->delivery_province : '--'; ?></td>
+</tr>
+<tr>
+	<th>Country:</th>
+	<td><?php echo isset($orderInfo->delivery_country) ? $orderInfo->delivery_country : '--'; ?></td>
+	<th>Postal/Zip Code:</th>
+    <td><?php echo isset($orderInfo->delivery_postcode) ? $orderInfo->delivery_postcode : '--'; ?></td>
+</tr>
+<tr>
+	<th>Telphone:</th>
+	<td><?php echo isset($orderInfo->delivery_phone) ? $orderInfo->delivery_phone : '--'; ?></td>
+	<th>Mobile Phone:</th>
+    <td><?php echo isset($orderInfo->delivery_mobile) ? $orderInfo->delivery_mobile : '--'; ?></td>
+
+</tr>
+<tr>
+	<th>Email Address:</th>
+	<td><?php echo isset($orderInfo->delivery_email) ? $orderInfo->delivery_email : '--'; ?></td>
+	<th>Delivery Time:</th>
+	<td><?php echo isset($orderInfo->delivery_time) ? $orderInfo->delivery_time : '--'; ?></td>
+</tr>
+</tbody></table>
+        </div>
+        </div>
+</div>

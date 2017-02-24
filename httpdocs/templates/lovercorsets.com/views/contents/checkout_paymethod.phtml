@@ -1,0 +1,27 @@
+<fieldset class="widget inner" id="choosePymt">
+	<div class="w-head">
+		<h2>
+			<span>Payment Method</span>
+		</h2>
+	</div>
+	<div class="main-section">
+		<table class="cart tb-paymentMethod" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+              <th>
+              <input type="radio" onclick="changePayment(this.value)" name="payment_method" value="paypal"/>
+              <strong>PayPal</strong></th>
+              <td>PayPal is the largest online purchasing platform,<span class="red">Credit Card/Debt Card User can currently use this option for your payment.</span></td>
+          </tr>
+          <tr>
+              <th><input type="radio" onclick="changePayment(this.value)" name="payment_method" value="western"/><strong>Western Union</strong></th>
+              <td>The world's leading money transfer company, 3-5 days delay might occur using this payment method.</td>
+          </tr>
+          <tr>
+              <th><input type="radio" onclick="changePayment(this.value)" name="payment_method" value="wiretransfer"/><strong>Wire Transfer</strong></th>
+              <td>Directly Transfer Money to us, you may need pay extra wire transfer fees to the bank. 5-7 days delay might occur using this payment method.</td>
+          </tr>
+        </tbody>
+        </table>
+	</div>
+</fieldset>

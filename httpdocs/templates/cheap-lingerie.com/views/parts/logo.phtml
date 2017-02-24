@@ -1,0 +1,33 @@
+<div id="header">
+    <div class="logo"><a href="<?php echo url('');?>"></a></div>
+    <div class="header-links">
+    <ul class="links">
+<?php if (isset($this->user) && $this->user->uid): ?>
+			<li><a href="<?php echo url('user/logout') ?>">Logout</a></li>
+			<li><a href="<?php echo url('order/list/');?>">My Orders</a></li>
+<?php else: ?>
+			<li><a href="<?php echo url('user/register');?>">Join Free</a></li>
+			<li><a href="<?php echo url('user/login');?>">Log In</a></li>
+<?php endif;?>
+			<li><div id="shoppingCart"><a class="top-checkout" href="<?php echo url('cart');?>" style=""><span>Cart&nbsp;<em class="cart_item_number"><?php echo isset($goodsInCart)? $goodsInCart : 0; ?></em> &nbsp;Item</span></a>
+	</div></li>
+    </ul>
+    <div class="quick-access">
+    <div class="top-bar">
+    <form action="<?php echo url('pitems');?>" method="post">
+      <div class="search">
+      <label for="search">Search</label>
+      <input name="keyword" id="search_keyword" type="text" class="text" value="<?php echo isset($search_keywords) ? plain($search_keywords) : 'sexy lingerie';?>" onfocus="if(this.value=='What would you like to save on today'){this.value='';}"  onblur="if(this.value==''){this.value='sexy lingerie';}" />
+      <a id="header_search_keyword" href="javascript:void(0)">
+        <button type="submit" title="GO" class="button"><span><span>GO</span></span></button>
+      </a>
+      </div>
+      
+      </form>
+     </div>
+
+     <?php $this->render('parts/navigation.phtml')?>
+     </div>
+     </div>
+
+</div>

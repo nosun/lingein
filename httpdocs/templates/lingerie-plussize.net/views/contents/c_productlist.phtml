@@ -1,0 +1,55 @@
+<div id="p_new_arrival"  class="grid">
+<?php	if(isset($productList) && $productList):
+			$showItemCount = 0;
+          	foreach ($productList as $k => $v):
+          		if($showItemCount > 0 && $showItemCount % 3 == 0):?>
+    <br class="clears"/>
+<?php 			endif;
+          	$showItemCount++;?>
+	<dl class="<?php echo (($showItemCount > 0 && $showItemCount % 3 == 1))? 'p_new':'';?>">
+		<dt><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>">
+				<img alt="<?php echo $v->name;?>" title="<?php echo $v->name;?>" src="<?php echo urlimg('210x316',$v->filepath)?>"/>
+      	</a></dt>
+      	<dd class="prodName"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo $v->name;?></a></dd>
+      	
+      	<dd class="oldPrice"><del><?php echo isset($v->list_price)? c($v->list_price) : null;?></del><span class="amount"><?php echo isset($v->price)? c($v->price) : null;?></dd>
+      	
+  		<dd class="add_cart">
+		<form class="buynowdirectly" method="post" action="<?php echo url('cart/productpost');?>">
+			<div class="p_post_inputs">
+			<input type="hidden" value="<?php echo isset($v->pid) ? $v->pid : null ?>" name="pid"/>
+			<input type="hidden" value="1" name="qty"/>
+<?php 			if($v->status):
+            		$default_fields = array();
+            		$canOrderDirectly = true;
+            		foreach ($v->fields as $fieldName => $field):
+              			if(!empty($v->{'field_' . $fieldName})):
+                			if ($field->multiple):
+                  				if(count($v->{'field_' . $fieldName})==1):
+                    				//we can use default field value to make the direct order.
+                    				$default_fields[$fieldName] = $v->{'field_' . $fieldName}[0];
+                  				else:
+                    				//need go to details page and make the value.
+                    				$canOrderDirectly = false;
+                    				break;
+                  				endif;
+                			endif;
+              			endif;
+            		endforeach;
+            		if($canOrderDirectly):
+              			foreach($default_fields as $field_name=>$field_value):?>
+			<input name="<?php echo $field_name;?>" type="hidden" value="<?php echo $field_value;?>"/>
+            <input name="data[<?php echo $field_name;?>]" type="hidden" value="<?php echo $field_value?>"/>
+            			<?php endforeach?>
+            <input type="submit" class="buynow button" value="ADD TO CART" name="cart"/>
+<?php 				else:?>
+            <a class="show_details button" href="<?php echo url($v->url)?>">View Choices</a>
+<?php 				endif;
+          		endif;?>
+			</div>
+		</form>
+     	</dd>
+	</dl>
+<?php 		endforeach;
+      	endif;?>
+</div>

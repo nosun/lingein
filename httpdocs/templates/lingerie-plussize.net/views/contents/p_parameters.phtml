@@ -1,0 +1,36 @@
+<div class="widget" id="p-parameters">
+	<h2 class="section_title">Product Details&nbsp;</h2>
+	<div class="section_content">
+	<p class="prodItemSummary"><?php echo $product->summary;?></p>
+	<table cellspacing="0" cellpadding="0" border="0" class="t-parameters">
+	<tbody>
+<?php if($product->brand):?>
+	<tr><td class="label"><strong>Brand </strong></td><td><?php echo isset ($product->brand->name) ? $product->brand->name : null ;?></td></tr>
+<?php endif;?>
+<?php if($product->number):?>
+	<tr><td class="label"><strong>Code: &nbsp;</strong></td><td><?php echo  isset($product->number) ? $product->number : null;?></td></tr>
+<?php endif;?>
+<?php if($product->field_color):?>
+	<tr><td class="label"><strong>Colors: &nbsp;</strong></td><td>
+<?php $corlorLists="";
+	  foreach ($product->field_color as $c) :
+	      $corlorLists.=($c.', ');
+	  endforeach;
+	  echo $corlorLists;?>
+	</td></tr>
+<?php endif;?>
+
+<?php if($product->field_size):?>
+	<tr><td class="label"><strong>Sizes: &nbsp;</strong></td><td>
+<?php $sizeLists='';
+	    foreach ($product->field_size as $s) :
+	      $sizeLists.=($s.', ');
+	    endforeach;
+	    echo $sizeLists;
+	  ?>
+	</td></tr>
+	<?php endif;?>
+	<tr><td class="label"><strong>Status: &nbsp;</strong><?php if ($product->status):?></td><td>In stock, usually ships in 24 hours<?php else:?>Under the frame<?php endif;?></td></tr>
+	</tbody></table>
+	</div>
+</div>

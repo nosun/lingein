@@ -1,0 +1,19 @@
+<?php $product->price = isset($product->price)?$product->price:$product->sell_price;?>
+<div class="price" id="salePrice"><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?>: <?php echo isset($product->price) ? c($product->price):null;?></div>
+
+<table class="prices">
+	<tbody>
+	<tr class="listPrice"><th>List Price:</th>
+		<td><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?></td>
+		<td><del><?php echo isset($product->list_price) ? c($product->list_price) : null;?></del></td>
+	</tr>
+	<tr class="savingPrice">
+			<th>SAVE:</th>
+			<td><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?></td>
+			<td><?php 
+					if (isset($product->price) && isset($product->list_price))
+					    echo c($product->list_price - $product->price);?>
+			</td>
+	</tr>
+	</tbody>
+</table>

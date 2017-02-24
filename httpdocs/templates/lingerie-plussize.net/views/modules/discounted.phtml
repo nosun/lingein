@@ -1,0 +1,24 @@
+<?php if(isset($disProductList) && $disProductList):?>
+<div class="products clearfix" style="display:none;">
+<?php
+	$item_count = 0;
+    foreach ($disProductList as $v):
+        $item_count++;
+?>
+<dl>
+	<dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>">
+		<img alt="<?php echo $v->name;?>" title="<?php echo $v->name;?>" src="<?php echo urlimg('180x270', $v->filepath);?>">
+			<em class="iconDiscount"><span><?php echo round((1 - $v->price / $v->list_price) * 100, 0);?></span></em>
+      	</a>
+    </dt>
+    <dd class="prodName"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo str_replace(',', ', ', $v->name);?></a></dd>
+    <dd class="product_price"> <del><?php echo isset($v->list_price)? c($v->list_price) : null;?></del> 
+    <span class="amount"><?php echo isset($v->price)? c($v->price) : null;?></span></dd>
+</dl>
+<?php if($item_count % 6 == 0): echo '<br class="clears">';endif;
+if($item_count % 12 == 0): 
+	break;
+endif;
+endforeach;?>
+</div>
+<?php endif;?>

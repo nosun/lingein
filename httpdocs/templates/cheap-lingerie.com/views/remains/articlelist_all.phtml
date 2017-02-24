@@ -1,0 +1,202 @@
+<?php
+echo $this->render('before_body.phtml'); ?>
+<body>
+<?php echo $this->render('header.phtml'); ?>
+
+<div class="widget" id="wrapper">
+	<h1 id="breadcrumb"><?php echo themeBreadcrumb() ?></h1>
+
+	<div id="wrapper-l-184">
+			
+		<!-- BOF Footer Nav-->
+<div class="bg_box_gray margin_t allborder clear big">
+<h3 class="in_1em line_30px">IWantLingerie.com</h3>
+	<div class="pad_10px pad_t">
+	<ul class="red_arrow_list">	
+	
+	<li><p class="sub_list_title">About IWantLingerie</p>
+	<?php  if( isset($helpList['about']) && $helpList['about']): ?>
+	<dl class="w-p">
+	  <?php foreach ($helpList['about'] as $v):?>
+      <dt><span>&nbsp;</span><a href="<?php echo url($v->url)?>"
+      <?php if($articleInfo->title == $v->title) echo 'class="red b"'?>
+      ><?php echo $v->title;?></a></dt>
+      <?php endforeach;?>
+    </dl>
+    <?php endif;?>
+	</li>
+
+	<li><p class="sub_list_title">Payments</p>
+	<?php  if( isset($helpList['payment']) && $helpList['payment']):  ?>
+	<dl class="w-p">
+	  <?php foreach ($helpList['payment'] as $v):?>
+      <dt><span>&nbsp;</span><a href="<?php echo url($v->url)?>"
+      <?php if($articleInfo->title == $v->title) echo 'class="red b"'?>
+      ><?php echo $v->title;?></a></dt>
+      <?php endforeach;?>
+    </dl>
+    <?php endif;?>
+	</li>
+
+	<li><p class="sub_list_title">Shipping</p>
+	<?php  if( isset($helpList['shipping']) && $helpList['shipping']):   ?>
+	<dl class="w-p">
+	  <?php foreach ($helpList['shipping'] as $v):?>
+      <dt><span>&nbsp;</span>
+      <a href="<?php echo url($v->url)?>" 
+        <?php if($articleInfo->title == $v->title) echo 'class="red b"'?>
+      >
+        <?php echo $v->title;?>
+      </a></dt>
+      <?php endforeach;?>
+    </dl>
+    <?php endif;?>
+	</li>
+
+	<li><p class="sub_list_title">F.A.Q</p>
+	<?php  if( isset($helpList['faq']) && $helpList['faq']):  ?>
+	<dl class="w-p">
+	  <?php foreach ($helpList['faq'] as $v):?>
+      <dt><span>&nbsp;</span><a href="<?php echo url($v->url)?>"
+      <?php if($articleInfo->title == $v->title) echo 'class="red b"'?>
+      ><?php echo $v->title;?></a></dt>
+      <?php endforeach;?>
+    </dl>
+    <?php endif;?>
+	</li>
+
+	</ul>
+	</div>
+</div>	
+			
+	</div>
+
+
+
+
+	<div id="wrapper-r-757">
+	
+	
+<div class="right_big_con margin_t">
+<div class="right_big_con margin_t big">
+
+	<!-- end of minframe -->
+	<h2 class="in_1em line_30px g_t_c">Welcome to Lightinthebox.com Knowledge Base!</h2>
+		<div class="pad_10px pad_t g_t_j fl margin_t">
+			We have developed this help page to assist you with standard information you may need, It also includes all the frequently asked questions from our customers.You can browse by categories you are interested or you can search some information you want to know at knowledgebase by entering keywords in the search bar. If you can not get a satisfied answer here, 			<a href="http://www.lightinthebox.com/r/contact-us.html"><img style="margin-bottom:-8px;" src="http://cloud.lbox.me/includes/templates/dev_v2/images/english/button/ask.jpg"></a>
+			Our customer service representative will help you figure it out.
+		</div>
+		
+			<ul class="line_120 fl bg_box_gray allborder margin_t" id="chapter_nav">
+	  			<h3 class="in_1em line_30px">An Introduction to LightInTheBox</h3>
+	  			<div class="pad_10px">
+					<ul class="red_arrow_list">
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c5/a1238.html" class="">LightInTheBox.com Overview</a></li>
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c5/a50.html" class="">Why create a LightInTheBox account?</a></li>
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c5/a6.html" class="">How can I order from LightInTheBox?</a></li>
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c5/a57.html" class="">Accepted Payment Methods</a></li>
+					</ul>
+					<a title="" href="http://www.lightinthebox.com/knowledge-base/c5/" class="fr u">More &gt;&gt;</a>
+				</div>
+			</ul>
+			<ul class="line_120 fr bg_box_gray allborder margin_t" id="chapter_nav">
+	  			<h3 class="in_1em line_30px">Troubleshooting</h3>
+	  			<div class="pad_10px">
+					<ul class="red_arrow_list">
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c17/a68.html" class="">Do you offer a guarantee or warranty?</a></li>
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c17/a67.html" class="">How can I return a faulty item?</a></li>
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c17/a64.html" class="">What if I can't log into my account?</a></li>
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c17/a65.html" class="">Why was my order cancelled and payment refunded?</a></li>
+					</ul>
+					<a title="" href="http://www.lightinthebox.com/knowledge-base/c17/" class="fr u">More &gt;&gt;</a>
+				</div>
+			</ul>
+			<ul class="line_120 fl bg_box_gray allborder margin_t" id="chapter_nav">
+	  			<h3 class="in_1em line_30px">How To Pay</h3>
+	  			<div class="pad_10px">
+					<ul class="red_arrow_list">
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c8/a15.html" class="">Accepted Payment Methods</a></li>
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c8/a1436.html" class="">Credit Card Exceptions</a></li>
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c8/a42.html" class="">PayPal Isn't Available in My Country</a></li>
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c8/a44.html" class="">How Does Paypal Work?</a></li>
+					</ul>
+					<a title="" href="http://www.lightinthebox.com/knowledge-base/c8/" class="fr u">More &gt;&gt;</a>
+				</div>
+			</ul>
+			<ul class="line_120 fr bg_box_gray allborder margin_t" id="chapter_nav">
+	  			<h3 class="in_1em line_30px">Shipping &amp; Delivery</h3>
+	  			<div class="pad_10px">
+					<ul class="red_arrow_list">
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c6/a1670.html" class="">Useful Shipping &amp; Payment Information  (Sorted By Country)</a></li>
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c6/a1231.html" class="">Shipping Methods Guide</a></li>
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c6/a1871.html" class="">Shipping &amp; Delivery Estimates</a></li>
+						<li><a href="http://www.lightinthebox.com/knowledge-base/c6/a11.html" class="">Why can't I choose my desired courier?</a></li>
+					</ul>
+					<a title="" href="http://www.lightinthebox.com/knowledge-base/c6/" class="fr u">More &gt;&gt;</a>
+				</div>
+			</ul>
+			<ul class="line_120 fl bg_box_gray allborder margin_t" id="chapter_nav">
+	  			<h3 class="in_1em line_30px">After Sales</h3>
+	  			<div class="pad_10px">
+					<ul class="red_arrow_list">
+    					<li><a href="http://www.lightinthebox.com/knowledge-base/c9/a33.html" class="">Cancelling Your Order</a></li>
+    					<li><a href="http://www.lightinthebox.com/knowledge-base/c9/a90.html" class="">Who is responsible for product damage or loss during transit?</a></li>
+    					<li><a href="http://www.lightinthebox.com/knowledge-base/c9/a91.html" class="">I have problems in using the product I ordered, please help</a></li>
+    					<li><a href="http://www.lightinthebox.com/knowledge-base/c9/a2951.html" class="">Viewing and Tracking an Order</a></li>
+    				</ul>
+					<a title="" href="http://www.lightinthebox.com/knowledge-base/c9/" class="fr u">More &gt;&gt;</a>
+				</div>
+			</ul>
+		
+	<div class="clear"></div>
+	</div>
+
+</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<div class="right_big_con margin_t big">
+<ul class="border_b_d pad_bottom">
+    <h1 class="static_h1"><?php echo $articleInfo->name;?></h1>
+</ul>
+<ul class="pad_1em">
+<!--  here comes the contents -->
+                  <?php foreach ($articleList as $k => $v) : ?>
+                    <li><a href="<?php echo url($v->url);?>" title="<?php echo isset($v->title) ? $v->title : null ?>"><?php echo isset($v->title) ? $v->title : null ?></a></li>
+                  <?php endforeach;?>
+</ul>
+
+                <div class="pages margin">
+                   <?php echo $pagination; ?>
+                </div>
+                
+</div>
+
+
+
+
+
+
+<div>   </div>		
+	</div>
+
+<?php echo $this->render('footer.phtml'); ?>
+</body>
+<?php echo $this->render('after_body.phtml'); ?>
+</html>

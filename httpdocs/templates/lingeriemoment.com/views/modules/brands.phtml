@@ -1,0 +1,11 @@
+<div id="cat-lists" class="widget">
+<h3>Brands</h3>
+<?php if(isset($brands)): ?>
+    <ul>
+<?php foreach($brands as $k=>$v):?>
+		<li class="top-cat"><a href="<?php echo url('+'.$v->path_alias.'.html');?>" <?php if(isset($termInfo) && $v->name == $termInfo->name)  echo 'class="red"'?>><?php echo ucwords($v->name);?></a></li>
+<?php endforeach;?>
+	</ul>
+<?php endif;?>
+
+</div>

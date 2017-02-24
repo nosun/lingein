@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+<?php global $user; ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<div class="container">
+<?php $this->render('parts/header.phtml'); ?>
+<div class="main-content">
+<?php $this->render('modules/ads_topslot.phtml')?>
+<?php $this->render('contents/a_category.phtml');?>
+<div class="general">
+	<div class="main-block main-block1" style="padding-left:10px;">
+		<?php $this->render('parts/breadcrumb.phtml')?>
+		<div class="widget1">
+			<h3><?php echo isset($articleInfo->name)?$articleInfo->name:"Knowledge Base";?></h3>
+		</div>
+		<ul>
+		<?php foreach ($articleList as $k => $v) : ?>
+				<li><a href="<?php echo url($v->url);?>" class="" title="<?php echo isset($v->title) ? $v->title : null ?>"><?php echo isset($v->title) ? ucwords($v->title) : null ?></a></li>
+		<?php endforeach;?>
+			</ul>
+		<div class="pages margin"> <?php echo $pagination; ?></div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="general_bottom"></div>
+</div>
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+
+</body>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+</html>

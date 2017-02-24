@@ -1,0 +1,26 @@
+<?php global $user; $this->user = $user;?>
+<div id="global_action">
+	<div id="utility" class="innercontainer">
+    <div class="logo1"><a href="#"><img src="<?php echo $this->themeResourceURI('images/logo-bottom.png');?>" /></a></div>	
+	
+	<div id="user_panel" class="top_a">
+	<ul>
+		<li id="up_signup">
+<?php if ($user->uid): ?>
+			<a href="<?php echo url('order/list/');?>">My Orders</a> or 
+			<a href="<?php echo url('user/logout') ?>">Logout</a>
+<?php else: ?>
+			<a href="<?php echo url('user/login');?>">Sign In</a> or 
+			<a href="<?php echo url('user/register');?>">Join Free</a>
+<?php endif;?>
+		</li>
+	</ul>
+	</div>	
+
+	<div id="shoppingCart"><span>Cart&nbsp;<em class="cart_item_number"><?php echo isset($goodsInCart)? $goodsInCart : 0; ?></em> &nbsp;Item</span>
+		<a class="button top-checkout" href="<?php echo url('cart');?>" style="">Check Out</a>
+	</div>
+	</div>
+	<a id="scroll-to-top"></a>
+</div>
+	

@@ -1,0 +1,9 @@
+<div id="pRate" style="overflow:hidden;padding:10px 0;">
+    <a class="button button-small toogleWriteReview" href="#write-a-review" style="float: right;padding: 0 8px;margin: 5px 50px 0 0;color: #fff;text-transform: uppercase;border-top: 2px solid #f4f4f4;border-left: 2px solid #f4f4f4;">Write a Review</a>
+	<div style="padding-top:5px;">
+	<?php if(isset($product->pid) && $product->pid):
+        echo widgetCallFunction('fivestars', 'getaveragestars', $product->pid, true);
+    endif;?>
+    <a href="#prReviews">(<span itemprop="reviewCount"><?php echo $commentCount;?></span> Reviews)</a>
+    </div>
+</div>

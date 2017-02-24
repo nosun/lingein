@@ -1,0 +1,13 @@
+<div class="navigation">
+<ul class="topnav">
+<li><a href="<?php echo url("");?>" class="dropdown">Home</a></li>
+<?php if(isset($category) && $category):
+    $_first_category_class = true;
+    foreach ($category as $c):
+?><li class="<?php echo $_first_category_class ? 'first' : ''; $_first_category_class = false;?> dropdown">
+	<a class="navItem " href="<?php echo url($c->path_alias . '.html');?>"><?php echo isset($c->name)? $c->name : null;?></a>
+</li>
+<?php endforeach;
+	endif;?>
+</ul>
+</div>

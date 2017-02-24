@@ -1,0 +1,132 @@
+<div class="footer">
+  <div id="customerHelp" class="w-bp">
+  <div>
+	<dl>
+		<dt>Get to Know Us</dt>
+          <?php 
+          if( isset($helpList['about']) && $helpList['about']): 
+          	foreach ($helpList['about'] as $v):
+          ?>
+		<dd><a href="<?php echo url($v->url)?>" rel="nofollow"><?php echo $v->title;?></a></dd>
+          <?php 
+          	endforeach;
+          endif;
+          ?>
+	</dl>
+  
+  
+	<dl>
+		<dt>Payment Method</dt>
+          <?php 
+          if( isset($helpList['payment']) && $helpList['payment']): 
+          	foreach ($helpList['payment'] as $v):
+          ?>
+		<dd><a href="<?php echo url($v->url)?>" rel="nofollow"><?php echo $v->title;?></a></dd>
+          <?php 
+          	endforeach;
+          endif;
+          ?>
+	</dl>
+  
+  
+	<dl>
+		<dt>Shipping Guide</dt>
+          <?php 
+          if( isset($helpList['shipping']) && $helpList['shipping']): 
+          	foreach ($helpList['shipping'] as $v):
+          ?>
+		<dd><a href="<?php echo url($v->url)?>" rel="nofollow"><?php echo $v->title;?></a></dd>
+          <?php 
+          	endforeach;
+          endif;
+          ?>
+	</dl>
+  
+  
+	<dl>
+		<dt>Let Us Help You</dt>
+          <?php 
+          if( isset($helpList['faq']) && $helpList['faq']): 
+          	foreach ($helpList['faq'] as $v):
+          ?>
+		<dd><a href="<?php echo url($v->url)?>" rel="nofollow"><?php echo $v->title;?></a></dd>
+          <?php 
+          	endforeach;
+          endif;
+          ?>
+	</dl>
+    </div>
+    
+    
+	<p><strong>127 </strong>Categories, <strong>1,010</strong> Products, Worldwide shipping for sexy lingeries and related products.</p>
+    
+</div>
+
+
+
+<div class="widget w-customeGuide" id="customerGuide">
+
+
+		<div class="col" id="productIndex">
+			<h4>Product Tags:</h4>
+			<p class="alphaIndex">
+            <?php
+              if (is_array($seoLinks) && count($seoLinks) >0) :
+                foreach ($seoLinks as $index => $link) :
+              ?>
+              <a href="<?php echo url($link);?>" target="_top"><?php echo $index == "#"? '0-9':$index;?></a>
+            <?php 
+              endforeach;
+              endif; 
+            ?>
+			
+			</p>
+			
+		</div>
+		<div class="col" id="productGuide">
+		<p><a target="_top" href="<?php echo url('new-arrivals.html');?>">New Products</a> | <a target="_top" href="<?php echo url('bestsellers.html');?>">Best Sellers</a> | <a target="_top" href="<?php echo url('hot-products.html');?>">Hot Products</a></p>
+			<h5>Compare Products and Vote Now!</h5>
+
+			<div class="hotProducts">
+
+               <h5>Hot Categories</h5>
+               <p>
+          		<a target="_top" href="<?php echo url('browse/sexy-latex-lingerie.html')?>">latex lingerie</a>,
+          		<a target="_top" href="<?php echo url('browse/sexy-pajamas.html')?>">sexy sleepwear</a>, 
+          		<a target="_top" href="<?php echo url('browse/mini-skirt.html')?>">short skirts</a>,
+          		<a target="_top" href="<?php echo url('browse/mini-skirt.html')?>">mini skirts</a>,
+          		<a target="_top" href="<?php echo url('browse/sexy-shirts.html')?>">sexy tops</a>,
+          		<a target="_top" href="<?php echo url('browse/sexy-panties.html')?>">panties</a>,
+          		<a target="_top" href="<?php echo url('browse/sexy-swimwear.html')?>">sexy bathing suits</a>, 
+          		<a target="_top" href="<?php echo url('browse/g-string.html')?>">g-string</a>, 
+          		<a target="_top" href="<?php echo url('browse/sexy-stocking.html')?>">sexy stocking</a>
+               </p>
+               </div>
+			
+			</div>
+			<div class="col" id="newsLetter">
+				<fieldset>
+					<h3>Subscribe to our <em>Newsletter</em></h3>
+					<p>Get updates, discounts, and special offers from today!</p>
+					<input type="text" class="text" value="Enter Your Email" id="mailAddress"><button id="submitMailAddress" class="textbtnGray">Subscribe</button>
+				</fieldset>
+			</div>
+</div>
+
+<div class="widget w-litbFooter">
+<div id="partners" class="widget w-partners">
+	<span class="paypal">paypal</span> 	
+	<span class="paypalVerified">paypal verified</span> 	
+	<span class="imgInSide mcafee">mcafee verified</span>
+	<span class="delivery">dhl ups  ems</span>		
+	<span class="banks">visa, master card, maestro, carte blue</span> 	
+	<span class="westernUnion">western union</span>
+	<span class="verSign">verSign Trusted</span>
+
+</div>
+</div>
+</div>
+<div id="copyright"> 		Copyright &copy; 2011-2012 <a href="<?php echo url('');?>">I Want Lingerie</a> Ltd. All Rights Reserved. 	</div>
+
+
+<!-- / Visitor Monitor HTML v4.00 -->

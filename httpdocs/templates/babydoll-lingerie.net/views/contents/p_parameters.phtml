@@ -1,0 +1,15 @@
+<div class="widget" id="p-parameters">
+	<div class="section_content">
+<div class="params">
+<?php if($product->brand):?>
+<div class="param"><span class="label"><strong>Brand </strong></span><?php echo isset ($product->brand->name) ? $product->brand->name : null ;?></div>
+<?php endif;?>
+<?php if($product->number):?>
+<div class="param"><span class="label"><strong>Product SN: &nbsp;</strong></span><?php echo  isset($product->number) ? $product->number : null;?></div>
+<?php endif;?>
+<div class="param"><span class="label"><strong>Status: &nbsp;</strong></span><?php if ($product->status):?>In stock, usually ships in 24 hours<?php else:?>Under the frame<?php endif;?></div>
+</div>
+	
+	<p class="prodItemSummary"><?php echo $product->summary;?></p>
+	</div>
+</div>

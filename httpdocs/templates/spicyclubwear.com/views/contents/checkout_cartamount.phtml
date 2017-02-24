@@ -1,0 +1,30 @@
+<div class="scCartAmountSum">
+<table id="subTotal" cellspacing="0" cellpadding="0">
+	<!-- Grand Total -->
+	<tfoot>
+		<tr id="cartAmount">
+			<td class="blank"></td>
+			<th>Grand Total:</th>
+			<td><em><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?></em><strong id="order_amount"><?php echo isset($cartInfo->goods_amount) ? c($cartInfo->goods_amount) : null?></strong></td>
+		</tr>
+	</tfoot>
+	<tbody>
+		<tr>
+			<td class="blank"></td>
+			<th>Subtotal <?php if ($cartInfo->product){echo '(' . count($cartInfo->product) . ' item)';} ?>:</th>
+			<td><em><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?></em><strong id="ot_subtotal"><?php echo isset($cartInfo->goods_amount) ? c($cartInfo->goods_amount) : null?></strong></td>
+		</tr>
+		<tr id="shippingCharges">
+			<td class="blank"></td>
+			<th>(+) Shipping Charges:</th>
+			<td><em><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?></em><strong id="shipping_money"><?php echo c(0);?></strong></td>
+		</tr>
+		<tr id="paymentCharge">
+			<td class="blank"></td>
+			<th>(+) Payment Fee:</th>
+			<td><em><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?></em><strong id="payment_money"><?php echo c(0);?></strong></td>
+		</tr>
+
+	</tbody>
+</table>
+</div>

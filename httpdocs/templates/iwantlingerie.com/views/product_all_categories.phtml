@@ -1,0 +1,24 @@
+            <div class="Title_head_four">Browse by Category</div>
+            <div class="side_nav">
+<?php
+  if(isset($category) && $category):
+    foreach ($category as $c):
+?>
+              <div class="top"><a href="<?php echo url('browse/' . $c->path_alias . '.html');?>"><?php echo isset($c->name)? $c->name : null;?></a></div>
+<?php
+      if(isset($c->sub) && $c->sub):
+?>
+              <ul>
+<?php   foreach($c->sub as $s):
+?>
+                  <li><a href="<?php echo url('browse/' . $s->path_alias . '.html');?>"><?php echo isset($s->name) ? $s->name : null; ?></a></li>
+<?php
+        endforeach;
+?>
+                </ul>
+<?php
+      endif;
+    endforeach;
+  endif;
+?>
+            </div>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body><div style="width:100%;height:100%;background:#000000">
+<?php global $user; ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<div class="container">
+<?php $this->render('parts/header.phtml'); ?>
+<div class="main-content">
+<h1 id="breadcrumb"><a href="<?php echo url("");?>">Home</a>&nbsp;&gt;&nbsp; Check Out</h1>
+<?php $this->render('modules/ads_topslot.phtml')?>
+
+<div class="general">
+	
+<div class="widget wide">
+    <div class="w-head">
+        <h2><span>Check Out</span></h2>
+    </div>
+</div>
+
+<?php echo themeMessages(); ?>
+
+<div id="client_message" style="display:none"></div>
+<form action="" method="post" name="checkoutForm" class="disable_on_submit" onsubmit="javascript: return checkCartShipping()">
+    <input type="hidden" name="pids" id="pids" value="<?php echo $pids;?>"/>
+    <input type="hidden" name="goods_amount" id="goods_amount" value = "<?php echo isset($cartInfo->goods_amount) ? $cartInfo->goods_amount : '0'; ?>"/>
+	<input type="hidden" name="goods_number" id="goods_number" value = "<?php echo isset($cartInfo->goods_number) ? $cartInfo->goods_number : '0'; ?>"/>
+	<input type="hidden" name="goods_weight" id="goods_weight" value = "<?php echo isset($cartInfo->goods_weight) ? $cartInfo->goods_weight : '0'; ?>"/>
+	<input type="hidden" name="fromcart" value="<?php echo isset($fromcart) ? $fromcart : 0?>"/>
+	<input type="hidden" name="ordertoken" value="<?php echo isset($ordertoken) ? $ordertoken : 0?>"/>
+	<input type="hidden" id="delivery_cid" name="delivery_cid" />
+	<input type="hidden" id="delivery_pid" name="delivery_pid" />
+
+<?php $this->render('contents/checkout_shipaddress.phtml');?>
+<?php $this->render('contents/checkout_shipmethod.phtml');?>
+<?php $this->render('contents/checkout_paymethod.phtml');?>
+<?php $this->render('contents/checkout_cartamount.phtml');?>
+
+<div class="widget fancy">
+    <div class="w-head">
+        <h2><span>Check Out</span></h2>
+    </div>
+</div>
+
+<input type="submit" class="checkoutBtn button" id="orderFormSubmit" value="Place Your Order"  name="checkout"/>
+
+</form>
+</div>
+
+
+</div>
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+</div>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/common.js'; ?>" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+<?php $product->price = isset($product->price)?$product->price:$product->sell_price;?>
+<div class="price" id="salePrice"><?php echo isset($product->price) ? c($product->price):null;?>
+<span><del><?php echo isset($product->list_price) ? c($product->list_price) : null;?></del></span>
+</div>

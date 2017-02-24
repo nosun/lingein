@@ -1,0 +1,32 @@
+<div class="w-prodImages" id="product-image-intro">
+	<div id="w-featurePics">
+    	<a href="<?php echo url('images/'.$product->filepath);?>" rel="gal1" class="jqzoom">
+    		<img id="main-display-pic" src="<?php echo urlimg('410x740',$product->filepath);?>"/>
+   		</a>
+	</div>
+<div id="w-prodthumbnails">
+
+	
+	<ul id="thumblist" class="clearfix" >
+	<?php if($product->fid):?>
+	<li><a href="javascript:void(0);"  class="zoomThumbActive" 
+	rel="{gallery: 'gal1', smallimage: '<?php echo urlimg('410x740',$product->filepath)?>',largeimage: '<?php echo url('images/'.$product->filepath)?>" rev="<?php echo url('images/'.$file->filepath);?>"><img width="65" height="118" src="<?php echo urlimg('118x213', $product->filepath) ?>" border="0" /></a></li><?php 
+	endif;?>
+	<?php
+        $thumbnail_count = 0;
+        foreach ($product->files as $i => $file):
+          $thumbnail_count++;
+        ?>
+        <li><a href="javascript:void(0)"
+	<?php if($product->filepath == $file->filepath){echo 'class="zoomThumbActive"';}?> 
+        rel="{gallery: 'gal1', smallimage: '<?php echo urlimg('410x740', $file->filepath) ?>',largeimage: '<?php echo url('images/'.$file->filepath);?>'}" 
+        style="margin-top: 0px;<?php if($thumbnail_count > 5) echo 'display:none;'?>"">
+        <img src="<?php echo urlimg('65x118', $file->filepath) ?>" alt="<?php echo isset($file->alt)? plain($file->alt):null; ?>" border="0" />
+        </a></li>
+    <?php endforeach ?>
+	</ul>
+
+</div>
+</div>
+
+

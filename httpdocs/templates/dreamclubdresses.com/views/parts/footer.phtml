@@ -1,0 +1,34 @@
+<div class="footer">
+<div id="customerHelp" class="w-bp">
+  <div>
+<?php if(isset($helpList) && isset($articleTypeList)):?>
+<ul>
+<li><a href="<?php echo url('');?>">Home</a> &nbsp;| </li>
+<?php foreach($helpList as $index => $articleList):
+	if($index != 'news'):
+		foreach ($articleList as $v):?>
+	<li><a href="<?php echo url($v->url)?>"><?php echo $v->title;?></a> &nbsp;| </li>
+	<?php endforeach;endif;
+  endforeach;?>
+</ul>
+  <?php endif?>
+  </div>
+</div>
+<div class="clear"></div>
+<div class="w-customeGuide" id="customerGuide">
+	<div class="col" id="newsLetter">
+		<p style="float:left">Newsletter Sign-Up:</p>
+			<input type="text" class="text" value="Enter Your Email" id="mailAddress"><button id="submitMailAddress" class="button">Subscribe</button>
+		</div>
+</div>
+
+
+<div id="copyright">
+<span class="floatleft">
+           	<?php $siteInfo = Bl_Config::get('siteInfo');echo $siteInfo['copyright'];?>
+        </span>
+<span style="float:right;">
+			Any Questions Please Email to: <a href="mailto:<?php echo $siteInfo['email'];?>"><?php echo $siteInfo['email'];?></a>
+</span>
+</div>
+</div>

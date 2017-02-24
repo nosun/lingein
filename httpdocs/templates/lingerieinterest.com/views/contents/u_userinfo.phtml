@@ -1,0 +1,65 @@
+<div class="widget">
+<div class="w-head">
+<h2>User information</h2>
+</div>
+
+            <div class="uc-wrapper w-content">
+             <?php echo themeMessages() ?>
+            <form action="" method="post">
+        		<div class="user_edit">
+                  <table cellspacing="1" cellpadding="3">
+                    <tbody>
+                      <tr>
+                        <th>Username:</th>
+                        <td><input type="text" readonly="readonly" value="<?php echo isset($user->name) ? $user->name : null ?>" class="elmbBlur input readonly"></td>
+                      	<td></td>
+                      </tr>
+                      <tr>
+                        <th>Nickname:</th>
+                        <td><input type="text" name="nickname" value="<?php echo isset($user->nickname) ? $user->nickname : null ?>" title="Nickname"/></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <th>Birthday:</th>
+                        <td><input type="text" name="birthday" value="<?php if (isset($user) && $user->birthday != '') echo plain(substr($user->birthday, 0, 4) . '-' . intval(substr($user->birthday, 4, 2)) . '-' . intval(substr($user->birthday, 6, 2))) ?>"  class="elmbBlur input" title="Birthday"/></td>
+                        <td><p class="explanation required"><span>*</span>Format : YYYY-MM-DD</p></td>
+                      </tr>
+                     <tr>
+                        <th>E-mail:</th>
+                        <td><input type="text" name="email" value="<?php echo isset($user->email) ? $user->email : null ?>"  class="non-empty elmbBlur input" title="Email can't for empty"/></td>
+                        <td><p class="explanation required">*</p></td>
+                      </tr>
+                      <tr>
+                        <th>Telephone:</th>
+                        <td><input type="text" name="phone" value="<?php echo isset($user->phone) ? $user->phone : null ?>" class="elmbBlur input"/></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <th>Mobile:</th>
+                        <td><input type="text" name="mobile" value="<?php echo isset($user->mobile) ? $user->mobile : null ?>" class="elmbBlur input"/></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <th>Region:</th>
+                        <td><input type="text" name="area" value="<?php echo isset($user->area) ? $user->area : null ?>" class="elmbBlur input"/></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <th>Postcode:</th>
+                        <td><input type="text" name="postcode" value="<?php echo isset($user->postcode) ? $user->postcode : null ?>" class="elmbBlur input"/></td>
+                        <td></td>
+                      </tr>
+                     <tr>
+                     	<th>&nbsp;</th>
+                        <td>
+	                        <button class="button" type="submit">Save Changes</button>
+	                        <button class="button" type="reset">Reset Form</button>
+                        </td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                </form>
+            </div>
+</div>

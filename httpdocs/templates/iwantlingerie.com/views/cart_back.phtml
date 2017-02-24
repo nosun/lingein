@@ -1,0 +1,76 @@
+<?php echo $this->render('before_body.phtml'); ?>
+<body style="background:none;">
+<div class="logo_head">
+  <div class="logo1"><a href="<?php echo url('');?>"><img src="<?php echo $tpldir ?>/images/logo1.gif" alt="" /></a></div>
+</div>
+
+<div class="shoppingContainers" id="cart">
+  <div class="payshopping"><img src="<?php echo $tpldir ?>/images/payshopping.gif" alt="" /></div>
+  <?php echo themeMessages(); ?>
+
+    <div class="boxcontent margin">
+        <div class="shoping_text clear"><span>Your Shopping Cart</span></div>
+        <form action="<?php echo url('cart/cartpost');?>" method="post">
+        <table width="96%" align="center" cellspacing="0" cellpadding="0" class="cart">
+        <tbody>
+            <tr>
+              <td width="3%"  class="line" valign="middle">&nbsp;</td>
+              <td width="12%" align="center" class="line"><strong>Image</strong></td>
+              <td width="28%" class="line"><strong>Name</strong></td>
+              <td width="19%" class="line"><strong>Parameter</strong></td>
+              <td width="6%" align="center" class="line"><strong>Quantity</strong></td>
+              <td width="8%" align="center" class="line"><strong>Price</strong></td>
+              <td width="12%" align="center" class="line"><strong>operate</strong></td>
+            </tr>
+<?php
+if ($cartInfo->product) :
+foreach ($cartInfo->product as $k => $v) : ?>
+            <tr>
+                <td align="center" class="dotted"><input type="checkbox" class="checkitem" name="cart_item_id_checked[]" checked value="<?php echo isset($v->cart_item_id) ? $v->cart_item_id : null ?>"></td>
+                <td align="center" class="dotted"><a href="<?php echo url($v->url);?>"><img src="<?php echo urlimg('67x67', $v->filepath) ?>" /></a></td>
+              <td class="dotted"><a href="<?php echo url($v->url);?>"><?php echo isset($v->name) ? $v->name : null ?></a></td>
+                <td class="dotted"><?php if(isset($v->data) && $v->data):
+                          foreach($v->data as $dk => $dv):
+                            echo $dk.":".$dv.'<br />';
+                          endforeach;
+                          else:
+                            echo '&nbsp;';
+                          endif;
+                      ?></td>
+                <td align="center" class="dotted">
+                <input type="hidden" value="<?php echo isset($v->pid) ? $v->pid : null ?>" name="pids[]"/>
+                <input type="hidden" value="<?php echo isset($v->cart_item_id) ? $v->cart_item_id : null ?>" name="cart_item_ids[]"/>
+                <input value="<?php echo isset($v->qty) ? $v->qty : null ?>" name="qtys[]" size="3" alt="<?php echo isset($v->qty) ? $v->qty : null ?>" id="<?php echo isset($v->cart_item_id) ? $v->cart_item_id : null ?>" class="ajax_qty" title="<?php echo $v->sell_min ? $v->sell_min : 0 ?>,<?php echo $v->sell_max ? $v->sell_max : 0 ?>" rel="<?php echo isset($v->price) ? $v->price : null ?>"/>
+                </td>
+                <td align="center" class="dotted"><?php echo isset($v->qty) ? c($v->price) : null;?></td>
+                <td align="center" class="dotted"><a href="<?php echo url('cart/deleteproductfromcart/'.$v->cart_item_id);?>">delete</a></td>
+            </tr>
+<?php endforeach;
+endif;?>
+            <tr>
+                <td colspan="9">
+                    <span class="left"><a href="<?php echo url('product/list');?>"><img src="<?php echo $tpldir ?>/images/buttom_3.gif" alt="" /></a> <a href="<?php echo url('cart');?>"><img src="<?php echo $tpldir ?>/images/buttom_2.gif" alt="" /></a><input type="submit" class="clear_cart" value="" name="delete" /></span>
+                    <span class="right">Total Amount:  <strong id="cart_Amount"><?php echo isset($cartInfo->goods_amount) ? c($cartInfo->goods_amount) : null?></strong></span>
+                </td>
+            </tr>
+            <tr>
+            <td colspan="9" align="center"><input type="submit" class="check" value="" name="checkout" /></td>
+            </tr>
+        </tbody>
+        </table>
+</form>
+    </div>
+</div>
+
+<div class="shopfoot">
+    <p>MSN: iwantlingerie@hotmail.com, Email: customer-support@iwantlingerie.com</p>
+    <p>Copyright © 2012 <a href="http://www.iwantlingerie.com">www.iwantlingerie.com</a> All rights reserved</p>
+    <p>Alphabetical Index: A - B - C - D - E - F - G - H - I - J - K - L - M - N - O - P - Q - R - S - T - U - V - W - X - Y - Z - 0-9</p>
+</div>
+
+</body>
+<?php echo $this->render('after_body.phtml'); ?>
+</html>
+<?php foreach(getMessages() as $k => $v) : ?>
+    <script type="text/javascript">alert('<?php echo $v['message']?>');</script>
+<?php endforeach;?>

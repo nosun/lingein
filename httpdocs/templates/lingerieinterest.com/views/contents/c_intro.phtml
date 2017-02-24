@@ -1,0 +1,9 @@
+<?php if(isset($termInfo) && $termInfo):?>
+	<div class="cat-intro">
+		<h1><?php echo $termInfo->name;?></h1>
+		<p class="cat-summary"><?php echo isset($termInfo->description) ? $termInfo->description : null;?></p>
+		<div class="extend">
+		<?php echo $docvar6;?>
+		</div>
+    </div>
+<?php endif;?>

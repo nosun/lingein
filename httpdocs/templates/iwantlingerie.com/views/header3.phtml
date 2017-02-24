@@ -1,0 +1,60 @@
+<?php global $user ?>
+<div class="header">
+  <div class="head_top">
+      <div class="logo"><a href="<?php echo url('');?>"><img src="<?php echo $tpldir ?>/images/logo.gif" width="305" height="101" alt="Sexy clothing Wholesale" /></a></div>
+        <div class="logo_right">
+            <div class="Head_content">
+              <p class="Welcome">Welcome to www.fashion-tribe.com !  Sexy lingerie online store for Plus Size Lingerie, Corsets, Bustiers and Stockings!  </p>
+                <p class="Sign"><span><?php if ($user->uid): ?><a href="<?php echo url('user/panel');?>" rel="nofollow">My Account</a> or <a href="<?php echo url('user/logout') ?>" rel="nofollow">Logout</a><?php else: ?><a href="<?php echo url('user/login');?>" rel="nofollow">Sign In</a> or <a href="<?php echo url('user/register');?>" rel="nofollow">Join Free</a><?php endif; ?> </span>   |  <a href="<?php echo url('how-to-place-an-order.html');?>" rel="nofollow">How to Place an Order</a>  |  <a href="javascript:void(0)" onclick="bookmark() " rel="nofollow">Add to Favoutite</a>  |  Currencies
+                  <select class="currencySelect" name="select" id="select">
+<?php
+if (!isset($_SESSION['currency'])) {
+  $_SESSION['currency'] = 'USD';
+}
+if ($currencyList && count($currencyList) >0) :
+  foreach ($currencyList as $k => $v) :
+    if ($v->visible) :
+?>
+          <option <?php if (isset($_SESSION['currency']) && $_SESSION['currency'] == $v->name) echo 'selected' ?> value="<?php echo $v->name; ?>"><?php echo $v->name; ?></option>
+<?php
+    endif;
+  endforeach;
+endif; ?></select></p>
+            </div>
+            <div class="search">
+                <form action="<?php echo url('search');?>" method="post">
+                <input name="keyword" id="search_keyword" type="text" class="text" value="<?php echo isset($search_keywords) ? plain($search_keywords) : 'What would you like to save on today';?>" onfocus="if(this.value=='What would you like to save on today'){this.value='';}"  onblur="if(this.value==''){this.value='What would you like to save on today';}" />
+                <input type="submit" class="bottom"  value=""  id="header_search_keyword"/>
+
+                <div class="Sexy">
+                <?php if(isset($topsearch) && $topsearch):
+                             foreach($topsearch as $k => $v):
+                              if($k>4){break;}
+                            $line = $k<4 ? ' , ' : null;
+                        ?>
+                      <a href="<?php $v=strtolower(str_replace(" ","-",$v));echo url('search/'.$v);?>"><?php echo isset($v) ? plain($v) : null;?></a><?php echo $line;?>
+                        <?php
+                         endforeach;
+               endif;?>
+               </div>
+               </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+      <ul>
+            <li><a href="<?php echo url('');?>">Home</a></li>
+            <li><a href="<?php echo url('new-arrivals.html');?>" rel="nofollow">New Arrivals</a></li>
+            <li><a href="<?php echo url('browse/all.html');?>">Products </a></li>
+            <li><a href="<?php echo url('articletype/payment.html');?>" rel="nofollow">Payment</a></li>
+            <li><a href="<?php echo url('articletype/news.html');?>" rel="nofollow">News</a></li>
+            <li><a href="<?php echo url('articletype/faq.html');?>" rel="nofollow">FAQ</a></li>
+            <li><a href="<?php echo url('article/contact-us.html');?>" rel="nofollow">Contact Us</a></li>
+        </ul>
+        <div class="Shopping">
+          <span class="bag">My Shopping Bag:<em><?php echo isset($goodsInCart)? $goodsInCart : 0; ?></em>items</span>
+            <input type="submit" class="bottom" value="Checkout" onclick="javascript:location.href='<?php echo url('cart');?>';"/>
+        </div>
+    </div>
+</div>

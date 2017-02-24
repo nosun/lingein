@@ -1,0 +1,52 @@
+<?php global $user;?>
+<div id="global_action">
+	<div id="utility" class="innercontainer">
+		<div id="welcome_section">
+		<div class="welcome"><strong>Best supplier for <a style="padding:0 0 0 0;" href='http://www.spicyclubwear.com/' ><font color="#B3B3B3">wholesale clubwear and sexy club dresses!</font></a></div>
+		<div class="currency">
+			<dl id="cur_selector" class="dropdown">
+			<dt><a title="" href="#" id="yourCurrency"><?php
+                      if (!isset($_SESSION['currency'])) {
+                        $_SESSION['currency'] = 'USD';
+                      }
+                      echo $_SESSION['currency']
+                    ?></a>
+         	</dt>
+			<dd>
+			<ul>
+<?php	if ($currencyList && count($currencyList) >0) :
+            foreach ($currencyList as $k => $v) :
+                if ($v->visible) :?>
+             	<li><a title="<?php echo $v->name ?>" class="flag <?php echo $v->name?>" rel="nofollow" href="#" target="_top"><?php echo $v->name; ?></a></li>
+<?php 			endif;
+            endforeach;
+         endif; ?>
+            </ul>
+            </dd>
+		</dl>
+		</div>
+	</div>
+	<div id="user_panel">
+	<ul>
+		<li id="up_help"><a href="<?php echo url('article/contact-us.html');?>" rel="nofollow"  class="b">Help</a></li>
+
+		<li id="up_signup">
+<?php if ($user->uid): ?>
+			<a href="<?php echo url('order/list/');?>" rel="nofollow" class="red">My Orders</a> or 
+			<a href="<?php echo url('user/logout') ?>" rel="nofollow" class="red">Logout</a>
+<?php else: ?>
+			<a href="<?php echo url('user/login');?>" rel="nofollow" class="red">Sign In</a> or 
+			<a href="<?php echo url('user/register');?>" rel="nofollow" class="red">Join Free</a>
+<?php endif;?>
+		</li>
+		</ul>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+

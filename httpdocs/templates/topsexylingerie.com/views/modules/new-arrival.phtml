@@ -1,0 +1,28 @@
+<?php if(isset($newProductList) && $newProductList):?>
+<div class="widget">
+<div class="w-head">
+<b><h2>New Arrivals</h2></b>
+<a class="more tiny" href="<?php echo url('new-arrivals.html');?>">&gt; View All New Arrivals</a>
+</div>
+<div id="p_new_arrival" class="grid">
+<?php
+	$item_count = 0;
+    	foreach ($newProductList as $v):
+        $item_count++;
+?>
+<?php if($item_count % 4 == 1):echo '<div  class="line-wrapper">'; endif;?>
+<dl <?php if($item_count % 4 == 0):echo 'class="last"';endif;?>>
+	<dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>">
+		<img alt="<?php echo $v->name;?>" title="<?php echo $v->name;?>" src="<?php echo urlimg('187x276', $v->filepath);?>">
+      	</a>
+    </dt>
+    <dd class="prodName"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo $v->name;?></a></dd>
+    <dd class="price"><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?> <?php echo isset($v->price)? c($v->price) : null;?></dd>
+</dl>
+<?php if($item_count % 4 == 0):echo '</div>';endif;endforeach;?>
+<?php if($item_count % 4 != 0): echo '</div>';endif;?>
+</div>
+</div>
+
+<?php endif;?>
+<br class="clears"/>

@@ -1,0 +1,51 @@
+<div class="widget">
+
+<h2>User Password Information</h2>
+             <?php echo themeMessages() ?>
+        <div class="Password-modification">
+        <h4>Modify Password information</h4>
+<div class="w-content">
+	<p>* Required Fields </p>
+
+            <form action="" method="post" name="changePwdForm" onsubmit="javascript:return checkChangePwd()">
+             <?php echo themeMessages() ?>
+
+		<div class="user_edit">
+        	
+                  <table>
+                    <tbody>
+                      <tr>
+                        
+                        <td><input type="text" readonly="readonly" value="<?php echo isset($user->name) ? $user->name : null ?>" class="elmbBlur input readonly"></td>
+			<th valign="bottom">Username</th>
+			<td></td>
+                      </tr>
+                      <tr>
+                        
+                        <td> <input type="password" name="oldpwd" value="" class="elmbBlur input" title="old password is not empty!"></td>
+			<th valign="bottom"><span style="color:#F22E9C;padding-right:5px;">*</span>Old Password</th>
+                      </tr>
+                      <tr>
+                        
+                        <td> <input type="password" name="newpwd" value="" class="elmbBlur input" title="new password is not empty!"></td>
+			<th valign="bottom"><span style="color:#F22E9C;padding-right:5px;">*</span>New Password</th>
+			<td></td>
+                      </tr>
+                      <tr>
+                        
+                        <td> <input type="password" name="newpwd2" value="" class="elmbBlur input" title="comfirm password is not empty!"></td>
+			<th valign="bottom"><span style="color:#F22E9C;padding-right:5px;">*</span>Retype New Password</th>
+			<td></td>
+                      </tr>
+
+                     <tr>
+                        <td colspan="3" class="td-buttons"><button class="button" type="submit">Save Changes</button><button class="button1" type="reset">Reset Form</button></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+                </form>
+</div>         
+</div>
+</div>

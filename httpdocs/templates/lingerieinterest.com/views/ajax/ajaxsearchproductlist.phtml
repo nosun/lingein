@@ -1,0 +1,14 @@
+<div class="w-head cat-filters"> 
+	<?php $this->render('modules/pagination.phtml');?>
+<?php $this->render('contents/c_filter_form.phtml');?>
+<div class="widget w-resultSortBar" id="resultSortBar">
+	<?php $this->render('contents/c_sortoptions.phtml')?>
+	<?php $this->render('contents/search_viewoptions.phtml')?>
+</div>
+</div>
+<?php $this->render('contents/c_productlist.phtml');?>
+<br class="clear"/>
+<div class="widget w-resultSortBar" id="resultSortBar">
+	<?php $this->render('contents/c_sortoptions.phtml');?>
+	<?php $this->render('modules/pagination.phtml');?>
+</div>

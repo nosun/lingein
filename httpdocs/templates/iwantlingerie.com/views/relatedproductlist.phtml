@@ -1,0 +1,19 @@
+<?php
+if (isset($product->related)&& $product->related ) :?>
+  <h2 class="fancyHeadingV2"><span>SIMILAR PRODUCTS </span><b></b></h2>
+  <div class="widget w-productList grid-m-l"><?php
+  foreach ($product->related as $v):
+?><dl><dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url) ?>"><img alt="" width="97px" height="146px" src="<?php echo urlimg('118x178',$v->filepath)?>"></a></dt>
+<dd><a title="<?php echo $v->name;?>" href="<?php echo url($v->url) ?>"><?php
+		  if (strlen($v->name) > 40){
+		    echo substr(str_replace(',', ', ', $v->name), 0, 40). ' ...';
+		  }
+		  else{
+		    echo str_replace(',', ', ', $v->name);
+		  }
+?></a><span class="price"><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?> <?php echo isset($v->price)? c($v->price) : null;?></span>
+</dd></dl><?php
+  endforeach;
+ ?></div><?php
+endif;
+?>

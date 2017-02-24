@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body><div style="width:100%;height:100%;background:#000000">
+<?php global $user ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<div class="container">
+<?php $this->render('parts/header.phtml'); ?>
+<div class="main-content">
+
+
+<h1 id="breadcrumb"><a href="<?php echo url("");?>">Home</a>&nbsp;&gt;&nbsp; Shopping Cart</h1>
+<?php $this->render('modules/ads_topslot.phtml')?>
+
+<div id="cart" class="widget fancy">
+    <div class="w-head">
+        <h2><span>Shopping Cart</span></h2>
+    </div>
+</div>
+<?php if($user->uid):?>
+	<a title="Proceed to Checkout" class="checkoutBtn button" href="javascript:submit_shopping_cart('checkout')">Proceed to Checkout</a>
+<?php else:?>
+    <a title="Proceed to Checkout" class="checkoutBtn button" href="<?php echo url('user/login/')?>">Proceed to Checkout</a>
+<?php endif?>
+<div class="clears"></div>
+
+<?php echo themeMessages(); ?>
+
+<?php $this->render('contents/cart_list.phtml');?>
+
+<div class="widget fancy">
+    <div class="w-head">
+        <h2><span>Shopping Cart</span></h2>
+    </div>
+</div>
+<?php if($user->uid):?>
+	<a title="Proceed to Checkout" class="checkoutBtn button" href="javascript:submit_shopping_cart('checkout')">Proceed to Checkout</a>
+<?php else:?>
+    <a title="Proceed to Checkout" class="checkoutBtn button" href="<?php echo url('user/login/')?>">Proceed to Checkout</a>
+<?php endif?>
+
+<div class="clears"></div>
+
+
+</div>
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+</div>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/common.js'; ?>" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<fieldset class="widget inner" id="shipMethod">
+	<div class="w-head">
+		<h2>
+			<span>Shipping Method</span>
+		</h2>
+	</div>
+	<div class="main-section">
+		<p style="display:none;" class="warning">No Shipping Method Available At This Time</p>
+		<table class="tb-shippingMethod" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr>
+					<th>Shipping Method</th>
+					<th>Estimated Shipping Time</th>
+					<th>Shipping Cost</th>
+				</tr>
+				</thead>
+			<tbody>
+				<tr>
+					<th valign="top">
+					<input type="radio" onclick="changeShipping(this.value)" name="shipping_method" value="ups" id="radio1"/>
+					<strong>Expedited Shipping</strong></th>
+					<td>3 - 5 business days. More cheaper when purchased items reached some amount.</td>
+					<td valign="top" class="shipping-counts">
+						<span id="shipping-count-ups" class="chargeFee red">Select To Count.</span>
+					</td>
+				</tr>
+				<tr>
+					<th valign="top"><input type="radio" onclick="changeShipping(this.value)" name="shipping_method" value="ems" id="radio1"/>
+					<strong>Standard Shipping</strong></th>
+					<td>6 - 8 business days. Cheaper if the shopping items are not many.</td>
+					<td valign="top" class="nowrap">
+						<span id="shipping-count-ems" class="chargeFee red">Select To Count.</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="extraInfo">	
+		</div>
+	</div>
+</fieldset>

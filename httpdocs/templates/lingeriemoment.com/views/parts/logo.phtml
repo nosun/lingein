@@ -1,0 +1,87 @@
+<?php global $user;?>
+<div id="header">
+
+<div id="utilityNav">     
+	<ul id="links">
+		<li><div id="shoppingCart"><a class="top-checkout" href="<?php echo url('cart');?>" style=""><span>MY BAG (<em class="cart_item_number"><?php echo isset($goodsInCart)? $goodsInCart : 0; ?></em>) &nbsp;<?php echo isset($goodsAmount) ? c($goodsAmount) : "$0.0"?></span></a></div></li>
+		
+		<!-- 
+		<li id="cur_selector">
+
+		<?php $cur_currency = isset($_SESSION['currency'])? $_SESSION['currency'] :'USD';?>
+		<a title="<?php echo $cur_currency;?>" class="flag <?php echo $cur_currency;?>" href="#" id="yourCurrency"><?php echo $cur_currency;?></a>
+                    
+         
+		<div class="currency lang_dropdown">
+			<ul>
+<?php	if (isset($currencyList) && count($currencyList) >0) :
+            foreach ($currencyList as $k => $v) :
+                if ($v->visible) :?>
+             	<li><a title="<?php echo $v->name ?>" class="flag <?php echo $v->name?>" rel="nofollow" href="#" target="_top"><?php echo $v->name; ?></a></li>
+<?php 			endif;
+            endforeach;
+         endif; ?>
+            </ul>
+		</div>
+		 
+			
+			
+			
+		</li>
+		-->
+		<?php if (isset($user) && $user->uid): ?>
+			<li><a href="<?php echo url('user/logout');?>">SIGN OUT</a> &nbsp;|&nbsp; <a href="<?php echo url('user/panel');?>">MY ACCOUNT</a></li>
+        <?php else: ?>
+			<li><a href="<?php echo url('user/login');?>">SIGN IN</a> &nbsp;|&nbsp; <a href="<?php echo url('user/register');?>">JOIN</a></li>
+        <?php endif;?>
+	</ul>
+	<!--links-->
+            
+    <form action="<?php echo url('pitems');?>" method="post">
+      <div id="search_box">
+      <a href="javascript:void(0)" id="header_search_keyword">
+        <button type="submit" title="GO" id="goSearch"><span><span>GO</span></span></button>
+      </a>
+	  <input name="keyword" id="search_keyword" type="text" class="text" value="<?php echo isset($search_keywords) ? plain($search_keywords) : 'Search';?>" onfocus="if(this.value=='Search'){this.value='';}"  onblur="if(this.value==''){this.value='Search';}" />
+      <img id="magnify" src="<?php echo $this->themeResourceURI('images/magnify.jpg');?>">
+      </div>
+     </form>
+</div>
+
+    <div class="logo_forever">
+
+            <div id="centerLogo">
+                <a href="<?php echo url("");?>"><img alt="Lingerie Moment" src="<?php echo $this->themeResourceURI('images/logo.jpg');?>"></a>
+            </div>
+
+			<div class="free-shipping">FREE SHIPPING!</div>
+    </div>
+
+
+    <?php $this->render('parts/navigation.phtml')?>
+
+    <!--  
+    <div id="topGlobalBanner">
+        <div id="wrapper">
+        <div id="ctaWrap">
+        	<div id="cta1">
+        		<a href="<?php echo url("");?>" onclick="">
+        			<img src="<?php echo $this->themeResourceURI('images/topGlobalBanner_1.jpg');?>">
+        		</a>
+        	</div>
+        	<div id="cta2">
+        		<a href="<?php echo url("");?>" onclick="">
+        			<img src="<?php echo $this->themeResourceURI('images/topGlobalBanner_2.jpg');?>">
+        		</a>
+        	</div>
+        	<div id="cta3">
+        		<a href="<?php echo url("");?>" onclick="">
+        			<img src="<?php echo $this->themeResourceURI('images/topGlobalBanner_3.jpg');?>">
+        		</a>
+        	</div>
+        	<div style="clear:both"></div>
+        </div>
+        </div>
+    </div>
+    -->
+</div>

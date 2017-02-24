@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+<?php global $user ?>
+<?php $this->render('parts/header.phtml'); ?>
+
+<div class="main-content">
+<div class="widget fancy">
+<div class="w-head">
+<h1>Login or Create an Account</h1>
+</div>
+
+	<div class="user-forms">
+	
+            <div class="user-register-pre">
+                <h1>New Customers</h1>
+                <div class="user-forms-border">
+                	<p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+            	</div>
+        	</div>
+                <form action="<?php echo url('user/login');?>" method="post">
+            <div class="user-login">
+                <h1>Registed Customers</h1>
+                <div class="user-forms-border">
+                <p>If you have an account with us, please log in. </p>
+                <?php echo themeMessages() ?>
+                <div id="client_message" style="display:none"></div>
+                
+					<div class="login_content">
+	                    <div class="name">
+	                    	<label><strong>Username/Email:</strong><em style="color:#CF0275;">*</em></label> <br />
+	                    	<input type="text" value="" name="username"  class="elmbBlur"/>
+	                    </div>
+	                    <div class="passwd">
+	                    	<label><strong>Password:</strong><em style="color:#CF0275;">*</em></label> <br />
+	                    	<input type="password" value="" name="password"  class="elmbBlur"/>
+                            <span>*Required</span>
+	                    </div>
+	                </div>
+                </div>    
+
+            </div>
+            <div class="clear"></div>
+              <div class="user-form-s">
+	                    <div class="button-sets">
+						<button onclick="window.location='<?php echo url('user/register');?>';" class="button fr" title="Create an Account" type="button"><span><span>Create an Account</span></span></button>
+						</div>
+						<div class="login-forgetpw">
+
+	                    <div class="login-submit">
+							<a href="<?php echo url('user/getPassword')?>">Forget Password? </a>
+	                    <input type="hidden" class="login-submit button" value="Sign In"/>
+	                    <button class="button"><span><span>Sign In</span></span></button>
+						</div>
+	                    </div>
+            </div>
+            	            </form>
+	 </div>
+    </div>
+    </div>
+
+
+<?php echo $this->render('parts/footer.phtml'); ?>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/common.js'; ?>" type="text/javascript"></script>
+</body>
+</html>

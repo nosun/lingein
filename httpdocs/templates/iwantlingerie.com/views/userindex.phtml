@@ -1,0 +1,14 @@
+            <div class="shopping_top_r">
+                <p class="welcome">Welcome to www.iwantlingerie.com Member Center! We will be happy to Serve you!</p>
+                <p class="last_login">Your last login time:<?php echo date('m-d-Y',$user->login_timestamp);?></p>
+            </div>
+			
+			<div class="formHeader"><b>User Information</b></div>
+            <div class="shopcart">
+                <div class="perweb">
+                    <p>Welcome <?php echo ($user->nickname == '') ? $user->name : $user->nickname ?>!</p>
+                    <p>Your Integral: <?php if(isset($user->points)) echo $user->points;?></p>
+                    <p>Your total orders' transactions: <?php if(isset($orderscount)) echo $orderscount?> </p>
+                    <p>View your <a href="<?php echo url('order/list/')?>"><strong>order history</strong></a></p>
+                </div>
+            </div>

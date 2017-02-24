@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+<?php global $user ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<div class="container">
+<?php $this->render('parts/header.phtml'); ?>
+
+
+<div class="main-content">
+<h1 id="breadcrumb"><a href="<?php echo url("");?>">Home</a>&nbsp;&gt;&nbsp; Login</h1>
+
+<div class="widget fancy">
+<div class="w-head">
+<h2>
+<span>Login or Create an Account</span>
+</h2>
+</div>
+
+	<div class="user-forms">
+	
+            <div class="user-register-pre">
+                <h1>New Customers</h1>
+                <div class="user-forms-border">
+                	<p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+            	</div>
+                <div class="button-sets">
+                	<button onclick="window.location='<?php echo url('user/register');?>';" class="button" title="Create an Account" type="button">Create an Account</button>
+                </div>
+        	</div>
+
+            <div class="user-login">
+                <h1>Registed Customers</h1>
+                
+                <form action="<?php echo url('user/login');?>" method="post">
+                <div class="user-forms-border">
+                <p>If you have an account with us, please log in. </p>
+                <?php echo themeMessages() ?>
+                <div id="client_message" style="display:none"></div>
+                
+					<div class="login_content">
+	                    <div class="name">
+	                    	<label>Username/Email:<em>*</em></label> 
+	                    	<input type="text" value="" name="username"  class="elmbBlur"/>
+	                    </div>
+	                    <div class="passwd">
+	                    	<label>Password:<em>*</em></label> 
+	                    	<input type="password" value="" name="password"  class="elmbBlur"/>
+	                    </div>
+	                </div>
+                </div>
+	                    <div class="button-sets">
+	                    <div class="login-forgetpw"><a href="<?php echo url('user/getPassword')?>">Forget Password? </a></div>
+	                    <div class="login-submit">
+	                    <input type="submit" class="login-submit button" value="Sign In"/> </div>
+	                    </div>
+	            </form>
+            </div>
+
+			<div class="user-help">
+		   		<h2>Help</h2>
+		   		<p>Our customer service team is available 
+		   			<span class="together">7am PT - 7 PM PT</span> 
+		   			<span class="together">Monday - Friday,</span> and 
+		   			<span class="together">7 am PT - 12 noon PT</span> Saturday. 
+		   			<br/>Just email us at <a href="mailto:<?php $siteInfo = Bl_Config::get('siteInfo');echo $siteInfo['email'];?>"><?php echo $siteInfo['email'];?></a>.
+		   		</p>
+			</div>
+    </div>
+    </div>
+</div>
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/common.js'; ?>" type="text/javascript"></script>
+</body>
+</html>

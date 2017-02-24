@@ -1,0 +1,17 @@
+<div class="w-prodImages" id="product-image-intro">
+	<div id="w-featurePics">
+    	<a href="<?php echo urlimg('500x750',$product->filepath);?>" target="_blank">
+    		<img id="main-display-pic" src="<?php echo urlimg('410x615',$product->filepath);?>"/>
+   		</a>
+	</div>
+<div id="w-prodthumbnails">
+<div id="prodthumbnails"><?php 
+	if($product->fid):?><a href="<?php echo urlimg('60x90',$product->filepath)?>"  class="current" style="margin-top: 0px;" rel="zoom1" rev="<?php echo url('images/'.$file->filepath);?>"><img width="65" height="85" src="<?php echo urlimg('118x178', $product->filepath) ?>" border="0" /></a><?php 
+	endif;?><?php
+        $thumbnail_count = 0;
+        foreach ($product->files as $i => $file):
+          $thumbnail_count++;
+        ?><a href="javascript:void(0)"  <?php if($product->filepath == $file->filepath){echo 'class="current"';}?> rel="zoom1" style="margin-top: 0px;<?php if($thumbnail_count > 5) echo 'display:none;'?>" rev="<?php echo url('images/'.$file->filepath);?>"><img src="<?php echo urlimg('118x178', $file->filepath) ?>" alt="<?php echo isset($file->alt)? plain($file->alt):null; ?>" border="0" /></a><?php 
+        endforeach ?></div>
+	</div>
+</div>

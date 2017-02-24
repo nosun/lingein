@@ -1,0 +1,26 @@
+<ul class="Shop_con">
+<?php if ($fieldsList):
+	foreach($fieldsList as $k):
+        foreach($k->attribute as $key => $dl) {
+          if (isset($dl->value)) {
+          $kk[$dl->value] = $dl;
+          }
+       }
+      $kk = isset($kk) ? $kk : $k->attribute;
+       ksort($kk);
+      foreach($kk as $k2):
+        foreach($k2 as $key => $dl) {
+          if (isset($dl->value)) {
+          $k2[$dl->value] = $dl;
+        }
+     }?>
+     <?php if ($k->field_name == 'color' && $k2->value): ?>
+            <li><a href="<?php echo url('browse/' . $filterm . '+' . $filbrand . '++shoe+color=' . $k2->value . ($filfieldSize !== '' ? ('_' . $filfieldSize) : '') . '+' . $filprice . '.html') ?>"><?php echo $k2->value ?></a></li>
+      <?php
+  endif;
+endforeach;
+unset($kk);
+?>
+<?php endforeach;
+endif;?>
+        </ul>

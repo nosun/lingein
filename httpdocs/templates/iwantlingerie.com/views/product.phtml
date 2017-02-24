@@ -1,0 +1,174 @@
+<?php echo $this->render('before_body.phtml'); ?>
+<body>
+<?php echo $this->render('header.phtml'); ?><div class="bodyer">
+<h1 id="breadcrumb"><?php echo themeBreadcrumb() ?></h1>
+<div id ="wrapper" class="prPage">
+<div class="w-prodImages vThumbnails" id="wrapper-t-l"><div id="w-featurePics">
+    	<a href="<?php echo url('images/'.$product->bigfilepath);?>" target="_blank"><img id="main-display-pic" height="500" src="<?php echo url('images/'.$product->bigfilepath);?>"></a>
+	<div style="position: absolute; cursor: pointer; top: -9999px; width: 133.333px; height: 120px; left: 0px;" id="detailImgLen"></div></div>
+	<div id="w-prodthumbnails"><div id="thumbnailsUp"><a href="javascript:void(0)">previous</a></div>
+	<div id="prodthumbnails"><?php 
+	if($product->fid):?><a href="<?php echo url('images/'.$product->filepath);?>"  class="current" style="margin-top: 0px;" rel="zoom1" rev="<?php echo url('images/'.$file->filepath);?>"><img width="65" height="85" src="<?php echo urlimg('118x178', $product->filepath) ?>" border="0" /></a><?php 
+	endif;?><?php
+        $thumbnail_count = 0;
+        foreach ($product->files as $i => $file):
+          $thumbnail_count++;
+        ?><a href="javascript:void(0)"  <?php if($product->filepath == $file->filepath){echo 'class="current"';}?> rel="zoom1" style="margin-top: 0px;<?php if($thumbnail_count > 5) echo 'display:none;'?>" rev="<?php echo url('images/'.$file->filepath);?>"><img width="65" height="85" src="<?php echo urlimg('118x178', $file->filepath) ?>" alt="<?php echo isset($file->alt)? plain($file->alt):null; ?>" border="0" /></a><?php 
+        endforeach ?></div>
+	<div id="thumbnailsDown"><a href="javascript:void(0)" <?php if(count($product->files) > 5) echo 'class="hasItem"';?>>next</a></div></div>
+</div>
+<div id="wrapper-t-r" class="zindex_2001">
+<h1 id="prHead"><?php echo $product->name;?></h1>
+<p class="prodItemId">Item ID # <?php echo $product->sn;?></p><p class="prodItemSummary"><?php echo $product->summary;?></p>
+<ul class="widget w-prSocial"><li id="prRate"><?php 
+	if(isset($product->pid) && $product->pid):
+        echo widgetCallFunction('fivestars', 'getaveragestars', $product->pid, true);
+    endif;?><a class="textbtnGray toogleWriteReview" href="#write-a-review" style="margin-bottom:5px;">Write a review</a><?php /*echo '<a class="small gray" href="" style="display:none;">(<span>123</span> reviews)</a></li>';*/?><li>
+    </li>
+	<li id="socialShare">
+                      <div class="addthis_toolbox addthis_default_style addthis_16x16_style " id="divAddThis">
+                      <!-- AddThis Button BEGIN --><div class="addthis_toolbox addthis_default_style "><a class="addthis_button_preferred_1"></a><a class="addthis_button_preferred_2"></a><a class="addthis_button_preferred_3"></a><a class="addthis_button_preferred_4"></a><a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a></div>
+                      <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f911222039d9281"></script><!-- AddThis Button END -->
+                      <div class="atclear"></div></div>
+	</li></ul>
+<div class="widget w-prOrderInfo"><table class="prPrice"><tbody><tr><th>List Price:</th>
+				<td><span class="currencysymbol"><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?></span></td>
+				<td><del><?php echo isset($product->list_price) ? c($product->list_price) : null;?></del></td></tr>
+			<tr><th class="black b">Price:</th>
+				<td><div style="position:relative;" id="prodCurSelector" class="left"><div class="currencysymbol current" id="chosedCur"><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?></div></div></td>
+				<td><strong class="salePrice"><?php echo isset($product->price) ? c($product->price):null;?></strong></td></tr>
+			<tr class="savingPrice"><th>SAVE:</th>
+				<td class="currencysymbol"><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?></td><td><?php 
+				if (isset($product->price) && isset($product->list_price))
+				    echo c($product->list_price - $product->price);
+				  ?></td></tr></tbody>
+	</table></div>
+<form name="cart_quantity_frm" method="post" class="widget w-prOrder w-prOrderNew disable_on_submit" action="<?php echo url('cart/productpost');?>" id="prOrder">
+    <input type="hidden" value="<?php echo isset($product->pid) ? $product->pid : null ?>" name="pid">
+	<div id="errorInfo" class="errorInfo">Please complete your selection(s) before adding to cart.<em></em></div>
+	<div class="clearfix prOrderOptions">
+	<table id="tb" class="table-prOrderOpts"><tbody><?php 
+		foreach ($product->fields as $fieldName => $field):
+    if(!empty($product->{'field_' . $fieldName})):
+    ?><tr><th><?php echo plain($field->name); ?>:</th>
+			<td><div class="fl"><?php 
+			if ($field->multiple){
+			  if($field->required==1){
+			    $sel_cont = ' class=" non-empty" title="You need choose at least one '.$field->name.'"';
+            }else{
+              $sel_cont = '';
+            }
+                  echo'<select name="'.$fieldName.'" onchange="selectAttr(\''.$field->field_name.'\',this.value)" '.$sel_cont.'>';
+                  echo '<option value="">Please Select</option>';
+                  foreach ($product->{'field_' . $fieldName} as $k => $v){
+                    if($v){
+                      if(isset($field->default_value) && $field->default_value && $field->default_value == $v ){
+                          echo '<option value="'.$v.'" selected="selected">'.$v.'</option>';
+                      }else{
+                      echo '<option value="'.$v.'">'.$v.'</option>';
+                      }
+                    }
+                  }
+                    echo '</select>';
+                    
+			if($field->required == 1){echo '<p class="error_notice red" style="display:none;">Choose At Least 1 '.$fieldName.'</p><p class="success_notice" style="display:none;"></p>';}
+                    
+                    if(isset($field->default_value) && $field->default_value && in_array($field->default_value,$product->{'field_' . $fieldName}) ){
+                      echo '<input type="hidden" value="'.$field->default_value.'" name="data['.$field->name.']" id="attr_'.$fieldName.'">';
+                    }else{
+                      echo '<input id="attr_'.$fieldName.'" type="hidden" value="" name="data['.$field->name.']">';
+                    }
+            }else{
+              echo isset($product->{'field_' . $fieldName}) ? plain($product->{'field_' . $fieldName}) : null;
+              echo '<input type="hidden" id="attr_'.$field->field_name.'" value="'.plain($product->{'field_' . $fieldName}).'" name="data['.$field->name.']">';
+            }
+            ?></div></td></tr><?php
+    endif;
+  endforeach; ?>
+		<tr><th>Quantity: </th>
+		<td><div class="fl"><input type="text" size="3"  class="numcheck" value="<?php echo isset($product->sell_min) && $product->sell_min ? $product->sell_min : 1 ?>" name="qty" title="<?php echo isset($product->sell_min) ? $product->sell_min : 0 ?>,<?php echo isset($product->sell_max) ? $product->sell_max : 0 ?>" value="1" />  Unit(s)</div></td></tr>
+	</tbody></table>			
+	<div class="actions orderBtnV2"><a href="javascript:void(0);"><input type="submit" value="" alt="" src="<?php echo $tpldir ?>/images/transparent.gif" class="litb-btn add2cartPending" name="cart"></a></div>
+  </div></form>
+
+<section class="widget w-prExtras"><div style="border-top: 1px solid rgb(221, 221, 221); padding-top: 5px;">
+<p style="font-weight: bold; margin-bottom: 0pt; color: rgb(0, 0, 0);">We ship to over 100 countries worldwide.</p>
+<p style="margin: 0pt;"><strong>Shipping Time:</strong> 3-8 business days. </p>
+</div></section>
+</div>
+<div class="product_details">
+<div id="wrapper-l">
+<!-- Start of Recommend Products -->
+<div class="widget w-prProm black">
+<h2 class="fancyHeading clearfix"><span class="current">Product Recommendations</span></h2>
+<div class="widget w-grid"><?php echo $this->render('recommand.phtml'); ?></div><!-- End of Recommand Products -->
+<!-- Start of Product Description Section -->
+<div id="w-prodSecTabs" class="widget w-prodSecTabs"> 
+	<h2 class="fancyHeading clearfix" id="fancyHeading">
+		<a class="current">About This Product</a>
+		<a class="pageAnchor" href="#customer_reviews">Customer Reviews</a>
+	</h2>
+	<section class="w-pbg big_ section"><div>
+        <span class="b_" style="font-size: 13px; color: rgb(102, 102, 102);"><strong> Product Summary: </strong><?php echo $product->summary;?><?php echo (isset($docvar4) && $docvar4 != '') ? '<br><strong>Tips:</strong>'.$docvar4 : null; ?></span>
+    </div><div class="clear"></div></section>
+</div>
+<div class="widget" id="w-productDescription"><!-- Parameters Section Start -->
+<h2 class="blue line_180">Parameters:&nbsp;</h2>
+<div class="pad_10px pad_l_28px big relative section">
+<table width="709" cellspacing="0" cellpadding="0" border="0" class="opacity layout"><tbody>
+<tr><td width="709" class="big black"><div class="section"><?php 
+if($product->brand):?><strong class="label">Brand: &nbsp;</strong> <?php echo isset ($product->brand->name) ? $product->brand->name : null ;?> <br><?php 
+endif;?><?php 
+if($product->number):?><strong class="label">Code: &nbsp;</strong><?php echo  isset($product->number) ? $product->number : null;?><br><?php 
+endif;?><?php 
+if($product->field_color):?><strong class="label">Colors: &nbsp;</strong><?php
+    $corlorLists="";
+    foreach ($product->field_color as $c) :
+      $corlorLists.=(' '.$c);
+    endforeach;
+    echo $corlorLists;
+  ?><br><?php 
+endif;?><?php 
+if($product->field_size):?><strong class="label">Sizes: &nbsp;</strong><?php
+    $sizeLists='';
+    foreach ($product->field_size as $s) :
+      $sizeLists.=(' '.$s);
+    endforeach;
+    echo $sizeLists;
+  ?><br><?php 
+  endif;?>
+<strong class="label">Status: &nbsp;</strong><?php if ($product->status):?>In stock, usually ships in 24 hours<?php else:?>Under the frame<?php endif;?><br>
+</div></td></tr>
+</tbody></table>
+</div>
+<!-- End of Parameters Section --><!-- Detailed Description Section -->
+<h2 class="blue line_180">Detailed Descriptions:&nbsp;</h2>
+<div class="pad_10px pad_l_28px big relative section"><?php 
+if($product->fid):?><p><span><?php echo $product->name;?></span></p><?php 
+endif;?>
+<p><?php echo isset($product->description)? $product->description : null;?></p><?php 
+if($product->fid):?><div class="banner"><img src="<?php echo url('images/'.$product->filepath); ?>" border="0" alt="<?php echo $product->name;?>" /></div><?php
+endif;
+if(isset($product->files) && $product->files):
+  foreach ($product->files as $i => $file):
+    if(isset($file->alt) && $file->alt):
+?><p><?php echo plain($file->alt);?></p><?php
+else: echo '<p>&nbsp;</p>';
+endif;?>
+<div class="banner"><img src="<?php echo url('images/'.$file->filepath);?>" alt="<?php echo isset($file->alt)? plain($file->alt):null; ?>" border="0" /></div><?php
+      endforeach;
+    endif;?></div><!-- end of Detailed Description Section -->
+<div class="clear"></div>
+</div><?php 
+if (Bl_Config::get('isOpen')): echo $this->render('comment.phtml'); endif;?>
+</div></div>
+<div id="wrapper-r"><div class="w-prRecommend"><?php echo $this->render('relatedproductlist.phtml'); ?></div>
+<div class="w-prRecommend"><?php echo $this->render('bestproductlist.phtml'); ?></div>
+</div></div></div><!-- end of wrapper -->
+</div>
+<?php echo $this->render('footer.phtml'); ?>
+<?php echo $this->render('after_body.phtml'); ?>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/products.js'; ?>" type="text/javascript"></script>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/common.js'; ?>" type="text/javascript"></script>
+</body>
+</html>

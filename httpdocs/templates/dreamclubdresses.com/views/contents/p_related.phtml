@@ -1,0 +1,28 @@
+<?php if (isset($product->related)&& $product->related ) :
+			$related_count = 0;?>
+<div id="p-related" class="p-widget fr">
+<h2>Same Styles</h2>
+<div class="grid">
+<?php foreach ($product->related as $v):
+      if(!isset($v))
+      	continue;
+      if($related_count >= 4)
+        break;
+      $related_count++;?>
+<dl><dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url) ?>"><img alt="<?php echo $v->name;?>" src="<?php echo urlimg('60x90',$v->filepath)?>"></a></dt></dl>
+<?php endforeach;?>
+<?php if ($bestProductList && $related_count < 4) :
+shuffle($bestProductList); ?>
+<?php foreach ($bestProductList as $v):
+      if(!isset($v))
+      	continue;
+      if($related_count >= 4)
+        break;
+      $related_count++;?>
+<dl><dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url) ?>"><img alt="<?php echo $v->name;?>" src="<?php echo urlimg('60x90',$v->filepath)?>"></a></dt></dl>
+<?php endforeach; 
+endif;?>
+
+</div>
+</div>
+<?php endif;?>

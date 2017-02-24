@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body><div style="width:100%;height:100%;background:#000000">
+<?php global $user ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<div class="container">
+<?php $this->render('parts/header.phtml'); ?>
+
+<div class="main-content">
+<h1 id="breadcrumb"><a href="<?php echo url("");?>">Home</a>&nbsp;&gt;&nbsp; Complete Register</h1>
+<?php $this->render('modules/ads_topslot.phtml')?>
+
+<div class="widget wide">
+    <div class="w-head">
+        <h2>Register Successful</h2>
+    </div>
+<div class="general checkout-result">
+<div class="main-block">
+<div class="status-info">
+        <h3>Your Account Has Been Created!</h3>
+        <h4>Congratulations! Your new account has been successfully created!</h4>
+        <ul class="info-list">
+        <li>You can now take advantage of member privileges to enhance your online shopping experience with us.</li> 
+        <li>If you have ANY questions about the operation of this online shop, please email the store owner.</li>
+        <li>A confirmation has been sent to the provided email address. If you have not received it within the hour, please <a href="<?php echo url('article/contact-us.html')?>" class="red">contact us</a>.</li>  
+        </ul>
+
+</div>
+</div>
+
+<div class="userlinks">
+<div class="widget inner">
+	<div class="w-head"><h2>You can now:</h2></div>
+	<ul>
+		<li><a href="<?php echo url('user/panel');?>">Visit User Center</a></li>
+		<li><a href="<?php echo url('user/info');?>">Change Baic Settings</a></li>
+		<li><a href="<?php echo url('user/pwd');?>">Change Password</a></li>
+		<li><a href="<?php echo url('order/list/first');?>">View Order History</a></li>
+		<li><a href="<?php echo url('user/logout');?>">Log Out</a></li>
+	</ul>
+<a href="<?php echo url('product/list/')?>" class="button continueBtn">Continue Shopping</a>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+</div>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/common.js'; ?>" type="text/javascript"></script>
+</body>
+</html>

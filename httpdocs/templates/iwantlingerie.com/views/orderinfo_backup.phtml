@@ -1,0 +1,210 @@
+		<div class="shopcart_top margin"><span>Order Information</span></div>
+                <div class="member_box">
+                 <div class="titlefout">Order Status</div>
+                  <table width="100%" cellspacing="1" cellpadding="3" bgcolor="#ffffff" align="center" class="shoppingche">
+                    <tbody>
+                      <tr>
+                        <td width="139" height="32" align="right" class="leftwhat">Order No:</td>
+                        <td colspan="5" class="gray"><?php echo $orderInfo->number;?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="leftwhat">Order Status:</td>
+                        <td colspan="5" class="gray">
+<?php
+  if($orderInfo->status==0): echo 'Pending';
+  elseif($orderInfo->status==1): echo 'Processing';
+  elseif($orderInfo->status==2): echo 'Completed';
+  elseif($orderInfo->status==-1): echo 'Removed';
+  elseif($orderInfo->status==-2): echo 'Deleted';
+  endif;
+?>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="leftwhat">Payment Status:</td>
+                        <td colspan="5" class="gray">
+<?php
+  if($orderInfo->status_payment==0):
+     echo 'Not Paid';
+  elseif($orderInfo->status_payment==1):
+     echo 'Paid';
+  endif;
+?>
+                        </td>
+                      </tr>
+
+
+                      <tr>
+                        <td align="right" class="leftwhat">Create at :</td>
+                        <td colspan="5" class="gray"><?php echo date('Y-m-d H:i:s',$orderInfo->created);?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="leftwhat">Payable total:</td>
+                        <td colspan="5" class="scarlet"><b><?php echo c($orderInfo->pay_amount);?></b></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="leftwhat">Delivery Number:</td>
+                        <td colspan="5" class="gray">
+                        <?php echo isset($orderInfo->data['shipping_no']) ? plain($orderInfo->data['shipping_no']) : 'non-delivery'; ?>
+                        </td>
+                      </tr>
+                       </tbody>
+                </table>
+                
+            <div class="titlefout" style="border:none;">Order Detail</div>                    
+              <table width="100%" cellspacing="2" cellpadding="0" align="center" class="shoppingche">
+                <tbody>
+                    <tr>
+                        <td height="29" align="center" bgcolor="#e4e4e4"><strong>Image</strong></td>
+                      <td height="29" bgcolor="#e4e4e4"><strong>Item Description</strong></td>
+                      <td width="79" align="center" bgcolor="#e4e4e4"><strong>Quantity</strong></td>
+                        <td width="84" align="center" bgcolor="#e4e4e4"><strong>Unit Price</strong></td>
+                        <td width="76" align="center" bgcolor="#e4e4e4"><strong>Sub Total</strong></td>
+                    </tr>
+<?php
+if (isset($orderInfo->items)):
+  foreach ($orderInfo->items as $k => $v):
+?>
+                      <tr>
+                        <td height="101" align="center" class="referral"><a href="<?php echo url($v->url);?>"><img src="<?php echo urlimg('67x67', $v->filepath) ?>" alt="" /></a></td>
+                        <td align="left" class="referral"><a href="<?php echo url($v->url);?>"><?php echo isset($v->name) ? $v->name : null ?></a><br />
+          <?php if(isset($v->data) && count($v->data)>0 && is_array($v->data)):
+                foreach($v->data as $dk => $dv):
+                echo '<p><strong>'. $dk. ':</strong><span class="gray">' . $dv . '</span></p>';
+               endforeach;
+         else:
+                    echo null;
+                 endif;
+          ?>
+                        </td>
+                        <td align="center" class="referral"><span><?php echo isset($v->qty) ? $v->qty : null ?></span></td>
+                        <td align="center" class="referral"><span class="scarlet"><?php echo isset($v->pay_price) ? c($v->pay_price) : null; ?></span></td>
+                        <td align="center" class="referral"><span class="scarlet"><?php echo isset($v->pay_price) ? c($v->qty * $v->pay_price) : null; ?></span></td>
+                      </tr>
+<?php
+  endforeach;
+endif;
+?>
+                      <tr>
+                        <td height="74" colspan="6" align="right">
+
+                        Subtotal :<span class="scarlet"><?php echo c($orderInfo->total_amount);?></span> <br>
+<?php if (isset($orderInfo)): ?>
+          <?php
+           if (isset($orderInfo->fees)) :
+              foreach ($orderInfo->fees as $fee) :
+                if ($fee->fee_value) :
+                  echo $fee->fee_key . ' : <span class="scarlet">' . c($fee->fee_value) . '</span><br />';
+                endif;
+              endforeach;
+            endif;
+          ?>
+<?php endif ?>
+Total Payment :<span class="scarlet"><strong><?php if (isset($orderInfo->pay_amount)) echo c($orderInfo->pay_amount) ?></strong></span>
+        </td>
+                      </tr>
+                      </tbody>
+              </table>
+                
+            <div class="titlefout">Payment Information</div>
+                <table width="100%" cellspacing="0" cellpadding="0" align="center" class="shoppingche">
+                <tbody>
+                      <tr>
+                        <td width="21%" align="right" class="leftwhat">Payment method</td>
+                        <td colspan="5" class="gray">
+                        <?php echo isset($paymentList[$orderInfo->payment_method]->name) ? $paymentList[$orderInfo->payment_method]->name : null?><?php if($orderInfo->status_payment==0):?>&nbsp;&nbsp;<?php echo $submitform; endif;?>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="leftwhat">Payment Status:</td>
+                        <td colspan="5" class="gray">
+<?php
+  if($orderInfo->status_payment==0):
+     echo 'Not Paid';
+  elseif($orderInfo->status_payment==1):
+     echo 'Paid';
+  endif;
+?>
+                        </td>
+                     </tbody>
+              </table>
+                
+            <div class="titlefout">Shipping Information</div>
+                <table width="100%" cellspacing="0" cellpadding="0" align="center" class="shoppingche">
+                <tbody>
+                         <tr>
+                        <td width="21%" align="right" class="leftwhat">Delivery method:</td>
+                        <td colspan="5" class="gray">
+                        <?php echo isset($shippingList[$orderInfo->shipping_method]->name) ? $shippingList[$orderInfo->shipping_method]->name : null ?>
+                        </td>
+                      </tr>
+                         <tr>
+                        <td align="right" class="leftwhat">Delivery costs:</td>
+                        <td colspan="5" class="gray">
+                      <?php echo isset($orderInfo->fees['shipping']->fee_value) ? c($orderInfo->fees['shipping']->fee_value) : ''; ?>
+                     </td>
+                      </tr>
+                      </tbody>
+              </table>
+                
+            <div class="titlefout">Payment Address</div>
+                <table width="100%" cellspacing="0" cellpadding="0" align="center" class="shoppingche">
+                <tbody>
+                      <tr>
+                        <td width="21%" align="right" class="leftwhat">First Name:</td>
+                        <td colspan="5" class="gray">
+                        <?php echo isset($orderInfo->delivery_first_name) ? $orderInfo->delivery_first_name : ''; ?></td>
+                      </tr>
+                       <tr>
+                        <td align="right" class="leftwhat">Last Name:</td>
+                        <td colspan="5" class="gray">
+                        <?php echo isset($orderInfo->delivery_last_name) ? $orderInfo->delivery_last_name : ''; ?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="leftwhat">Address:</td>
+                        <td colspan="5" class="gray">
+                        <?php echo isset($orderInfo->delivery_address) ? $orderInfo->delivery_address : ''; ?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="leftwhat">City:</td>
+                        <td colspan="5" class="gray">
+                        <?php echo isset($orderInfo->delivery_city) ? $orderInfo->delivery_city : ''; ?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="leftwhat">State/Province:</td>
+                        <td colspan="5" class="gray">
+                        <?php echo isset($orderInfo->delivery_province) ? $orderInfo->delivery_province : ''; ?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="leftwhat">Country:</td>
+                        <td colspan="5" class="gray">
+                        <?php echo isset($orderInfo->delivery_country) ? $orderInfo->delivery_country : ''; ?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="leftwhat">Postal/Zip code:</td>
+                        <td colspan="5" class="gray">
+                        <?php echo isset($orderInfo->delivery_postcode) ? $orderInfo->delivery_postcode : ''; ?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="leftwhat">Telphone:</td>
+                        <td colspan="5" class="gray">
+                        <?php echo isset($orderInfo->delivery_phone) ? $orderInfo->delivery_phone : ''; ?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="leftwhat">Mobile Phone:</td>
+                        <td colspan="5" class="gray">
+                        <?php echo isset($orderInfo->delivery_mobile) ? $orderInfo->delivery_mobile : ''; ?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="leftwhat">Email Address:</td>
+                        <td colspan="5" class="gray">
+                        <?php echo isset($orderInfo->delivery_email) ? $orderInfo->delivery_email : ''; ?></td>
+                      </tr>
+                      <tr>
+                        <td align="right" class="leftwhat">Delivery time:</td>
+                        <td colspan="5" class="gray">
+                        <?php echo isset($orderInfo->delivery_time) ? $orderInfo->delivery_time : ''; ?></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>

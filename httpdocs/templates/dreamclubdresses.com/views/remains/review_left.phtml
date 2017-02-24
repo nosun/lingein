@@ -1,0 +1,24 @@
+<div id="wrapper-l-200 w-b w-cateNav">
+<div class="bg_box_gray allborder clear big">
+<?php $isTag = isset($termInfo) && $termInfo->vid == Taxonomy_Model::TYPE_TAG;?>
+<h3 class="side-subcat-title"><?php echo 'Product Reviews';?></h3>
+	<div class="side-sibcat2">
+	<?php if(isset($category) && count($category) > 0):?>
+		    <ul class="big"><?php foreach($category as $k=>$v):?>
+		     	<li class="topreviewcat"><a href="<?php echo url('review/' . $v->path_alias . '.html');?>" class="b <?php if($v->name == $termInfo->name)  echo 'red'?>"><?php echo ucwords($v->name);?></a>
+		     	
+        	<div class="side-subcat-div">
+        	<ul class="side-subcat-lists" ><?php 
+        	foreach($v->sub as $subk=>$subv):?>
+        		<li class="subreviewcat"><a href="<?php echo url('review/' . $subv->path_alias . '.html');?>" class="<?php if($subv->name == $termInfo->name)  echo 'red'?>"><?php echo ucwords($subv->name);?></a></li><?php 
+        	endforeach;?>
+        	</ul>
+        	</div>
+		     	
+		     	</li>
+			 <?php endforeach;?>
+		    </ul>
+	
+	<?php endif;?>
+
+</div></div></div>

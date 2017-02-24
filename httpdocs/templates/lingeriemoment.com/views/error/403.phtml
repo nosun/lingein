@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+<?php $this->render('parts/header.phtml');?>
+
+<div class="main-content">
+
+<div class="general">
+
+<div class="error-content">
+	<h2>403 Forbidden</h2>
+	
+	<div class="info-list">
+		<p>You don't have previlege to view the resouce.</p>
+		<p>Return <a href="<?php echo $siteInfo['siteurl'];?>">Home</a></p>
+		<p><?php echo $ex->getMessage(); ?></p>
+	</div>
+	
+</div>
+
+</div>
+
+</div>
+
+<?php echo $this->render('parts/footer.phtml'); ?>
+</body>
+</html>

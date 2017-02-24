@@ -1,0 +1,38 @@
+<?php echo $this->render('admin/before_body.phtml', array('docTitle' => '后台管理登录', )) ?>
+
+<?php if(false){ ?>
+<body>
+  <div style="margin:50px auto;padding:10px;width:300px;background-color:#ffc;border:1px solid #cc9;padding:30px 50px;text-align:center;line-height:300%">
+    <form action="" method="post">
+      <h2 style="text-align:left"><?php echo t('MEMBER LOGIN') ?></h2>
+      <p><label><?php echo t('Username') ?></label> : <input type="text" name="username" style="font-size:16px;padding:5px"></p>
+      <p><label><?php echo t('Password') ?></label> : <input type="password" name="password" style="font-size:16px;padding:5px"></p>
+      <p><button type="submit" style="font-size:16px;padding:5px"><?php echo t('LOGIN') ?></button></p>
+    </form>
+  </div>
+</body>
+<?php } ?>
+
+<link href="<?php echo url('images/admin/login.css') ?>" rel="stylesheet" type="text/css" />
+
+<body>
+<div class="Containers">
+  <div class="Box clear">
+      <div class="logo"></div>
+      <form action="" method="post" style="margin:0;padding:0;border:0;">
+        <div class="login">
+          <?php echo themeMessages() ?>
+          <ul>
+            <li><span>管理员姓名：</span><input type="text" class="bltext" value=""  name="username"/></li>
+            <li><span>管理员密码：</span><input type="password" class="bltext" value=""  name="password"/></li>
+            <li><span>&nbsp;</span><input type="submit" value="" class="Buttom" /></li>
+            <li class="return"><a href="<?php echo url('') ?>">» 返回首页</a>  <a href="#">» 您忘记了密码吗?</a></li>
+          </ul>
+        </div>
+      </form>
+    </div>
+</div>
+</body>
+
+
+<?php echo $this->render('admin/after_body.phtml') ?>

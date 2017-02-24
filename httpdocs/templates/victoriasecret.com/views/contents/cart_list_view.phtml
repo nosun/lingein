@@ -1,0 +1,39 @@
+<section id="shoppingBag">
+<h1 class="return">Shopping Bag</h1>
+<section>
+ <div> </div>
+ <div id="bagContent"> 
+ 
+<?php if ($cartInfo->product) :
+foreach ($cartInfo->product as $k => $v): ?>
+   
+   <div class="item"> 
+   <span> <img class="edit-item" alt="<?php echo isset($v->name) ? $v->name : null ?>" title="<?php echo isset($v->name) ? $v->name : null ?>" src="<?php echo urlimg('90x135', $v->filepath) ?>"/> <em></em></span>
+   <section> 
+   <hgroup class="edit-item"><h1><?php echo isset($v->name) ? $v->name : null ?></h1></hgroup>
+   <?php if(isset($v->data) && $v->data):
+	  	foreach($v->data as $dk => $dv):
+			echo '<span>'.$dk.'</span>'.$dv.'<br/>';
+		endforeach;
+      else: echo '&nbsp;';
+      endif;?>
+   <span>Qty</span><?php echo isset($v->qty) ? $v->qty : null ?>
+   </section>
+   
+	<div class="price deal ">
+   		<p class="pink"><?php echo isset($v->price) ? c($v->price) : null;?></p> <p class="status"> <span class="pink">Clearance</span> </p> <br />
+   		<p class="orig"> Orig <?php echo isset($v->list_price) ? c($v->list_price) : null;?></p>
+	</div> 
+   
+   </div> 
+   <hr> 
+<?php endforeach;endif;?>
+   </div> 
+</section> 
+   
+   
+   <section class="total"> 
+   <div class="alert notice"> <em></em><p> You will be able to review the details of your Order Total at the right before you Place Order. </p> </div> <b>Merchandise Subtotal</b> 
+   <p><span class="total-price"><?php echo isset($cartInfo->goods_amount) ? c($cartInfo->goods_amount) : null?></span><br>All Prices are in <?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?></p> 
+   </section>
+</section>

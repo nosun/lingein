@@ -1,0 +1,64 @@
+<div class="footerWrap">
+<div class="wrapper">
+<!-- 页脚部分开始 -->
+<div class="footer">
+
+<!-- 页脚内容部分开始 -->
+<div class="footContent">
+
+<!-- 页脚链接部分开始 -->
+<div class="footLinks">
+
+<!-- 用户帮助内容模块，展示一些帮助内容的列表，这个内容很重要，你可以重新组织，但这个功能需要-->
+<div class="customerHelp">
+  <div>
+  <?php if(isset($helpList) && isset($articleTypeList)):
+  $articleTypeCount = 0;
+  foreach($helpList as $index => $articleList):
+  	if(strcasecmp($index, 'news')):
+  	$articleTypeCount++;
+  	if($articleTypeCount > 4):
+  		break;
+  	endif;
+  	?>
+  <ul><li class="footHeader"><?php echo $articleTypeList[$index]->name;?></li><?php 
+          	foreach ($articleList as $v):
+          ?><li><a href="<?php echo url($v->url)?>"><?php echo $v->title;?></a></li><?php 
+          	endforeach;
+          ?></ul>
+  <?php endif;
+  endforeach;
+  endif?>
+  </div>
+</div>
+<!-- 用户帮助内容模块结束 -->
+
+</div>
+<!-- 页脚链接部分结束 -->
+
+<!-- 邮件订阅功能模块，这个功能可以要，也可以不要，看你的设计-->
+<div class="mailer">
+   <div class="mailerHead">
+     <img src="<?php echo $this->themeResourceURI('images/mailer.jpg');?>" alt="Sign up for special promotions and updates">
+   </div>
+  <input type="text" class="text" value=" ENTER EMAIL ADDRESS" id="mailAddress"><button id="submitMailAddress" class="textbtnGray">JOIN</button>
+</div>
+<!-- 结束邮件订阅功能模块 -->
+
+</div>
+<div style="clear:both;"></div>
+<!-- 页脚内容部分结束 -->
+
+<!-- 版权信息开始  -->
+<div class="copyright">
+	<span class="legal">
+           	<?php $siteInfo = Bl_Config::get('siteInfo');echo $siteInfo['copyright'];?>
+    </span>
+</div>
+<div style="clear:both;"></div>
+<!-- 版权信息结束 -->
+
+</div>
+<!-- 页脚部分结束 -->
+</div>
+</div>

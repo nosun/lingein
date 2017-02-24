@@ -1,0 +1,1 @@
+[Tue Sep 24 04:52:47 2013] [error] [client 66.175.219.250] PHP Warning:  file_get_contents(staticcontent): failed to open stream: No such file or directory in /srv/www/topsexylingerie.com/sites/default/controllers/default.php on line 19

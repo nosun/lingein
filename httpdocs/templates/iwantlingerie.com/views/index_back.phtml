@@ -1,0 +1,271 @@
+<?php echo $this->render('before_body.phtml'); ?>
+<body>
+<?php echo $this->render('header.phtml'); ?>
+<div class="bodyer">
+	<div class="body_left">
+    	<div class="general_top"></div>
+        <div class="general">
+        	<div class="clear" id="KinSlideshow" style="visibility:hidden;">
+           <?php
+            if(isset($hdpArr) && $hdpArr):
+              foreach ($hdpArr as $v):
+           ?>
+                <a href="<?php echo $v->url ?>"><img src="<?php echo urlimg('760x280',$v->filepath); ?>" alt="<?php echo $v->title;?>" width="760" height="280" /></a>
+            <?php
+              endforeach;
+             endif;
+            ?>
+        	</div>
+
+            <div class="width760">
+            	<div class="width550 left" id="prodcutTab">
+                	<ul class="tab margin">
+                    	<li class="clik"><a href="#">Hot Products</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Discounted products</a></li>
+                    </ul>
+                    <ul class="product_hot">
+<?php
+  if(isset($hotProductList) && $hotProductList):
+     foreach ($hotProductList as $v):
+?>
+                    	<li>
+                        	<div class="yhphoto"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><img src="<?php echo urlimg('118x178', $v->filepath);?>" alt="<?php echo $v->name;?>" /></a></div>
+                            <div class="yhtext">
+                            	<p class="title"><?php echo $v->name;?></p>
+                                <p class="price"><span><?php echo isset($v->list_price)? c($v->list_price) : null;?></span>  <?php echo isset($v->price)? c($v->price) : null;?></p>
+                                <div class="parameters">
+                                <?php  if(isset($v->number) && $v->number):?>
+                                	<p>Code:<?php echo $v->number;?></p>
+                                <?php endif;?>
+                                <?php if(isset($v->field_color) && $v->field_color): ?>
+                                    <p>Color:
+                                    <?php
+                                            if(is_array($v->field_color)):
+                                                foreach ($v->field_color as $f):
+                                                  echo $f.'&nbsp;';
+                                                 endforeach;
+                                            else :
+                                                echo $v->field_color;
+                                            endif;
+                                    ?>
+                                    </p>
+                                <?php endif;?>
+                                </div>
+                                <?php if(isset($v->star) && $v->star):?>
+                                <p class="star"><?php echo $v->star;?></p>
+                                <br>
+                                <?php endif;?>
+                                <div class="Detials"><span>Detials:</span><?php echo $v->summary;?></div>
+                                <form method="POST" action="<?php echo url('cart/productpost');?>">
+                                   <input type="hidden" value="<?php echo isset($v->pid) ? $v->pid : null ?>" name="pid">
+                                   <input type="hidden" value="1" name="qty">
+                                   <p><?php if($v->status):?><input type="submit" class="yrbuttom" value="" name="cart"/><?php endif;?></p>
+                                </form>
+                            </div>
+                        </li>
+<?php endforeach;
+   endif;
+?>
+                    </ul>
+                    <ul class="product_hot" style="display:none;">
+<?php
+  if(isset($newProductList) && $newProductList):
+     foreach ($newProductList as $v):
+?>
+                      <li>
+                          <div class="yhphoto"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><img src="<?php echo urlimg('118x178', $v->filepath);?>" alt="<?php echo $v->name;?>" /></a></div>
+                            <div class="yhtext">
+                              <p class="title"><?php echo $v->name;?></p>
+                                <p class="price"><span><?php echo isset($v->list_price)? c($v->list_price) : null;?></span>  <?php echo isset($v->price)? c($v->price) : null;?></p>
+                                <div class="parameters">
+                                <?php  if(isset($v->number) && $v->number):?>
+                                  <p>Code:<?php echo $v->number;?></p>
+                                <?php endif;?>
+                                <?php if(isset($v->field_color) && $v->field_color): ?>
+                                  <p>Color:
+                                  <?php
+                                    if(is_array($v->field_color)):
+                                      foreach ($v->field_color as $f):
+                                        echo $f.'&nbsp;';
+                                      endforeach;
+                                     else :
+                                      echo $v->field_color;
+                                    endif;
+                                  ?>
+                                  </p>
+                                <?php endif;?>
+                                </div>
+                                <?php if(isset($v->star) && $v->star):?>
+                                <p class="star"><?php echo $v->star;?></p><br/>
+                                 <?php endif;?>
+                                <div class="Detials"><span>Detials:</span><?php echo $v->summary;?></div>
+                                <form method="POST" action="<?php echo url('cart/productpost');?>">
+                                    <input type="hidden" value="<?php echo isset($v->pid) ? $v->pid : null ?>" name="pid">
+                                    <input type="hidden" value="1" name="qty">
+                                <p><?php if($v->status):?><input type="submit" class="yrbuttom" value="" name="cart"/><?php endif;?></p>
+                                </form>
+                            </div>
+                        </li>
+<?php endforeach;
+   endif;
+?>
+                    </ul>
+                    <ul class="product_hot" style="display:none">
+<?php
+  if(isset($disProductList) && $disProductList):
+     foreach ($disProductList as $v):
+?>
+                      <li>
+                          <div class="yhphoto"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><img src="<?php echo urlimg('118x178', $v->filepath);?>" alt="<?php echo $v->name;?>" /></a></div>
+                            <div class="yhtext">
+                              <p class="title"><?php echo $v->name;?></p>
+                                <p class="price"><span><?php echo isset($v->list_price)? c($v->list_price) : null;?></span>  <?php echo isset($v->price)? c($v->price) : null;?></p>
+                                <div class="parameters">
+                                <?php  if(isset($v->number) && $v->number):?>
+                                  <p>Code:<?php echo $v->number;?></p>
+                                <?php endif;?>
+                                <?php if(isset($v->field_color) && $v->field_color): ?>
+                                  <p>Color:
+                                  <?php
+                                    if(is_array($v->field_color)):
+                                      foreach ($v->field_color as $f):
+                                        echo $f.'&nbsp;';
+                                      endforeach;
+                                     else :
+                                      echo $v->field_color;
+                                    endif;
+                                  ?>
+                                  </p>
+                                <?php endif;?>
+                                </div>
+                                <?php if(isset($v->star) && $v->star):?>
+                                <p class="star"><?php echo $v->star;?></p><br/>
+                                 <?php endif;?>
+                                <div class="Detials"><span>Detials:</span><?php echo $v->summary;?></div>
+                                <form method="POST" action="<?php echo url('cart/productpost');?>">
+                                    <input type="hidden" value="<?php echo isset($v->pid) ? $v->pid : null ?>" name="pid">
+                                    <input type="hidden" value="1" name="qty">
+                                <p><?php if($v->status):?><input type="submit" class="yrbuttom" value="" name="cart"/><?php endif;?></p>
+                                </form>
+                            </div>
+                        </li>
+<?php endforeach;
+   endif;
+?>
+                    </ul>
+
+
+                    <div class="Title_head margin">About Fashion-tribe.com</div>
+                    <div class="about">
+                      <?php echo isset($docvar2) ? $docvar2 : null;?>
+                    </div>
+                </div>
+
+                <div class="width200 right">
+                	<div class="Smallside_top margin">Customers Saying</div>
+            		<ul class="message">
+ <?php
+if(isset($commentList) && $commentList) :
+$i=1;
+foreach($commentList as $v) :
+  if($v && $v->subject){
+  if($i>3){break;}
+
+?>
+                        <li>
+                            <strong><?php echo $v->subject?></strong>
+                            <span> <?php echo date('M d, Y', $v->timestamp) ?></span>
+                            <div class="clear"><?php echo $v->comment?>...</div>
+                        </li>
+<?php
+  $i++;
+  }
+endforeach;
+endif;
+?>
+                        <li><input type="submit" class="Read" value="Read all Reviews" onclick="location.href='<?php //echo url('feedback')?>http://www.fashion-tribe.com/articletype/news.html'"/></li>
+                    </ul>
+                	<div class="Smallside_bottom"></div>
+
+                	<div class="Smallside_top1 margin"></div>
+                    <div class="Trustful">
+                		Reliable and professional China wholesale website where you can buy wholesale merchandise and dropship them anywhere in the world!
+                	</div>
+                	<div class="Smallside_bottom"></div>
+
+                    <div class="clear margin"><script src="http://fashion-tribe.com/script/getadimg/index_right/"></script></div>
+
+                </div>
+            </div>
+
+            <div class="Title_head_one clear margin"><span>Fashion-tribe.com Proudcts</span><a href="#">More &gt;&gt;</a></div>
+	            <ul class="Category_product">
+	             <?php echo $this->render('bestproductlist.phtml'); ?>
+	            </ul>
+
+            <div class="Title_head_two margin clear"></div>
+            <div class="Newscontent">
+ <?php
+if($news_list) :
+  $newsNums=count($news_list);
+  $i=1;
+  foreach ($news_list as $v) :
+   if($newsNums>$i){
+
+?>
+                <div class="content">
+                    <div class="left"><span><?php echo date("d",$v->created);?></span><strong><?php echo date("M",$v->created);?></strong></div>
+                    <div class="right">
+                        <strong><a href="<?php echo url($v->url);?>"><?php echo $v->title;?></a></strong>
+                        <div class="clear"><a href="<?php echo url($v->url);?>"><?php echo $v->summary;?></a></div>
+                    </div>
+                </div>
+                <div class="line_2"></div>
+<?php
+   }else {
+?>
+                <div class="content">
+                    <div class="left"><span><?php echo date("d",$v->created);?></span><strong><?php echo date("M",$v->created);?></strong></div>
+                    <div class="right">
+                        <strong><a href="<?php echo url($v->url);?>"><?php echo $v->title;?></a></strong>
+                        <div class="clear"><a href="<?php echo url($v->url);?>"><?php echo $v->summary;?></a></div>
+                    </div>
+                </div>
+<?php
+   }
+   $i++;
+endforeach;
+endif;
+?>
+            </div>
+            <div class="Title_head_one clear margin"><span>Recommended Products</span></div>
+             <?php echo $this->render('recommand.phtml'); ?>
+        </div>
+        <div class="general_bottom"></div>
+
+    </div>
+
+	<div class="body_right">
+        <?php echo $this->render('body_left.phtml'); ?>
+        <div class="head_d"></div>
+
+      	<div class="Title_head_there margin">Shop by Price</div>
+        <?php echo $this->render('priceindex.phtml'); ?>
+        <div class="Shop_d"></div>
+
+      	<div class="Title_head_there margin">Shop by Color</div>
+       <?php echo $this->render('colorindex.phtml'); ?>
+        <div class="Shop_d"></div>
+<?php echo $this->render('popular_search.phtml'); ?>
+
+
+        <div class="clear margin"><script src="http://fashion-tribe.com/script/getadimg/index_left/"></script></div>
+
+    </div>
+</div>
+
+<?php echo $this->render('footer.phtml'); ?>
+</body>
+<?php echo $this->render('after_body.phtml'); ?>
+</html>

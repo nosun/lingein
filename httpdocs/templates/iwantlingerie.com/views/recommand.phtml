@@ -1,0 +1,20 @@
+<?php
+  if(isset($recommandProductList) && $recommandProductList):
+    shuffle($recommandProductList);
+    $recommand_count = 0;
+    foreach ($recommandProductList as $v):
+      if(!isset($v))
+      	continue;
+      if($recommand_count >= 5)
+        break;
+      $recommand_count++;
+?><dl><dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><img width="118" height="178" alt="<?php echo $v->name;?>" title="<?php echo $v->name;?>" src="<?php echo urlimg('118x178',$v->filepath)?>"></a></dt>
+<dd><p class="oldPrice"><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?><del><?php echo isset($v->list_price)? c($v->list_price) : null;?></del></p><p class="price"><strong><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?><?php echo isset($v->price)? c($v->price) : null;?></strong></p>
+    <p class="savingPrice">Save <span><?php 
+    if (isset($v->price) && isset($v->list_price))
+	    echo c($v->list_price - $v->price);
+	  ?></span></p></dd>
+</dl><?php 
+endforeach;
+endif;
+?>

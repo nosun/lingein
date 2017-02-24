@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+<?php $this->render('parts/header.phtml');?>
+
+<div class="main-content">
+
+
+<div class="general cat">
+
+
+
+<div class="main-block1">
+
+<div class="main-block1-plist">
+<?php $this->render('contents/search_intro.phtml');?>
+<div id="productlist" class="widget">
+<div class="w-head cat-filters"> 
+
+<?php $this->render('contents/search_filter_form.phtml');?>
+<div class="widget w-resultSortBar">
+ 	<?php $this->render('contents/c_sortoptions.phtml');?>
+	<?php $this->render('modules/pagination.phtml');?>
+	<?php $this->render('contents/search_viewoptions.phtml')?>
+</div>
+</div>
+<?php $this->render('contents/c_productlist.phtml');?>
+<br class="clear"/>
+</div>
+<hr size="1" style="border:1px solid #cccccc">
+<div class="w-head cat-filters"> 
+<?php $this->render('contents/search_filter_form.phtml');?>
+<div class="widget w-resultSortBar">
+	<?php $this->render('contents/c_sortoptions.phtml');?>
+	<?php $this->render('modules/pagination.phtml');?>
+	<?php $this->render('contents/search_viewoptions.phtml')?>
+</div>
+</div>
+
+<!-- extral intro for this category -->
+<?php if(isset($docvar3)):?>
+<div class="advanced_intro"><?php echo $docvar3;?></div>
+<!-- end of extral intro -->
+<?php endif;?>
+<?php echo $this->render('contents/c_comments.phtml');?>
+</div>
+
+<?php $this->render('parts/body_left.phtml'); ?>
+</div>
+</div>
+</div>
+
+<!-- Back to Top button -->
+<div>
+<a href="#" onclick="javascript:scroll(0,0);" style="position:fixed; bottom:40px; right:40px; z-index:1000;">
+	<img src="<?php echo $this->themeResourceURI('images/backtotop-btn.png');?>"/></a>
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+</body>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+</html>

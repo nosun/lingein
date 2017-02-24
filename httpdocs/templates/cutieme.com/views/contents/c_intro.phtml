@@ -1,0 +1,16 @@
+<?php if(isset($termInfo) && $termInfo):?>
+	<div class="cat-intro">
+		<h1><?php echo $termInfo->name;?></h1>
+		<?php if(isset($termInfo->filepath) && $termInfo->filepath != ''):?>
+		<div class="cat-intro-wrapper" style="border:none;">
+		<img alt="<?php echo $termInfo->name;?>" src="<?php echo urlimg(null, $termInfo->filepath);?>" width="788px"/>
+		</div>
+		<?php endif;?>
+		<div class="cat-intro-wrapper cat-summary">
+		<p style="display:inline"><?php echo isset($termInfo->description) ? $termInfo->description : null;?></p>
+		<div class="extend">
+		<?php echo $docvar6;?>
+		</div>
+		</div>
+    </div>
+<?php endif;?>

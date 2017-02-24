@@ -1,0 +1,91 @@
+<!-- 最上面一层全局操作条，无论用户浏览到哪里这个操作条始终存在。你可以根据设计把这个全局操作条移到别的地方，比如左侧。或者除去，但是要保证几个必须的功能在页面上能够找到。1. 货币选择。2.用户登录注册的链接。3.在线聊天那个图片。 -->
+<?php global $user;?>
+<div id="global_action">
+
+<!-- 全局操作条的功能块 -->
+	<div id="utility" class="innercontainer">
+	
+	<!-- 欢迎部分，这个welcome_section可以去掉，但你需要将货币切换功能拿出来 -->
+	
+	<div id="welcome_section">
+		
+		
+		<!-- 欢迎标语，这个可以去掉 -->
+		<div class="welcome"><strong>Welcome! </strong> Enjoy online shopping for sexy lingeries, g strings, sexy panties and stocking!</div>
+		<!-- 结束欢迎标语  -->
+		
+		
+		<!-- 货币切换功能块开始，这个可以移到其他地方，但这个本身有js，因此 class, id什么的不要变。你可以增加class，但不要删除或改变原有class -->
+		<div class="currency">
+			<dl id="cur_selector" class="dropdown">
+			<dt><a title="" href="#" id="yourCurrency"><?php
+                      if (!isset($_SESSION['currency'])) {
+                        $_SESSION['currency'] = 'USD';
+                      }
+                      echo $_SESSION['currency']
+                    ?></a>
+         	</dt>
+			<dd>
+			<ul>
+<?php	if ($currencyList && count($currencyList) >0) :
+            foreach ($currencyList as $k => $v) :
+                if ($v->visible) :?>
+             	<li><a title="<?php echo $v->name ?>" class="flag <?php echo $v->name?>" rel="nofollow" href="#" target="_top"><?php echo $v->name; ?></a></li>
+<?php 			endif;
+            endforeach;
+         endif; ?>
+            </ul>
+            </dd>
+		</dl>
+		</div>
+		<!-- 货币切换功能块结束 -->
+		
+		
+	</div>
+	<!-- 欢迎块结束  -->
+	
+	
+	<!-- 用户面板部分，包括登陆，注册，聊天，以及帮助。 帮助可以根据设计去掉。更换顺序，改变结构都是可以的，这块没有js代码。这个部分可以移除，但需要在页面其他地方有类似的功能 -->
+	<div id="user_panel">
+	<ul>
+		<li id="up_help"><a href="<?php echo url('article/contact-us.html');?>" rel="nofollow"  class="b">Help</a></li>	
+		
+		
+		<!-- 在线聊天功能模块 -->
+		<li id="up_livechat" class="skypecall">
+		<script type="text/javascript" src="http://cdn.dev.skype.com/uri/skype-uri.js"></script>
+				<div id="genSkypeCall_01">
+				    <script type="text/javascript">
+				        Skype.ui({
+				            name: "chat",
+				            element: "genSkypeCall_01",
+				            participants: ["christiya521"],
+				            imageSize: 16,
+				            imageColor: "skype"
+				        });
+				    </script>
+				</div>
+		</li>
+		<!-- 结束在线聊天功能模块 -->
+		
+		
+		<!-- 登陆，注册链接 -->
+		<li id="up_signup">
+<?php if ($user->uid): ?>
+			<a href="<?php echo url('order/list/');?>" rel="nofollow" class="red">My Orders</a> or 
+			<a href="<?php echo url('user/logout') ?>" rel="nofollow" class="red">Logout</a>
+<?php else: ?>
+			<a href="<?php echo url('user/login');?>" rel="nofollow" class="red">Sign In</a> or 
+			<a href="<?php echo url('user/register');?>" rel="nofollow" class="red">Join Free</a>
+<?php endif;?>
+		</li>
+		<!-- 登陆，注册链接结束 -->
+		
+		</ul>
+
+		</div>
+	</div>
+<!-- 结束全局导航条的功能块 -->
+	
+	
+</div>

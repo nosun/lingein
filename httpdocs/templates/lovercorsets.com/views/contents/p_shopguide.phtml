@@ -1,0 +1,24 @@
+<div class="widget" id="shopping-guide">
+<h2 class="section_title">Detailed Descriptions:&nbsp;</h2>
+<div class="section_content">
+<?php if($product->fid):?><p><span><?php echo $product->name;?></span></p>
+<?php endif;?>
+<p><?php echo isset($product->description)? $product->description : null;?></p>
+<?php if($product->fid):?>
+<div class="banner"><img src="<?php echo url('images/'.$product->filepath); ?>" border="0" alt="<?php echo $product->name;?>" /></div>
+
+<?php endif;
+if(isset($product->files) && $product->files):
+  foreach ($product->files as $i => $file):
+    if(isset($file->alt) && $file->alt):
+?><p><?php echo plain($file->alt);?></p>
+<?php else:?>
+<p>&nbsp;</p>
+<?php endif;?>
+
+<div class="pr-image-big"><img src="<?php echo url('images/'.$file->filepath);?>" alt="<?php echo isset($file->alt)? plain($file->alt):null; ?>" border="0" /></div>
+<?php endforeach;
+ endif;?>
+</div>
+<div class="clear"></div>
+</div>

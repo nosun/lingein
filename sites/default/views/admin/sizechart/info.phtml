@@ -1,0 +1,31 @@
+<div class="main_right ui-tabs-panel ui-widget-content ui-corner-bottom">
+	<table>
+		<tr style="display:none"><td><input type="hidden" name="id" value="<?php if (isset($sizeChart)){echo $sizeChart->id;} else { echo "";} ?>" /></td></tr>
+		<tr class="nohover"><td class="bold" colspan="2">Size Chart名称：</td></tr>
+	    <tr>
+	    	<td><input type="text" name="name" value="<?php if(isset($sizeChart)){echo $sizeChart->name;} else{ echo "";}?>" /><span style="color:red">*</span></td>
+	    	<td>Size Chart名称</td>
+	    </tr>
+	    <tr class="nohover"><td class="bold" colspan="2">品牌：</td></tr>
+	    <tr>
+	    	<td>
+	    		<select name="brand_tid" class="non-empty" title="品牌不能为空">
+            		<option value=""></option>
+            		<?php if (isset($brandList)): ?>
+    					<?php foreach ($brandList as $key => $brand): ?>
+                			<option value="<?php echo $key ?>"<?php if (isset($sizeChart) && $sizeChart->brand_tid == $key) echo ' selected="selected"' ?>><?php echo empty($brand->name_cn) ? $brand->name : $brand->name_cn; ?></option>
+    					<?php endforeach ?>
+					<?php endif; ?>
+          		</select> 
+          		<span style="color:red">*</span>
+          	</td>
+          	<td>商品类型</td>
+        </tr>
+        <tr class="nohover"><td class="bold" colspan="2">内容</td></tr>
+        <tr>
+        	<td colspan="2">
+          		<textarea name="content" class="xheditor" rows="15"><?php if (isset($sizeChart)) echo stripslashes($sizeChart->content) ?></textarea>
+          	</td>
+        </tr>
+	</table>
+</div>

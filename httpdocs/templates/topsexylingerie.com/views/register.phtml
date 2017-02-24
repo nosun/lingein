@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+
+<?php global $user ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<div class="container">
+<?php $this->render('parts/header.phtml'); ?>
+
+
+<div class="main-content">
+<h1 id="breadcrumb"><a href="<?php echo url("");?>">Home</a>&nbsp;&gt;&nbsp; Login</h1>
+<p class="n_t">Login or Create an Account</p>
+
+<?php echo themeMessages() ?>
+
+	<div class="user-forms">
+            <div class="user-login">
+                <h1>Returning Customer</h1>
+                <div class="user-forms-border">
+
+                <div id="client_message" style="display:none"></div>
+                <form action="<?php echo url('user/login');?>" method="post">
+					<div class="login_content">
+	                    <div class="name">
+	                    	<span>Username/Email:</span> 
+	                    	<input type="text" value="" name="username"  class="elmbBlur"/>
+	                    </div>
+	                    <div class="passwd">
+	                    	<span>Password:</span> 
+	                    	<input type="password" value="" name="password"  class="elmbBlur"/>
+                            <p>Sign in to your account for a fast, easy checkout. </p>
+	                    </div>
+	                    <div class="fg">
+	                    <div class="login-submit">
+	                    <input type="submit" class="login-submit" value=""/> </div>
+                    	<div class="login-forgetpw"><a href="<?php echo url('user/getPassword')?>">Forget Password? </a></div>
+	                    </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+
+            <div class="user-register">
+                <h1>New Customer</h1>
+                <div class="user-forms-border">
+
+                <form action="<?php echo url('user/register');?>" method="post" name="regForm" onsubmit="javascript:return checkRegister()">
+                <div class="register_content">
+                    <div class="name">
+	                    <span>Username<font style="color:#E42528;">*</font></span> <br />
+	                    <input type="text"  name="username"<?php if (isset($_POST['username'])) echo ' value="' . $_POST['username'] . '"' ?> class="elmbBlur"/>
+                    </div>
+                     <div class="smallfont">Less than 12 characters</div>
+                    <div class="email">
+	                    <span>E-mail<font style="color:#E42528;">*</font></span><br /> 
+	                    <input type="text" name="email"<?php if (isset($_POST['email'])) echo ' value="' . $_POST['email'] . '"' ?> class="elmbBlur"/>
+                    </div>
+                    <div class="passwd">
+	                    <span>Password<font style="color:#E42528;">*</font></span> <br />
+	                    <input type="password"  name="password"  class="elmbBlur"/>
+                    </div>
+                    <div class="cfm-passwd">
+                    	<span>Confirm Password:</span> 
+                    	<input type="password"  name="confirm_password"  class="elmbBlur"/>
+                        <p class="emphasis">Creating an account is so easy and has many benefits.</p>
+                    </div>
+                    <div class="register-submit">
+                    	<input type="submit" class="register-submit creat" value="" />
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="l_btm"></div>
+</div>
+
+</div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+
+<?php echo $this->render('parts/after_body.phtml'); ?>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/common.js'; ?>" type="text/javascript"></script>
+</body>
+</html>

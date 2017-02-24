@@ -1,0 +1,21 @@
+<img src="<?php echo themeResourceURI('images/8811.jpg')?>" />
+<?php if(isset($hotProductList) && $hotProductList):?>
+<div class="widget" id="hotsNow" >
+<div class="hottest">
+<div class="w-head contrast">
+	<h2>HOTTEST</h2>
+</div>
+<div>
+<?php foreach ($hotProductList as $v):?>
+	<dl>
+	<dt><a href="<?php echo url($v->url);?>">
+		<img src="<?php echo urlimg('128x192', $v->filepath);?>" title="<?php echo $v->name;?>" alt="<?php echo $v->name;?>">
+	</a></dt>
+	<dd class="prodName"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo $v->name;?></a></dd>
+    <dd class="price"><?php echo isset($_SESSION['currency'])? $_SESSION['currency']: 'USD'?><?php echo isset($v->price)? c($v->price) : null;?></dd>
+	</dl>
+	<?php endforeach;?>
+</div>
+</div>
+</div>
+<?php endif;?>

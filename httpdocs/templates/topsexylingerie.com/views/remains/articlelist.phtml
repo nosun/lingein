@@ -1,0 +1,85 @@
+<?php
+echo $this->render('before_body.phtml'); ?>
+<body>
+<?php echo $this->render('header.phtml'); ?>
+
+<div class="widget" id="wrapper">
+	<h1 id="breadcrumb"><?php echo themeBreadcrumb() ?></h1>
+
+	<div id="wrapper-l-184">
+			
+<div class="bg_box_gray margin_t allborder clear big">
+<h3 class="in_1em line_30px">IWantLingerie.com</h3>
+	<div class="pad_10px pad_t">
+
+	<ul class="red_arrow_list big">	
+	
+	<?php 
+	  $i = 0;
+	  foreach($helpList as $k=>$article_list):
+	  $i++;
+	?>
+	<li><a href="javascript:void(0);" onclick="toogle('<?php echo "ul_".$i?>');" class="b">
+		    <?php echo $k == 'about'? 'About IWantLingerie':ucwords($k);?></a>
+		    <ul class="gray_trangle_list" id="<?php echo "ul_".$i?>" style="display: block;">
+		     <?php foreach ($article_list as $v):?>
+		     	<li><a href="<?php echo url($v->url)?>" <?php if($articleInfo->title == $v->title) echo 'class="red"'?>><?php echo ucwords($v->title);?></a></li>
+			 <?php endforeach;?>
+		    </ul>
+	</li>
+    <?php endforeach?>
+
+	</ul>
+	</div>
+</div>
+<script type="text/javascript">
+	function toogle(ul_name){
+		if($("#" + ul_name).css("display") == "none"){
+			$("#" + ul_name).css({"display":"block"});
+		}else{
+			$("#" + ul_name).css({"display":"none"});
+		}
+	}
+</script>
+			
+	</div>
+
+
+
+
+	<div id="wrapper-r-757">
+	
+	
+<div class="right_big_con margin_t">
+<div class="right_big_con margin_t big">
+
+	<!-- end of minframe -->
+	<h2 class="in_1em line_30px g_t_c"><?php echo isset($articleInfo->name)?$articleInfo->name:"Knowledge Base";?></h2>
+<div class="margin_t">
+
+	<ul class="red_arrow_list pad_10px" id="ul_5">
+		     <?php foreach ($articleList as $k => $v) : ?>
+					<li><a href="<?php echo url($v->url);?>" class="" title="<?php echo isset($v->title) ? $v->title : null ?>"><?php echo isset($v->title) ? ucwords($v->title) : null ?></a></li>
+			 <?php endforeach;?>
+			</ul>
+
+                <div class="pages margin">
+                   <?php echo $pagination; ?>
+                </div>
+                
+</div>
+
+
+		
+	<div class="clear"></div>
+	</div>
+
+</div>
+
+	</div>
+	</div>
+
+<?php echo $this->render('footer.phtml'); ?>
+</body>
+<?php echo $this->render('after_body.phtml'); ?>
+</html>

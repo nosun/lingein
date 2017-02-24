@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body style="zoom:1">
+<?php global $user; ?>
+<?php $this->render('parts/top_bar.phtml');?>
+<?php $this->render('parts/navigation.phtml'); ?>
+<div class="container">
+
+<div class="main-content">
+
+	<div class="user-forms">
+
+            <div class="user-register">
+                <h1>New Customer</h1>
+                <div class="user-forms-border user-forms-border1">
+                <h2 class="emphasis">Creating an account is so easy and has many benefits.</h2>
+                <?php echo themeMessages() ?>
+                <div id="client_message" style="display:none"></div>
+                <form action="<?php echo url('user/register');?>" method="post" name="regForm" onsubmit="javascript:return checkRegister()">
+                <div class="register_content">
+                    <div class="name">
+	                    <span>Username:</span><span class="smallfont" style="padding-left:150px;color:#aaa;">Less than 20 characters</span><br />
+	                    <input type="text"  name="username"<?php if (isset($_POST['username'])) echo ' value="' . $_POST['username'] . '"' ?> class="elmbBlur"/>
+	                    
+                    </div>
+                    <div class="email">
+	                    <span>E-mail:</span><br />
+	                    <input type="text" name="email"<?php if (isset($_POST['email'])) echo ' value="' . $_POST['email'] . '"' ?> class="elmbBlur"/>
+                    </div>
+                    <div class="clears"></div>
+                    <div class="passwd">
+	                    <span>Password:</span><br />
+	                    <input type="password"  name="password"  class="elmbBlur"/>
+                    </div>
+                    <div class="cfm-passwd">
+                    	<span>Confirm Password:</span><br />
+                    	<input type="password"  name="confirm_password"  class="elmbBlur"/>
+                    </div>
+                    <div class="clears"></div>
+                    <div class="register-submit">
+                    	<input type="submit" class="register-submit textbtn" value="create an account" />
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<div class=" clears"></div>
+<?php echo $this->render('parts/footer.phtml'); ?>
+<?php echo $this->render('parts/after_body.phtml'); ?>
+<script language="javascript" src="<?php echo $tpldir . '/javascripts/common.js'; ?>" type="text/javascript"></script>
+</body>
+</html>

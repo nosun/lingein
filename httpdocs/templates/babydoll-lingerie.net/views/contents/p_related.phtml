@@ -1,0 +1,38 @@
+<?php $related_count = 0; 
+	if (isset($product->related)&& $product->related ):?>
+<div id="p-related" class="p-widget fr">
+<h2>Similar Products</h2>
+<div class="productlist">
+<?php foreach ($product->related as $v):
+      if(!isset($v))
+      	continue;
+      if($related_count >= 4)
+        break;
+      $related_count++;?>
+<dl><dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url) ?>"><img alt="<?php echo $v->name;?>" src="<?php echo urlimg('126x192',$v->filepath)?>"></a></dt>
+    <dd class="prodName"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo $v->name;?></a></dd>
+    <dd class="oldPrice" style="float:left;"><del><?php echo isset($v->list_price)? c($v->list_price) : null;?></del></dd>
+    <dd class="price" style="color:#F22E9C; float:left;"><?php echo isset($v->price)? c($v->price) : null;?></dd>
+</dl>
+<div class="clear"></div>
+<?php endforeach;?>
+<?php if ($bestProductList && $related_count < 4) :
+shuffle($bestProductList); ?>
+<?php foreach ($bestProductList as $v):
+      if(!isset($v))
+      	continue;
+      if($related_count >= 4)
+        break;
+      $related_count++;?>
+<dl><dt><a title="<?php echo $v->name;?>" href="<?php echo url($v->url) ?>"><img alt="<?php echo $v->name;?>" src="<?php echo urlimg('126x192',$v->filepath)?>"></a></dt>
+    <dd class="prodName"><a href="<?php echo url($v->url);?>" title="<?php echo $v->name;?>"><?php echo $v->name;?></a></dd>
+    <dd class="oldPrice" style="float:left;"><del><?php echo isset($v->list_price)? c($v->list_price) : null;?></del></dd>
+    <dd class="price" style="color:#F22E9C; float:left;"><?php echo isset($v->price)? c($v->price) : null;?></dd>
+</dl>
+<div class="clear"></div>
+<?php endforeach; 
+endif;?>
+
+</div>
+</div>
+<?php endif;?>

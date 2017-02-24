@@ -1,0 +1,23 @@
+<fieldset class="widget inner" id="choosePymt">
+	<div class="w-head">
+		<h2>
+			<span>Payment Method</span>
+		</h2>
+	</div>
+	<div class="main-section">
+		<table class="cart tb-paymentMethod" cellspacing="0" cellpadding="0">
+        <tbody>
+          <?php foreach ($paymentList as $name => $payment): ?>
+          <?php if($payment->status && $payment->visible): ?>
+          <tr>
+              <th style="width:100px">
+              <input type="radio" onclick="changePayment(this.value)" name="payment_method" value="<?php echo $name;?>"/>
+              <strong><?php echo $payment->name;?></strong></th>
+              <td><span><?php echo $payment->description;?></span></td>
+          </tr>
+          <?php endif;?>
+          <?php endforeach; ?>
+        </tbody>
+        </table>
+	</div>
+</fieldset>

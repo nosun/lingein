@@ -1,0 +1,47 @@
+<div class="widget">
+<div class="w-head">
+<h2>User Password Information</h2>
+</div>
+<div class="w-content">
+<p>Modify Password information</p>
+
+            <form action="" method="post" name="changePwdForm" onsubmit="javascript:return checkChangePwd()">
+             <?php echo themeMessages() ?>
+
+		<div class="user_edit">
+        	
+                  <table>
+                    <tbody>
+                      <tr>
+                        <th>Username:</th>
+                        <td><input type="text" readonly="readonly" value="<?php echo isset($user->name) ? $user->name : null ?>" class="elmbBlur input readonly"></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <th>Old Password:</th>
+                        <td> <input type="password" name="oldpwd" value="" class="elmbBlur input" title="old password is not empty!"></td>
+                        <td><p class="explanation">*</p></td>
+                      </tr>
+                      <tr>
+                        <th>New Password:</th>
+                        <td> <input type="password" name="newpwd" value="" class="elmbBlur input" title="new password is not empty!"></td>
+                        <td><p class="explanation">*</p></td>
+                      </tr>
+                      <tr>
+                        <th>Retype New Password:</th>
+                        <td> <input type="password" name="newpwd2" value="" class="elmbBlur input" title="comfirm password is not empty!"></td>
+                        <td><p class="explanation">*</p></td>
+                      </tr>
+
+                     <tr>
+                        <th></th>
+                        <td class="td-buttons"><button class="button" type="submit">Save Changes</button><button class="button" type="reset">Reset Form</button></td>
+                        <td></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+                </form>
+</div>         
+</div>

@@ -1,0 +1,45 @@
+<?php global $user;?>
+<div id="global_action">
+	<div id="utility" class="innercontainer">
+	
+	<div class="currency top_a">
+		<ul id="cur_selector">
+		<li  class="dropdown"><a title="" href="#" id="yourCurrency"><?php
+                      if (!isset($_SESSION['currency'])) {
+                        $_SESSION['currency'] = 'USD';
+                      }
+                      echo $_SESSION['currency']
+                    ?></a>
+		<ul>
+<?php	if ($currencyList && count($currencyList) >0) :
+            foreach ($currencyList as $k => $v) :
+                if ($v->visible) :?>
+             <li><a title="<?php echo $v->name ?>" class="flag <?php echo $v->name?>" rel="nofollow" href="#" target="_top"><?php echo $v->name; ?></a></li>
+<?php 			endif;
+            endforeach;
+         endif; ?>
+            </ul>
+		</li>
+	</ul>
+	</div>
+	
+	<div id="user_panel" class="top_a">
+	<ul>
+		<li id="up_signup">
+<?php if ($user->uid): ?>
+			<a href="<?php echo url('order/list/');?>">My Orders</a> or 
+			<a href="<?php echo url('user/logout') ?>">Logout</a>
+<?php else: ?>
+			<a href="<?php echo url('user/login');?>">Sign In</a> or 
+			<a href="<?php echo url('user/register');?>">Join Free</a>
+<?php endif;?>
+		</li>
+	</ul>
+	</div>	
+
+	<div id="shoppingCart"><span>Cart&nbsp;<em class="cart_item_number"><?php echo isset($goodsInCart)? $goodsInCart : 0; ?></em> &nbsp;Item</span>
+		<a class="button top-checkout" href="<?php echo url('cart');?>" style="">Check Out</a>
+	</div>
+
+	</div>
+</div>

@@ -1,0 +1,74 @@
+<div class="cart-list">
+<form class="form-cartpost" id="itemsForm" method="post" action="<?php echo url('cart/cartpost');?>">
+<input id="cart_submit" type="hidden" name="checkout"/>
+<table class="cart-list-table" cellspacing="0" cellpadding="0">
+	<thead>
+		<tr>
+             <th class="prDesc">ITEM</th>
+             <th class="">ITEM NAME</th>
+             <th>ITEM PRICE</th>
+             <th class="prQuant">QUANTITY</th>
+             <th class="prAmount">PRICE</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr class="scTotalSaving">
+             <td class="blank" colspan="3"></td>
+             <td>YOUR TOTAL SAVINGS:</td>
+             <td><strong> -<span class="numVal"><?php echo isset($cartInfo->total_save_amount) ? c($cartInfo->total_save_amount) : null?></span></strong></td>
+        </tr>
+        <tr class="scSumAmount">
+        		<td class="cart-funcs" colspan="3">    <a title="Continue Shopping" class="textbtn contShopping left" href="<?php echo url('browse/all.html');?>">Shop More</a>
+    <a href="<?php echo url('cart');?>" class="textbtn contShopping left">Update Cart</a>
+    <a href="javascript:submit_shopping_cart('delete')" class="textbtnGray contShopping left clearcartBtn">Clear Cart</a>
+		</td>
+			<td class="total">
+				<strong>CART TOTAL</strong>
+				<span><?php if ($cartInfo->product){ echo '(' . count($cartInfo->product) . ' item)';} ?></span>
+			</td>
+			<td class="total">
+				<strong class="totalPrice"><span class="numVal"><?php echo isset($cartInfo->goods_amount) ? c($cartInfo->goods_amount) : null?></span></strong>
+			</td>
+		</tr>
+		<tr>
+			<td class="savingTips" colspan="3">We automatically apply all eligible promotions to offer you the lowest possible price.</td>
+
+		</tr>
+	</tfoot>
+<tbody>     
+<?php if ($cartInfo->product) :
+foreach ($cartInfo->product as $k => $v): ?>
+    <tr id="<?php echo isset($v->cart_item_id) ? $v->cart_item_id : null ?>" class="" valign="top">
+    <td class="prImage">
+    	<a href="<?php echo url($v->url);?>" title="<?php echo isset($v->name) ? $v->name : null ?>"><img alt="<?php echo isset($v->name) ? $v->name : null ?>" title="<?php echo isset($v->name) ? $v->name : null ?>" src="<?php echo urlimg('118x178', $v->filepath) ?>"/></a>
+    </td>
+    <td class="prName">
+		<input type="hidden" class="checkitem" name="cart_item_id_checked[]" checked value="<?php echo isset($v->cart_item_id) ? $v->cart_item_id : null ?>"/>
+		<h4><a href="<?php echo url($v->url);?>" title="<?php echo isset($v->name) ? $v->name : null ?>"><?php echo isset($v->name) ? $v->name : null ?></a></h4>
+<?php if(isset($v->data) && $v->data):
+	  	foreach($v->data as $dk => $dv):
+			echo '<p class="prAttr">'.$dk.'&nbsp;-&nbsp;'.$dv.'</p>';
+		endforeach;
+      else: echo '&nbsp;';
+      endif;?>
+
+    </td>
+    <td class="prPrice">
+		<p class="listPrice"><del><?php echo isset($v->list_price) ? c($v->list_price) : null;?></del></p>
+		<p class="price"><?php echo isset($v->price) ? c($v->price) : null;?></p>
+		<p class="savingPrice"><span>SAVE&nbsp;</span><span class="numVal"><?php echo (isset($v->price) && isset($v->list_price)) ? ' -'. c($v->list_price - $v->price) : '--';?></span></p>
+    </td>
+    <td class="prQuant">
+		<input type="hidden" value="<?php echo isset($v->pid) ? $v->pid : null ?>" name="pids[]"/>
+        <input type="hidden" value="<?php echo isset($v->cart_item_id) ? $v->cart_item_id : null ?>" name="cart_item_ids[]"/>
+    	<input value="<?php echo isset($v->qty) ? $v->qty : null ?>" name="qtys[]" size="3" alt="<?php echo isset($v->qty) ? $v->qty : null ?>" id="<?php echo isset($v->cart_item_id) ? $v->cart_item_id : null ?>" class="ajax_qty elmbBlur" title="<?php echo $v->sell_min ? $v->sell_min : 0 ?>,<?php echo $v->sell_max ? $v->sell_max : 0 ?>" rel="<?php echo isset($v->price) ? $v->price : null ?>"/>
+    </td>
+    <td class="prAmount">
+        <span class="payPrice"><span class="numVal"><?php echo isset($v->qty) ? c($v->price * $v->qty) : null;?></span></span><br><a href="<?php echo url('cart/deleteproductfromcart/'.$v->cart_item_id);?>" title="Remove" class="remove ir">Remove</a>
+    </td>
+</tr>
+<?php endforeach; endif;?>
+</tbody>
+</table>
+</form>
+</div>

@@ -1,0 +1,97 @@
+<div class="shopcart_top">
+	<h1 class="top">My Orders </h1>
+</div>
+            <div class="shopcart">
+            <div class="user_edit">
+                <form action="<?php echo url('order/list');?>" method="post" id="form_order">
+                
+                
+                
+                <table width="100%" border="0" align="center" class="member">
+                <tbody>
+                <tr>
+                <td height="37" colspan="4"><span class="orange_top">You can find orders by selecting a date period below.</span></td>
+                </tr>
+                <tr>
+                <td width="7" height="32">&nbsp;</td>
+                <td width="100"><strong>Order No.</strong> </td>
+                <td width="200"><input type="text" value="<?php echo isset($number) ? $number : null?>" name="number"  class="elmbBlur input" /></td>
+                <td width="390">&nbsp;</td>
+                </tr>
+                <tr>
+                <td height="32">&nbsp;</td>
+                <td><strong>Date Ranges</strong></td>
+                <td align="left"> <input type="text" class="datepicker elmbBlur input" name="startTime" value="<?php echo isset($startTime) ? $startTime : null?>"/>
+                &nbsp; -- &nbsp;                      </td>
+                <td><input type="text" value="<?php echo isset($endTime) ? $endTime : null?>" name="endTime" class="datepicker elmbBlur input" /></td>
+                </tr>
+                <tr>
+                <td height="32">&nbsp;</td>
+                <td><strong>Order Status</strong> </td>
+                <td>
+                
+                <select name="status" class="width100 elmbBlur input"><option value="any">Any</option><option value="1">Process</option>
+                <option value="2">Backorder</option>
+                <option value="3">Cancelled</option>
+                <option value="4">Completed</option>
+                <option value="5">Failed</option>
+                <option value="6">Abandoned</option>
+                </select>
+                
+                </td>
+                <td>
+                <button class="textbtn" type="submit">Search</button>
+                <!--  <input type="submit" class="serach_buttom" value="Search" /> -->
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                </form>
+				<div id="order-list-tbl">
+                <table width="700" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center">
+                <tbody>
+					<tr class="formHeader">
+                      <td align="center" width="125" height="28" bgcolor="#FFF7F7" class="In_line">Order ID</td>
+                      <td align="center" width="150" bgcolor="#FFF7F7" class="In_line">Last Update</td>
+                      <td align="center" width="140" bgcolor="#FFF7F7" class="In_line">Order Status</td>
+                      <td align="center" width="130" bgcolor="#FFF7F7" class="In_line">Payment Status</td>
+                      <td align="center" width="90" bgcolor="#FFF7F7" class="In_line">Total</td>
+                      <td align="center" width="" bgcolor="#FFF7F7" class="In_line">Details</td>
+                	</tr>
+
+<?php
+foreach ($ordersList as $k => $v) : ?>
+                <tr>
+                <td class="under_dotted" align="center">
+                <a href="<?php echo url('order/info/'.$v->oid);?>"><?php echo isset($v->number)? $v->number : null;?>   </a></td>
+                <td class="under_dotted" align="center"><?php echo isset($v->created) && $v->created ? date('Y-m-d H:i:s', $v->created) : null ;?></td>
+                <td class="under_dotted" align="center">
+                <?php
+								  if($v->status==0): echo 'Pending payment';
+								  elseif($v->status==1): echo 'Pending assessment';
+								  elseif($v->status==2): echo 'completed';
+								  elseif($v->status==-1): echo 'removed';
+								  elseif($v->status==-2): echo 'deleted';
+								  endif;
+							?>
+								</td>
+                <td class="under_dotted" align="center">
+                <?php if($v->status_payment==0): echo 'Not Paid';
+								      elseif($v->status_payment==1): echo 'Paid';
+								      endif;
+								?>
+								</td>
+                <td class="under_dotted" align="center"><?php echo isset($v->pay_amount) ? c($v->pay_amount) : null; ?></td>
+                <td class="under_dotted" align="center">
+                <a href="<?php echo url('order/info/' . $v->oid)?>"><img alt="" src="<?php echo $tpldir;?>/images/order-details.png" /></a></td>
+                </tr>
+ <?php endforeach; ?>
+                </tbody>
+                </table>
+				</div>
+
+                <div class="pages_one">
+                     <?php echo $pagination; ?>
+                </div>
+              </div>
+            </div>

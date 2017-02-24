@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<?php $this->render('parts/before_body.phtml'); ?>
+<body>
+<?php global $user; ?>
+
+<?php $this->render('parts/header.phtml'); ?>
+<div class="main-content">
+<div class="general">
+<?php $this->render('modules/slider.phtml');?>
+<div class="little_banner">
+<div class="small-ban-wrapper" style="position:relative;overflow:hidden;float:left;">
+<a href="<?php echo url("sexy-lingerie.html");?>" rel="nofollow" class="little_banner banner"><img src="<?php echo themeResourceURI('images/sexy-lingerie.jpg'); ?>" width="210" height="118" alt="sexy lingerie" style="border:none;"/></a>
+<p style="position: absolute;font-size: 18px;font-weight: bold;color: #eeeeee;text-shadow: 1px 2px 4px rgba(0,0,0,0.8);bottom: 10px;right: 10px;">CHEAP LINGERIE</p>
+</div>
+<div class="small-ban-wrapper" style="position:relative;overflow:hidden;float:left;">
+<a href="<?php echo url("costumes.html");?>" rel="nofollow"><img src="<?php echo themeResourceURI('images/costume.jpg');?>" width="210" height="118" alt="sexy costumes"/></a>
+<p style="position: absolute;font-size: 20px;font-weight: bold;color: #AF0C2D;text-shadow: 1px 2px 4px rgba(255,255,255,0.9);top: 30px;left: 50px;width: 100px;text-align: center;">SEXY COSTUMES</p>
+</div>
+<div class="small-ban-wrapper" style="position:relative;overflow:hidden;float:left;">
+<a href="<?php echo url("sexy-corsets.html");?>" rel="nofollow"><img alt="underbust corset" src="<?php echo themeResourceURI('images/corset.jpg');?>" width="210" height="118"/></a>
+<p style="position: absolute;font-size: 18px;font-weight: bold;color: #367743;text-shadow: 1px 1px 1px rgba(255,255,255,0.7);bottom: 40px;right: 35px;">CHEAP CORSETS</p>
+</div>
+<div class="small-ban-wrapper" style="position:relative;overflow:hidden;float:left;">
+<a href="<?php echo url("plus-size-club-dresses.html"); ?>" rel="nofollow"><img alt="plus size club wear" src="<?php echo themeResourceURI('images/club-wear.jpg');?>" width="210" height="118"/></a>
+<p style="position: absolute;font-size: 18px;font-weight: bold;color: #C73BA4;text-shadow: 1px 1px 1px rgba(0,0,0,0.3);bottom: 10px;left: 60px;width: 130px;text-align: center;line-height: 1.7;">PLUS SIZE CLUB DRESSES</p>
+</div>
+</div>
+
+<br class="clears" />
+<div class="index_main clearfix">
+      <div class="tab">
+        <ul class="tab_head clearfix">
+          <li class="active" id="new_arrival">
+            <h3>New Arrival</h3>
+          </li>
+          <li id="recommend">
+            <h3>Recommended</h3>
+          </li>
+          <li id="discounted">
+            <h3>Discounted</h3>
+          </li>
+        </ul>
+        <ul class="tab_body">
+          <li class="new_arrival">
+            <?php $this->render('modules/new-arrival.phtml');?>
+          </li>
+          <li class="recommend">
+            <?php $this->render('modules/recommand.phtml');?>
+          </li>
+          <li class="discounted">
+            <?php $this->render('modules/discounted.phtml');?>
+          </li>
+        </ul>
+</div>
+</div>
+</div>
+</div>
+
+<?php echo $this->render('parts/footer.phtml'); ?>
+
+
+<?php echo $this->render('parts/after_body.phtml'); ?>
+<script src="<?php echo $tpldir. '/javascripts/jquery.flexslider.js';?>" type="text/javascript"></script>
+<script type="text/javascript">
+// Can also be used with $(document).ready()
+$(window).load(function() {
+    $('.flexslider').flexslider(
+		{controlNav: "paging",slideshowSpeed: 100000, animationDuration: 600}
+	);
+	$('.flex-caption').each(function(){
+		var flexabstract = $('p.abstract', $(this));
+		var flexdetail = $('p.detail', $(this));
+		if(!(flexabstract.length&&flexdetail.length)){
+			$('h3', $(this)).css({'display':'none'});
+		}
+		});
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<div id="header">
+      <div class="logo"><a href="<?php echo url('');?>"></a></div>
+      <div class="search">
+      <form action="<?php echo url('pitems');?>" method="post">
+           <input name="keyword" id="search_keyword" type="text" class="text" value="<?php echo isset($search_keywords) ? plain($search_keywords) : 'sexy lingerie';?>" onfocus="if(this.value=='What would you like to save on today'){this.value='';}"  onblur="if(this.value==''){this.value='sexy lingerie';}" />
+           <a id="header_search_keyword" href="javascript:void(0)"><button type="submit"></button></a>
+      </form>
+     </div>
+	<div id="shoppingCart"><span>Cart&nbsp;<em class="cart_item_number"><?php echo isset($goodsInCart)? $goodsInCart : 0; ?></em> &nbsp;Item</span>
+		<a class="button top-checkout" href="<?php echo url('cart');?>" style="">Check Out</a>
+	</div>
+</div>

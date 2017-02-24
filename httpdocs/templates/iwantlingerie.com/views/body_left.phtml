@@ -1,0 +1,65 @@
+<div id="wrapper-l-200 w-b w-cateNav">
+<div class="bg_box_gray allborder clear big" style="border-bottom:none;">
+<?php $isTag = isset($termInfo) && $termInfo->vid == Taxonomy_Model::TYPE_TAG;?>
+<h3 class="side-subcat-title"><?php echo (isset($termInfo)&& $termInfo->name && !$isTag) ? ucwords($termInfo->name) : 'Categories';?></h3>
+	<div class="side-subcat-div">
+	<?php if((isset($termChildren) && count($termChildren) > 0)):?>
+		    <ul class="side-subcat-lists" ><?php foreach($termChildren as $k=>$v):?>
+		     	<li><a href="<?php echo url(categoryURL($v->path_alias));?>" ><?php echo ucwords($v->name);?></a></li>
+			 <?php endforeach;?>
+		    </ul>
+	<?php elseif(isset($termChildren) && count($termChildren) == 0):?>
+	  <?php if((isset($termSibling) && count($termSibling) > 0) && !$isTag):?>
+		    <ul class="side-subcat-lists" ><?php foreach($termSibling as $k=>$v):?>
+		     	<li><a href="<?php echo url(categoryURL($v->path_alias));?>" class="<?php if($v->name == $termInfo->name)  echo 'red'?>"><?php echo ucwords($v->name);?></a></li>
+			 <?php endforeach;?>
+		    </ul>
+	  <?php endif;?>
+	<?php endif;?>
+	</div>
+    <?php if((isset($termSibling) && count($termSibling) > 0) && !$isTag):?>
+    	<?php if(isset($termChildren) && count($termChildren) > 0): ?>
+        	<div class="side-sibcat">
+        	<ul class="big"><?php 
+        	foreach($termSibling as $k=>$v):?>
+        		<li><a href="<?php echo url(categoryURL($v->path_alias));?>" class="b <?php if($v->name == $termInfo->name)  echo 'red'?>"><?php echo ucwords($v->name);?></a></li><?php 
+        	endforeach;?>
+        	</ul>
+        	</div><?php endif;
+     elseif(isset($category)):?>
+    	<div class="side-sibcat">
+    	<ul class="big"><?php foreach($category as $k=>$v):?>
+    		<li><a href="<?php echo url(categoryURL($v->path_alias));?>" class="b"><?php echo ucwords($v->name);?></a></li><?php 
+          endforeach;?>
+    	</ul>
+    	</div>
+    <?php endif;?></div><?php 
+    echo $this->render('priceindex.phtml');
+    if (isset($isHomeIndex) && $isHomeIndex === true){echo $this->render('hotproducts_left.phtml');}
+    ?></div>
+		<div class="w-bp w-popularTags" id="popularTags">
+		<h3>Popular Searches</h3>
+		<div class="side-subcat-div"><ul class="popular-search-list">
+				<li><a href="<?php echo url('browse/sexy-lingerie.html')?>">sexy lingerie</a></li>
+		     	<li><a href="<?php echo url('browse/sexy-lingerie.html')?>">sexy underwear</a></li>
+		     	<li><a href="<?php echo url('browse/sexy-halloween-costumes.html')?>">sexy halloween costumes</a></li>
+		     	<li><a href="<?php echo url('browse/mini-skirt.html')?>">mini skirt</a></li>
+		     	<li><a href="<?php echo url('browse/pvc-latex-leather-lingerie.html')?>">sexy latex</a></li>
+		     	<li><a href="<?php echo url('browse/sexy-clubwear-dresses.html')?>">sexy clubwear dresses</a></li>
+		     	<li><a href="<?php echo url('browse/sexy-nurse-costume.html')?>">sexy nurse costume</a></li>
+		     	<li><a href="<?php echo url('browse/bras-panties.html')?>">sexy bra and panties</a></li>
+		     	<li><a href="<?php echo url('browse/sexy-swimwear.html')?>">sexy swimwear</a></li>
+		     	<li><a href="<?php echo url('browse/sexy-stocking.html')?>">sexy stocking</a></li>
+		     	<li><a href="<?php echo url('browse/g-string.html')?>">g string</a></li>
+		     	<li><a href="<?php echo url('browse/sexy-panties.html')?>">sexy panties</a></li>
+		     	<li><a href="<?php echo url('browse/sexy-back-dresses.html')?>">sexy back dresses</a></li>
+		     	<li><a href="<?php echo url('browse/corsets-bustiers.html')?>">cheap corsets</a></li><?php /*
+		foreach ($tagsList as $k=>$v):
+		  if ($v->visible == 1):?><li><a href="<?php echo url(categoryURL($v->path_alias));?>"><?php echo $v->name;?></a></li><?php
+		  endif;endforeach;*/?></ul></div>
+</div><div>
+<div class="Smallside_top1 margin"></div>
+<div class="Trustful">Reliable and professional China wholesale website where you can buy wholesale merchandise and dropship them anywhere in the world!</div>
+<div class="Smallside_bottom"></div>
+<!-- <div class="clear margin"><script src="http://www.fashion-tribe.com/script/getadimg/index_right/"></script></div> -->
+</div>
